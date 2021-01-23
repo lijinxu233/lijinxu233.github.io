@@ -15,13 +15,10 @@
 <meta property="og:site_name" content="Lee">
 <meta property="og:description" content="运算符(优先级) 包机制 JavaDoc Java流程控制 1、用户交互 2、顺序结构 3、选择结构 4、循环结构 5、break&amp;continue 6、练习">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lijinxu233.github.io/.io//1.png">
-<meta property="og:image" content="https://lijinxu233.github.io/.io//2.png">
 <meta property="article:published_time" content="2021-01-22T04:44:31.000Z">
-<meta property="article:modified_time" content="2021-01-22T12:20:29.073Z">
+<meta property="article:modified_time" content="2021-01-23T06:37:40.956Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lijinxu233.github.io/.io//1.png">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
   
@@ -280,8 +277,10 @@
 <p>JDK新特性：表达式的结果可以是字符串</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lee.struct;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String name = <span class="string">&quot;李晋旭&quot;</span>;</span><br><span class="line">        <span class="keyword">switch</span> (name)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;张坤鳌&quot;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;毕设老师&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;王少博&quot;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;辅导员&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;朱桂宇&quot;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;舍友&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;李晋旭&quot;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;本人&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;不认识&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>每一个对象都有一个HashCode</p>
-<p><img src="/.io//1.png"></p>
-<p><img src="/.io//2.png"></p>
+
+
+
+
 <h3><span id="4-循环结构">4、循环结构</span></h3><h5><span id="41-while">4.1、while</span></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(布尔表达式)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5><span id="42-dowhile">4.2、do…while</span></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">while</span>(布尔表达式);</span><br></pre></td></tr></table></figure>
 <h5><span id="43-for">4.3、for</span></h5><p>for循环语句是支持迭代的一种通用结构，是最有效、最灵活的循环结构。</p>
