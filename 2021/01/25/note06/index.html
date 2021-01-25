@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>JavaSE笔记 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常用类1、包装类 在实际应用中，我们经常需要把基本数据类型转化成对象以便于操作，Java在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类（Wrapper Class）。 8种基本数据类型，分别对应一个包装类。包装类均位于 java.lang 包。     基本数据类型 包装类    byte Byte   boolean Boolean   sho">
+  <meta name="description" content="常用类   1、包装类 2、String类 3、StringBuffer类和StringBuilder类 4、Date类和DateFormat类 5、Calendar类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaSE笔记">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/01/25/note06/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="常用类1、包装类 在实际应用中，我们经常需要把基本数据类型转化成对象以便于操作，Java在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类（Wrapper Class）。 8种基本数据类型，分别对应一个包装类。包装类均位于 java.lang 包。     基本数据类型 包装类    byte Byte   boolean Boolean   sho">
+<meta property="og:description" content="常用类   1、包装类 2、String类 3、StringBuffer类和StringBuilder类 4、Date类和DateFormat类 5、Calendar类">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-25T03:50:11.000Z">
-<meta property="article:modified_time" content="2021-01-25T04:24:40.672Z">
+<meta property="article:modified_time" content="2021-01-25T04:58:50.688Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
   
@@ -174,7 +174,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="常用类">常用类</span></h1><h2><span id="1-包装类">1、包装类</span></h2><ul>
+        <h1><span id="常用类">常用类</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#1-%E5%8C%85%E8%A3%85%E7%B1%BB">1、包装类</a></li>
+<li><a href="#2-string%E7%B1%BB">2、String类</a></li>
+<li><a href="#3-stringbuffer%E7%B1%BB%E5%92%8Cstringbuilder%E7%B1%BB">3、StringBuffer类和StringBuilder类</a></li>
+<li><a href="#4-date%E7%B1%BB%E5%92%8Cdateformat%E7%B1%BB">4、Date类和DateFormat类</a></li>
+<li><a href="#5-calendar%E7%B1%BB">5、Calendar类</a></li>
+</ul>
+<!-- tocstop -->
+
+<a id="more"></a>
+
+<h2><span id="1-包装类">1、包装类</span></h2><ul>
 <li>在实际应用中，我们经常需要把基本数据类型转化成对象以便于操作，Java在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类（Wrapper Class）。</li>
 <li>8种基本数据类型，分别对应一个包装类。包装类均位于 java.lang 包。</li>
 </ul>

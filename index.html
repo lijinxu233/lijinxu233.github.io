@@ -172,14 +172,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="为什么静态方法不能调用非静态变量非静态方法可以引用静态变量">为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？</span></h1><p>理由很简单，静态方法<strong>不属于对象</strong>，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。</p>
-<p>相反，非静态方法是可以引用静态变量的。</p>
-<p>因为静态变量是存储在静态内存单元内，可以直接用类进行调用，也可以用实例化的对象对其引用。所以非静态方法是可以引用静态变量的。</p>
-<p>只有一种情况下 会定义static方法 就是在一个类中没有任何成员变量（属性）的时候，定义static方法。</p>
-<blockquote>
-<p>转自(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wlx6/p/12323934.html">https://www.cnblogs.com/wlx6/p/12323934.html</a>)</p>
-</blockquote>
+        <h1 id="为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？"><a href="#为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？" class="headerlink" title="为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？"></a>为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？</h1><p>理由很简单，静态方法<strong>不属于对象</strong>，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。</p>
+<!-- toc -->
 
+
+
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/01/25/note07/#more">more >></a>
+        
       
 
       
@@ -241,51 +242,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="常用类">常用类</span></h1><h2><span id="1-包装类">1、包装类</span></h2><ul>
-<li>在实际应用中，我们经常需要把基本数据类型转化成对象以便于操作，Java在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类（Wrapper Class）。</li>
-<li>8种基本数据类型，分别对应一个包装类。包装类均位于 java.lang 包。</li>
+        <h1 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h1><!-- toc -->
+
+<ul>
+<li><a href="#1-%E5%8C%85%E8%A3%85%E7%B1%BB">1、包装类</a></li>
+<li><a href="#2-string%E7%B1%BB">2、String类</a></li>
+<li><a href="#3-stringbuffer%E7%B1%BB%E5%92%8Cstringbuilder%E7%B1%BB">3、StringBuffer类和StringBuilder类</a></li>
+<li><a href="#4-date%E7%B1%BB%E5%92%8Cdateformat%E7%B1%BB">4、Date类和DateFormat类</a></li>
+<li><a href="#5-calendar%E7%B1%BB">5、Calendar类</a></li>
 </ul>
-<table>
-<thead>
-<tr>
-<th align="center">基本数据类型</th>
-<th align="center">包装类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">byte</td>
-<td align="center">Byte</td>
-</tr>
-<tr>
-<td align="center">boolean</td>
-<td align="center">Boolean</td>
-</tr>
-<tr>
-<td align="center">short</td>
-<td align="center">Short</td>
-</tr>
-<tr>
-<td align="center">char</td>
-<td align="center">Character</td>
-</tr>
-<tr>
-<td align="center">int</td>
-<td align="center">Integer</td>
-</tr>
-<tr>
-<td align="center">long</td>
-<td align="center">Long</td>
-</tr>
-<tr>
-<td align="center">float</td>
-<td align="center">Float</td>
-</tr>
-<tr>
-<td align="center">double</td>
-<td align="center">Double</td>
-</tr>
-</tbody></table>
-<h2><span id="2-string类">2、String类</span></h2><h2><span id="3-stringbuffer类和stringbuilder类">3、StringBuffer类和StringBuilder类</span></h2><h2><span id="4-date类和dateformat类">4、Date类和DateFormat类</span></h2><h2><span id="5-calendar类">5、Calendar类</span></h2>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/01/25/note06/#more">more >></a>
+        
       
 
       

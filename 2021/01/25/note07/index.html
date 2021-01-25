@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>随笔 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？理由很简单，静态方法不属于对象，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。 相反，非静态方法是可以引用静态变量的。 因为静态变量是存储在静态内存单元内，可以直接用">
+  <meta name="description" content="为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？理由很简单，静态方法不属于对象，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="随笔">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/01/25/note07/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？理由很简单，静态方法不属于对象，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。 相反，非静态方法是可以引用静态变量的。 因为静态变量是存储在静态内存单元内，可以直接用">
+<meta property="og:description" content="为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？理由很简单，静态方法不属于对象，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-25T04:52:37.000Z">
-<meta property="article:modified_time" content="2021-01-25T04:57:28.431Z">
+<meta property="article:modified_time" content="2021-01-25T04:59:00.439Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
   
@@ -175,6 +175,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1><span id="为什么静态方法不能调用非静态变量非静态方法可以引用静态变量">为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？</span></h1><p>理由很简单，静态方法<strong>不属于对象</strong>，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。</p>
+<!-- toc -->
+
+
+
+<!-- tocstop -->
+
+<a id="more"></a>
+
 <p>相反，非静态方法是可以引用静态变量的。</p>
 <p>因为静态变量是存储在静态内存单元内，可以直接用类进行调用，也可以用实例化的对象对其引用。所以非静态方法是可以引用静态变量的。</p>
 <p>只有一种情况下 会定义static方法 就是在一个类中没有任何成员变量（属性）的时候，定义static方法。</p>
