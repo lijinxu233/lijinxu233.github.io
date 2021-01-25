@@ -152,6 +152,181 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-note07" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/25/note07/">随笔</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/25/note07/" class="archive-article-date">
+  	<time datetime="2021-01-25T04:52:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="为什么静态方法不能调用非静态变量非静态方法可以引用静态变量">为什么静态方法不能调用非静态变量，非静态方法可以引用静态变量？</span></h1><p>理由很简单，静态方法<strong>不属于对象</strong>，是属于类的，是不需要实例化的，而非静态变量是属于对象的，需要先实例化。在一个类的静态成员中去访问其非静态成员之所以会出错是因为在类的非静态成员不存在的时候类的静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。</p>
+<p>相反，非静态方法是可以引用静态变量的。</p>
+<p>因为静态变量是存储在静态内存单元内，可以直接用类进行调用，也可以用实例化的对象对其引用。所以非静态方法是可以引用静态变量的。</p>
+<p>只有一种情况下 会定义static方法 就是在一个类中没有任何成员变量（属性）的时候，定义static方法。</p>
+<blockquote>
+<p>转自(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wlx6/p/12323934.html">https://www.cnblogs.com/wlx6/p/12323934.html</a>)</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/25/note07/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-note06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/25/note06/">JavaSE笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/25/note06/" class="archive-article-date">
+  	<time datetime="2021-01-25T03:50:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="常用类">常用类</span></h1><h2><span id="1-包装类">1、包装类</span></h2><ul>
+<li>在实际应用中，我们经常需要把基本数据类型转化成对象以便于操作，Java在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类（Wrapper Class）。</li>
+<li>8种基本数据类型，分别对应一个包装类。包装类均位于 java.lang 包。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">基本数据类型</th>
+<th align="center">包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">byte</td>
+<td align="center">Byte</td>
+</tr>
+<tr>
+<td align="center">boolean</td>
+<td align="center">Boolean</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">Short</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">Character</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">Integer</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">Long</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">Float</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">Double</td>
+</tr>
+</tbody></table>
+<h2><span id="2-string类">2、String类</span></h2><h2><span id="3-stringbuffer类和stringbuilder类">3、StringBuffer类和StringBuilder类</span></h2><h2><span id="4-date类和dateformat类">4、Date类和DateFormat类</span></h2><h2><span id="5-calendar类">5、Calendar类</span></h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/25/note06/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-note05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -309,7 +484,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><p>Java的核心思想就是OOP</p>
+        <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><p>Java的核心思想就是OOP</p>
 <!-- toc -->
 
 <ul>
@@ -385,7 +560,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- toc -->
+        <h1 id="Java基础语法"><a href="#Java基础语法" class="headerlink" title="Java基础语法"></a>Java基础语法</h1><!-- toc -->
 
 <ul>
 <li><a href="#java%E6%96%B9%E6%B3%95">Java方法</a><ul>
@@ -475,7 +650,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- toc -->
+        <h1 id="Java基础语法"><a href="#Java基础语法" class="headerlink" title="Java基础语法"></a>Java基础语法</h1><!-- toc -->
 
 <ul>
 <li><a href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7">运算符(优先级)</a></li>
@@ -621,7 +796,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- toc -->
+        <h1 id="Java基础语法"><a href="#Java基础语法" class="headerlink" title="Java基础语法"></a>Java基础语法</h1><!-- toc -->
 
 <ul>
 <li><a href="#java%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8C%E4%BC%98%E5%8A%BF">Java的特性和优势</a></li>
