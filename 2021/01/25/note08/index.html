@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/01/25/note08/1.png">
 <meta property="article:published_time" content="2021-01-25T10:31:20.000Z">
-<meta property="article:modified_time" content="2021-01-25T10:39:58.512Z">
+<meta property="article:modified_time" content="2021-01-25T10:42:54.067Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://lijinxu233.github.io/2021/01/25/note08/1.png">
@@ -186,7 +186,7 @@
 <li>是JVM 所有线程共享的、用于存储类的信息、常量池、方法数据、方法代码等。</li>
 </ul>
 <p><strong>永久代：（方法区的实现、JDK7及之前、主要是和元空间对比）</strong></p>
-<p><code>PermGen</code> ， 就是 <code>PermGen space</code> ，全称是 <code>Permanent Generation space</code> ，是指内存的永久保存区域。</p>
+<p>PermGen， 就是 PermGen space，全称Permanent Generation space，是指内存的永久保存区域。</p>
 <ul>
 <li>PermGen space 则是 HotSpot 虚拟机基于JVM规范对方法区的一个落地实现，并且只有 HotSpot 才有 PermGen space。</li>
 <li>而如 JRockit（Oracle）、J9（IBM） 虚拟机有方法区 ，但是就没有 PermGen space。</li>
@@ -228,7 +228,7 @@
 <td align="left">Heap（堆）</td>
 </tr>
 </tbody></table>
-<p>JDK6、JDK7 时，方法区 就是 <code>PermGen</code>（永久代）。<br>JDK8 时，方法区就是 <code>Metaspace</code>（元空间）。</p>
+<p>JDK6、JDK7 时，方法区 就是 PermGe（永久代）。<br>JDK8 时，方法区就是 Metaspace（元空间）。</p>
 <p><strong>为什么使用元空间替换永久代？</strong></p>
 <p>表面上看是为了避免OOM异常。</p>
 <p>因为通常使用PermSize和MaxPermSize设置永久代的大小就决定了永久代的上限，但是不是总能知道应该设置为多大合适, 如果使用默认值很容易遇到OOM错误。</p>
