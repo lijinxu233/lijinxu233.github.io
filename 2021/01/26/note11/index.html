@@ -15,10 +15,13 @@
 <meta property="og:site_name" content="Lee">
 <meta property="og:description" content="数据结构基础   1、什么是数据结构 1.1、数据的逻辑结构 1.2、数据的存储结构   2、线性表 2.1、顺序表和链表 2.2、栈和队列   3、树和二叉树">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/26/note11/1.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/26/note11/2.png">
 <meta property="article:published_time" content="2021-01-26T07:56:46.000Z">
-<meta property="article:modified_time" content="2021-01-26T11:39:41.028Z">
+<meta property="article:modified_time" content="2021-01-26T12:04:29.728Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lijinxu233.github.io/2021/01/26/note11/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
   
@@ -241,12 +244,11 @@
 <p>在队列中把插入数据元素的一端称为队尾（rear），删除数据元素的一端称为队首（front）。</p>
 <p>向队尾插入元素称为进队或入队，新元素入队后成为新的队尾元素；从队列中删除元素称为离队或出队，元素出队后，其后续元素成为新的队首元素。</p>
 <p>由于队列的插入和删除操作分别在队尾和队首进行，所以队列是先进先出表。</p>
-<h2><span id="3-树和二叉树">3、树和二叉树</span></h2><h5><span id="结点的度与树的度">结点的度与树的度</span></h5><p>结点拥有的子树的数目称为结点的度（Degree）</p>
+<h2><span id="3-树和二叉树">3、树和二叉树</span></h2><p><strong>结点的度与树的度</strong></p>
+<p>结点拥有的子树的数目称为结点的度（Degree）</p>
 <p>度为0的结点称为叶子（leaf）或终端结点。度不为0的结点称为非终端结点或分支结点。除根之外的分支结点也称为内部结点。</p>
 <p>树内各结点的最大值称为树的度。</p>
-<ul>
-<li><p>二叉树</p>
-<p>每个结点的度均不超过2的有序树，称为二叉树（binary tree）。</p>
+<h4><span id="31-二叉树">3.1、二叉树</span></h4><p>每个结点的度均不超过2的有序树，称为二叉树（binary tree）。</p>
 <p>与树的递归定义类似，二叉树的递归定义如下：</p>
 <p>二叉树或者是一颗空树，或者是一棵由一个根节点和两棵互不相交的分别称为根的左子树和右子树的子树所组成的非空树。</p>
 <ul>
@@ -258,8 +260,23 @@
 <p>若在一棵满二叉树中，在最下层从最右侧起去掉相邻的若干叶子结点，得到的二叉树即为完全二叉树。</p>
 </li>
 </ul>
-</li>
-</ul>
+<p>满二叉树必为完全二叉树，而完全二叉树不一定是满二叉树。</p>
+<p><strong>二叉树的存储结构</strong></p>
+<p>二叉树的存储结构有两种：顺序存储结构和链式存储结构。更多使用链式存储结构。</p>
+<p><strong><em>二叉链表：</em></strong>（很容易找到孩子结点，但是找不到父节点）</p>
+<img src="/2021/01/26/note11/1.png" class title="test">
+
+<p><strong><em>三叉链表：</em></strong></p>
+<img src="/2021/01/26/note11/2.png" class title="test">
+
+<h4><span id="32-查找树">3.2、查找树</span></h4><p>二叉查找/搜索/排序树，  BST   （binary/search/sort tree）</p>
+<p>或者是一棵空树；</p>
+<p>或者是具有下列性质的二叉树；</p>
+<ol>
+<li>若它的左子树不为空，则左子树上所有结点的值均小于它的根节点的值；</li>
+<li>若它的右子树上的所有结点的值均大于它的根节点的值；</li>
+<li>它的左、右子树也分别为二叉排序树。</li>
+</ol>
 
       
 
@@ -352,6 +369,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/01/26/note12/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          算法笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/26/note10/" id="article-nav-older" class="article-nav-link-wrap">
