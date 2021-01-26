@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>算法笔记 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、排序算法 2、递归和折半查找">
+  <meta name="description" content="算法   1、排序算法（比较排序） 1.1、冒泡排序（交换排序） 1.2、选择排序   2、递归和折半查找 2.2、递归 2.3、折半查找">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/01/26/note12/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="1、排序算法 2、递归和折半查找">
+<meta property="og:description" content="算法   1、排序算法（比较排序） 1.1、冒泡排序（交换排序） 1.2、选择排序   2、递归和折半查找 2.2、递归 2.3、折半查找">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-26T11:40:44.000Z">
-<meta property="article:modified_time" content="2021-01-26T12:36:55.083Z">
+<meta property="article:modified_time" content="2021-01-26T13:25:59.141Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
   
@@ -174,17 +174,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- toc -->
+        <h1><span id="算法">算法</span></h1><!-- toc -->
 
 <ul>
-<li><a href="#1-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">1、排序算法</a></li>
-<li><a href="#2-%E9%80%92%E5%BD%92%E5%92%8C%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE">2、递归和折半查找</a></li>
+<li><a href="#1-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%AF%94%E8%BE%83%E6%8E%92%E5%BA%8F">1、排序算法（比较排序）</a><ul>
+<li><a href="#11-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F">1.1、冒泡排序（交换排序）</a></li>
+<li><a href="#12-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">1.2、选择排序</a></li>
+</ul>
+</li>
+<li><a href="#2-%E9%80%92%E5%BD%92%E5%92%8C%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE">2、递归和折半查找</a><ul>
+<li><a href="#22-%E9%80%92%E5%BD%92">2.2、递归</a></li>
+<li><a href="#23-%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE">2.3、折半查找</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 <a id="more"></a>
 
-<h2><span id="1-排序算法">1、排序算法</span></h2><h2><span id="2-递归和折半查找">2、递归和折半查找</span></h2>
+<h2><span id="1-排序算法比较排序">1、排序算法（比较排序）</span></h2><h3><span id="11-冒泡排序交换排序">1.1、冒泡排序（交换排序）</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.algorithm;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> [] arr = &#123;<span class="number">233</span>, <span class="number">3123</span>, <span class="number">312</span>, <span class="number">221</span>, <span class="number">4</span>, <span class="number">54</span>, <span class="number">65</span>, <span class="number">522</span>, <span class="number">6575</span>, <span class="number">4353</span>, <span class="number">77</span>&#125;;</span><br><span class="line">        <span class="comment">//int [] arr = &#123;4, 54, 65, 77, 221, 233, 312, 522, 3123, 4353, 6575&#125;;</span></span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    temp = arr[j];</span><br><span class="line">                    arr[j] = arr[j+<span class="number">1</span>];</span><br><span class="line">                    arr[j+<span class="number">1</span>] = temp;</span><br><span class="line">                    <span class="comment">//如果发生了交换说明是无序的</span></span><br><span class="line">                    flag = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//一趟小排序结束后，判断是否有序，如果有序，直接退出循环</span></span><br><span class="line">            System.out.println(<span class="string">&quot;============&quot;</span>+i+<span class="string">&quot;============&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (flag)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3><span id="12-选择排序">1.2、选择排序</span></h3><p>选择排序的算法</p>
+<ul>
+<li>整个数列分为两部分：前面是有序数列，后面是无序数列</li>
+<li>初始状态下，整个数列都是无序的，有序数列是空</li>
+<li>一共n个数，需要n-1趟循环（一趟都不能少）</li>
+<li>每比较完一趟，有序数列数量+1，无序数列数量-1</li>
+<li>每趟先假设无序数列的第1个元素（整个数列的第i个元素）是最小的，让当前的最小数，从第i+1个元素开始比较，一直比较到最后一个元素。如果发现更小的数，就假设当前数是最小数。</li>
+<li>一趟比较完后，将发现最小数和无序数列的第一个数交换（如果最小数不是无序数列的第一个数）</li>
+</ul>
+<h2><span id="2-递归和折半查找">2、递归和折半查找</span></h2><h3><span id="22-递归">2.2、递归</span></h3><h3><span id="23-折半查找">2.3、折半查找</span></h3>
       
 
       
