@@ -8,20 +8,19 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>JavaSE笔记 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="集合   集合引入 和ArrayList 集合框架 List 栈和队列">
+  <meta name="description" content="集合框架Set和Map 1、HashSet、TreeSet、LinkedHashSet 1.1、Set 1.2、HashSet 1.3、LinkedHashSet 1.4、TreeSet   2、内部比较器和外部比较器 3、哈希表的原理 4、HashMap、TreeMap、LinkedHashMap 5、HashMap源码解析 6、TreeMap源码解析 7、HashMap源码解析 8、Tr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaSE笔记">
-<meta property="og:url" content="https://lijinxu233.github.io/2021/01/27/note13/index.html">
+<meta property="og:url" content="https://lijinxu233.github.io/2021/01/27/note14/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="集合   集合引入 和ArrayList 集合框架 List 栈和队列">
+<meta property="og:description" content="集合框架Set和Map 1、HashSet、TreeSet、LinkedHashSet 1.1、Set 1.2、HashSet 1.3、LinkedHashSet 1.4、TreeSet   2、内部比较器和外部比较器 3、哈希表的原理 4、HashMap、TreeMap、LinkedHashMap 5、HashMap源码解析 6、TreeMap源码解析 7、HashMap源码解析 8、Tr">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lijinxu233.github.io/2021/01/27/note13/1.png">
-<meta property="og:image" content="https://lijinxu233.github.io/2021/01/27/note13/2.png">
-<meta property="article:published_time" content="2021-01-26T16:09:55.000Z">
-<meta property="article:modified_time" content="2021-01-27T13:06:58.931Z">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/27/note14/1.png">
+<meta property="article:published_time" content="2021-01-27T13:08:06.000Z">
+<meta property="article:modified_time" content="2021-01-27T13:31:40.624Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lijinxu233.github.io/2021/01/27/note13/1.png">
+<meta name="twitter:image" content="https://lijinxu233.github.io/2021/01/27/note14/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
   
@@ -157,7 +156,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-note13" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-note14" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -169,21 +168,32 @@
   
 
         
-        <a href="/2021/01/27/note13/" class="archive-article-date">
-  	<time datetime="2021-01-26T16:09:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-27</time>
+        <a href="/2021/01/27/note14/" class="archive-article-date">
+  	<time datetime="2021-01-27T13:08:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="集合">集合</span></h1><!-- toc -->
+        <!-- toc -->
 
 <ul>
-<li><a href="#%E9%9B%86%E5%90%88%E5%BC%95%E5%85%A5-%E5%92%8Carraylist">集合引入 和ArrayList</a></li>
-<li><a href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6">集合框架</a><ul>
-<li><a href="#list">List</a></li>
-<li><a href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97">栈和队列</a></li>
+<li><a href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6set%E5%92%8Cmap">集合框架Set和Map</a><ul>
+<li><a href="#1-hashset-treeset-linkedhashset">1、HashSet、TreeSet、LinkedHashSet</a><ul>
+<li><a href="#11-set">1.1、Set</a></li>
+<li><a href="#12-hashset">1.2、HashSet</a></li>
+<li><a href="#13-linkedhashset">1.3、LinkedHashSet</a></li>
+<li><a href="#14-treeset">1.4、TreeSet</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%86%85%E9%83%A8%E6%AF%94%E8%BE%83%E5%99%A8%E5%92%8C%E5%A4%96%E9%83%A8%E6%AF%94%E8%BE%83%E5%99%A8">2、内部比较器和外部比较器</a></li>
+<li><a href="#3-%E5%93%88%E5%B8%8C%E8%A1%A8%E7%9A%84%E5%8E%9F%E7%90%86">3、哈希表的原理</a></li>
+<li><a href="#4-hashmap-treemap-linkedhashmap">4、HashMap、TreeMap、LinkedHashMap</a></li>
+<li><a href="#5-hashmap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90">5、HashMap源码解析</a></li>
+<li><a href="#6-treemap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90">6、TreeMap源码解析</a></li>
+<li><a href="#7-hashmap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90">7、HashMap源码解析</a></li>
+<li><a href="#8-treeset%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90">8、TreeSet源码解析</a></li>
 </ul>
 </li>
 </ul>
@@ -191,93 +201,30 @@
 
 <a id="more"></a>
 
-<h2><span id="集合引入-和arraylist">集合引入 和ArrayList</span></h2><p>集合和数组的比较</p>
-<p>当我们需要将一些相同结构的个体整合在一起时，就可以考虑使用集合了。</p>
-<p>集合和数组都可以存储多个对象，对外作为一个整体存在。</p>
-<p><strong><em>数组的缺点：</em></strong></p>
-<ul>
-<li>长度必须在初始化时指定，且固定不变</li>
-<li>数组采用连续存储空间，删除和添加效率低下，需要大量移动元素</li>
-<li>数组无法直接保存映射关系</li>
-<li>数组缺乏封装，操作繁琐</li>
+<h1><span id="集合框架set和map">集合框架Set和Map</span></h1><h2><span id="1-hashset-treeset-linkedhashset">1、HashSet、TreeSet、LinkedHashSet</span></h2><h3><span id="11-set">1.1、Set</span></h3><ul>
+<li>特点：无序、唯一（不重复）</li>
 </ul>
-<p>数组只有一组存储结构，集合底层存储结构可以用链表，可以用哈希表，还可以用红黑树</p>
-<h2><span id="集合框架">集合框架</span></h2><p>Java集合框架提供了一套性能优良、使用方便的接口和类，它们位于java.util包中。存放在集合中的数据，被称为元素。</p>
-<img src="/2021/01/27/note13/1.png" class title="test">
+<h3><span id="12-hashset">1.2、HashSet</span></h3><ul>
+<li>采用Hashtable哈希表存储结构（神奇的结构）</li>
+<li>优点：添加速度快  查询速度快   删除速度快</li>
+<li>缺点：无序</li>
+</ul>
+<h3><span id="13-linkedhashset">1.3、LinkedHashSet</span></h3><ul>
+<li><p>采用哈希表存储结构，同时使用链表维护次序</p>
+</li>
+<li><p>有序（添加顺序）（索引的顺序）</p>
+<img src="/2021/01/27/note14/1.png" class title="test">
 
-<ul>
-<li>集合架构<ul>
-<li>Collection 接口存储一组不唯一，无序的对象</li>
-<li>List 接口存储一组不唯一，有序（索引顺序）的对象</li>
-<li>Set 接口存储一组唯一，无序的对象</li>
-<li>Map 接口存储一组键值对象，提供key到value的映射<ul>
-<li>Key 唯一 无序</li>
-<li>value 不唯一 无序 </li>
-</ul>
 </li>
 </ul>
-</li>
+<h3><span id="14-treeset">1.4、TreeSet</span></h3><ul>
+<li>采用二叉树（红黑树）的存储结构</li>
+<li>优点：有序（按照大小的顺序）  查询速度比List快（按照内容查询）</li>
+<li>缺点：查询速度没有HashSet快</li>
 </ul>
-<h3><span id="list">List</span></h3><p>像数组，有序，不唯一（可重复），线性表（线性表里有顺序表，底层就是数组）</p>
-<p><strong><em>ArrayList（顺序表）</em></strong></p>
-<ul>
-<li>在内存中分配连续的空间，实现了长度可变的数组。</li>
-<li>优点：遍历元素和随机访问元素的效率比较高</li>
-<li>缺点：添加和删除需大量移动元素效率低，按照内容查询效率低</li>
-</ul>
-<p><strong><em>LinkedList</em></strong></p>
-<ul>
-<li>采用双向链表存储方式</li>
-<li>缺点：遍历和随机访问元素效率低下</li>
-<li>优点：插入、删除元素的效率较高（但是前提也是必须先低效率查询才可。如果插入删除发生在头尾可以减少查询次数）</li>
-</ul>
-<h4><span id="arraylist的使用">ArrayList的使用</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.container;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestArrayList</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//使用ArrayList存储多个分数的信息</span></span><br><span class="line">        <span class="comment">//1.创建一个ArrayList对象，用来存储多个分数</span></span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();<span class="comment">//泛型,加一个&lt;&gt;,使用泛型安全</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//JDK1.5提供了泛型</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//ArrayList list = new ArrayList();</span></span><br><span class="line">        <span class="comment">//2.向ArrayList中添加分数</span></span><br><span class="line">        list.add(<span class="number">67</span>);<span class="comment">//向末尾添加</span></span><br><span class="line">        list.add(<span class="number">89</span>);<span class="comment">//集合的元素必须是对象类型，不能是基本数据类型</span></span><br><span class="line">        list.add(<span class="number">78</span>);<span class="comment">//如果要放入基本数据类型，需要使用包装类</span></span><br><span class="line">        list.add(<span class="number">89</span>);<span class="comment">//JDK5之后，自动装箱</span></span><br><span class="line">        list.add(<span class="number">96</span>);</span><br><span class="line">        list.add(<span class="number">2</span>,<span class="number">100</span>);</span><br><span class="line">        list.add(Integer.valueOf(<span class="number">67</span>));<span class="comment">//-128到127是Integer.valueOf()，超过就是new Integer().</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ArrayList list2 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        list2.add(<span class="number">45</span>);</span><br><span class="line">        list2.add(<span class="number">54</span>);</span><br><span class="line">        list2.add(<span class="number">45</span>);</span><br><span class="line"></span><br><span class="line">        list.addAll(list2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.获取ArrayList中的分数</span></span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line">        System.out.println(list.size());</span><br><span class="line">        System.out.println(list.get(<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历ArrayList：使用for循环</span></span><br><span class="line">        System.out.println(<span class="string">&quot;==========使用for循环============&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> elem = (<span class="keyword">int</span>) list.get(i);<span class="comment">//繁琐，需要强制转换</span></span><br><span class="line">            <span class="comment">//int elem1 = list.get(i);//是Integer类型了，不需要强转</span></span><br><span class="line">            System.out.println(elem);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//遍历ArrayList：使用for-each循环</span></span><br><span class="line">        System.out.println(<span class="string">&quot;============使用for-each循环=============&quot;</span>);</span><br><span class="line">        <span class="comment">//list.for</span></span><br><span class="line">        <span class="keyword">for</span> (Object elem:list</span><br><span class="line">             ) &#123;</span><br><span class="line">            System.out.println(elem);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;==========使用迭代器==========&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历ArrayList：使用迭代器Iterator</span></span><br><span class="line">        <span class="comment">//Iterator it = list.iterator();</span></span><br><span class="line">        Iterator&lt;Integer&gt; it = list.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext())&#123;</span><br><span class="line">            <span class="comment">//int elem = (int)it.next();</span></span><br><span class="line">            <span class="keyword">int</span> elem = it.next();<span class="comment">//不需要强转</span></span><br><span class="line">            System.out.println(elem);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.container;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestArrayList02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建</span></span><br><span class="line">        <span class="comment">//ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();//泛型,加一个&lt;&gt;,使用泛型安全</span></span><br><span class="line">        ArrayList list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        ArrayList list2 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="comment">//2.添加</span></span><br><span class="line">        list.add(<span class="number">67</span>);</span><br><span class="line">        list.add(<span class="number">77</span>);</span><br><span class="line">        list.add(<span class="number">88</span>);</span><br><span class="line">        list.add(<span class="number">96</span>);</span><br><span class="line">        list.add(<span class="number">2</span>,<span class="number">100</span>);</span><br><span class="line">        list2.add(<span class="number">45</span>);</span><br><span class="line">        list2.add(<span class="number">48</span>);</span><br><span class="line">        list.addAll(list2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//修改</span></span><br><span class="line">        list.set(<span class="number">0</span>,<span class="number">76</span>);</span><br><span class="line">        <span class="comment">//删除</span></span><br><span class="line">        <span class="comment">//list.clear();</span></span><br><span class="line">        list.remove(<span class="keyword">new</span> Integer(<span class="number">96</span>));</span><br><span class="line">        list.remove(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">//3.获取</span></span><br><span class="line">        list.removeAll(list);</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line">        System.out.println(list.contains(<span class="number">960</span>));</span><br><span class="line">        System.out.println(list.isEmpty());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4><span id="arraylist源码">ArrayList源码</span></h4><p>ArrayList底层就是一个长度可以动态增长的Object数组；</p>
-<p>（StringBuilder底层就是一个长度可以动态增长的char数组）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable&#123;...&#125;</span><br><span class="line">&#x2F;&#x2F;ArrayList的三个接口都没有方法</span><br></pre></td></tr></table></figure>
-<p>JDK1.7中，使用无参构造方法创建ArrayList对象时，默认底层数组长度是10。JDK1.8中，使用无参构造方法创建ArrayList对象时，默认底层数组长度是0，第一次 添加元素，容量不足就要进行扩容了。</p>
-<h4><span id="linkedlist的使用">LinkedList的使用</span></h4><p>LinkedList和ArrayList的异同</p>
-<ul>
-<li><p>底层的存储结构发生了变化</p>
-<ul>
-<li>ArrayList：数组</li>
-<li>LinkedList：双向链表</li>
-</ul>
-</li>
-<li><p>功能的底层实现变了</p>
-<ul>
-<li><p>add（2，67）</p>
-<p>ArrayList：需要大量的后移元素：效率低</p>
-<p>LinkedList：修改前后结点的指针：效率高</p>
-</li>
-<li><p>get（2）</p>
-<p>ArrayList：计算地址 1012+4*2=1020  效率高</p>
-<p>LinkedList：顺藤摸瓜，逐个查找 0 ，1， 2   效率低</p>
-</li>
-</ul>
-</li>
-<li><p>到底是使用ArrayList还是LinkedList</p>
-<p>视情况而定</p>
-<p>按照索引查询多：ArrayList</p>
-<p>删除添加操作多：LinkedList</p>
-</li>
-<li><p>LinkedList相比ArrayList提供了更多的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class LinkedList&lt;E&gt;</span><br><span class="line">    extends AbstractSequentialList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable&#123;...&#125;</span><br><span class="line">    Deque是双端队列，可以当做栈来用，本身是一个队列</span><br></pre></td></tr></table></figure></li>
-<li><p>推荐向上转型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>LinkedList的源码</p>
-<p>底层是一个双向链表</p>
-<p>有一个静态内部类Node，表示双向链表的节点。</p>
-<p>LinkedList可以当做线性表来用，也可以当做栈和队列来使用。</p>
-</li>
-</ul>
-<img src="/2021/01/27/note13/2.png" class title="test">
-
-<h3><span id="栈和队列">栈和队列</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.container;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Deque;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.Queue;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStackQueue</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//栈</span></span><br><span class="line">        <span class="comment">//public class Stack&lt;E&gt; extends Vector&lt;E&gt; 已经过时</span></span><br><span class="line">        Stack stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        <span class="comment">//双端队列 可以作为栈来使用  push()入栈   pop()出栈   peek()获取栈顶元素</span></span><br><span class="line">        Deque deque;<span class="comment">//ArrayDeque 底层是数组  LinkedList 底层是链表</span></span><br><span class="line">        <span class="comment">//队列</span></span><br><span class="line">        Queue queue;<span class="comment">//ArrayDeque 底层是数组  LinkedList 底层是链表</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//模拟摞盘子</span></span><br><span class="line"></span><br><span class="line">        Deque &lt;String&gt;deque1 = <span class="keyword">new</span> &lt;String&gt;LinkedList();</span><br><span class="line">        deque1.push(<span class="string">&quot;盘子1&quot;</span>);</span><br><span class="line">        deque1.push(<span class="string">&quot;盘子2&quot;</span>);</span><br><span class="line">        System.out.println(deque1.peek());</span><br><span class="line">        deque1.push(<span class="string">&quot;盘子3&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (!deque1.isEmpty())&#123;</span><br><span class="line">            String elem = deque1.pop();</span><br><span class="line">            System.out.println(elem);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<p><strong><em>时间复杂度</em></strong></p>
+<p>List：O(n)      Tree：O（logn）   Hashtable： O（1）</p>
+<h2><span id="2-内部比较器和外部比较器">2、内部比较器和外部比较器</span></h2><h2><span id="3-哈希表的原理">3、哈希表的原理</span></h2><h2><span id="4-hashmap-treemap-linkedhashmap">4、HashMap、TreeMap、LinkedHashMap</span></h2><h2><span id="5-hashmap源码解析">5、HashMap源码解析</span></h2><h2><span id="6-treemap源码解析">6、TreeMap源码解析</span></h2><h2><span id="7-hashmap源码解析">7、HashMap源码解析</span></h2><h2><span id="8-treeset源码解析">8、TreeSet源码解析</span></h2>
       
 
       
@@ -356,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lijinxu233.github.io/2021/01/27/note13/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lijinxu233.github.io/2021/01/27/note14/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -370,18 +317,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/01/27/note14/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JavaSE笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/26/note12/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法笔记</div>
+    <a href="/2021/01/27/note13/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaSE笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
