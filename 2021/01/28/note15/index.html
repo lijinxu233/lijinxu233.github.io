@@ -16,7 +16,7 @@
 <meta property="og:description" content="集合   1、集合的其他内容 1.1、Iterator 1.2、ListIterator 1.3、Collections   2、集合的其他内容 2.1、旧的集合类 2.2、新一代并发集合类 2.3、集合常用概念辨析">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-28T14:30:36.000Z">
-<meta property="article:modified_time" content="2021-01-28T15:13:39.406Z">
+<meta property="article:modified_time" content="2021-01-28T15:35:45.883Z">
 <meta property="article:author" content="李晋旭">
 <meta name="twitter:card" content="summary">
   
@@ -194,7 +194,40 @@
 
 <a id="more"></a>
 
-<h2><span id="1-集合的其他内容">1、集合的其他内容</span></h2><h3><span id="11-iterator">1.1、Iterator</span></h3><h3><span id="12-listiterator">1.2、ListIterator</span></h3><h3><span id="13-collections">1.3、Collections</span></h3><h2><span id="2-集合的其他内容">2、集合的其他内容</span></h2><h3><span id="21-旧的集合类">2.1、旧的集合类</span></h3><h3><span id="22-新一代并发集合类">2.2、新一代并发集合类</span></h3><h3><span id="23-集合常用概念辨析">2.3、集合常用概念辨析</span></h3>
+<h2><span id="1-集合的其他内容">1、集合的其他内容</span></h2><h3><span id="11-iterator">1.1、Iterator</span></h3><ul>
+<li><p>Iterator专门为遍历集合而生，集合并没有提供专门的遍历的方法</p>
+</li>
+<li><p>Iterator实际上 迭代器设计模式的实现</p>
+</li>
+<li><p>Iterator的常用方法</p>
+<ul>
+<li>boolean hasNext（）：判断是否存在另一个可访问的元素。</li>
+<li>Object next（）：返回要访问的下一个元素。</li>
+<li>void remove（）：删除上次访问返回的对象。</li>
+</ul>
+</li>
+<li><p>哪些集合可以使用Iterator遍历</p>
+<ul>
+<li>层次1：Collection、List、Set可以，Map不可以。</li>
+<li>层次2：提供iterator（）方法的就可以将元素交给Iterator。</li>
+<li>层次3：实现Iterator接口的集合类都可以使用迭代器遍历。</li>
+</ul>
+</li>
+<li><p>for-each循环和Iterator的联系</p>
+<ul>
+<li>for-each循环（遍历集合）时，底层使用的是Iterator。</li>
+<li>凡是可以使用for-each循环（遍历的集合），肯定也可以使用Iterator进行遍历。</li>
+</ul>
+</li>
+<li><p>Iterator是一个接口，它的实现类在哪里？</p>
+<p>在相应的结婚实现类中，比如在ArrayList中存在一个内部类Itr</p>
+<p>implements Iterator</p>
+</li>
+<li><p>为什么Iterator不设计成一个类，而是一个接口？</p>
+<p>不同的集合类，底层结构不同，迭代的方法不同，所以提供一个接口，让相应的实现类来实现。</p>
+</li>
+</ul>
+<h3><span id="12-listiterator">1.2、ListIterator</span></h3><h3><span id="13-collections">1.3、Collections</span></h3><h2><span id="2-集合的其他内容">2、集合的其他内容</span></h2><h3><span id="21-旧的集合类">2.1、旧的集合类</span></h3><h3><span id="22-新一代并发集合类">2.2、新一代并发集合类</span></h3><h3><span id="23-集合常用概念辨析">2.3、集合常用概念辨析</span></h3>
       
 
       
