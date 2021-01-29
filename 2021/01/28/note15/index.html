@@ -16,7 +16,7 @@
 <meta property="og:description" content="集合   1、集合的其他内容 1.1、Iterator 1.2、ListIterator 1.3、Collections   2、集合的其他内容 2.1、旧的集合类 2.2、新一代并发集合类 2.3、集合常用概念辨析">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-28T14:30:36.000Z">
-<meta property="article:modified_time" content="2021-01-29T07:48:30.276Z">
+<meta property="article:modified_time" content="2021-01-29T10:26:36.254Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="Iterator">
 <meta name="twitter:card" content="summary">
@@ -295,7 +295,52 @@
 </ul>
 </li>
 </ul>
-<h3><span id="22-新一代并发集合类">2.2、新一代并发集合类</span></h3><h3><span id="23-集合常用概念辨析">2.3、集合常用概念辨析</span></h3>
+<h3><span id="22-新一代并发集合类">2.2、新一代并发集合类</span></h3><ul>
+<li><p>早期集合类Vector、Hashtable：线程安全的。是使用synchronized修饰方法来保证。</p>
+</li>
+<li><p>为了提高性能，使用ArrayList、HashMap替换，线程不安全，但是性能好。</p>
+<p>使用ArrayList、HashMap，需要线程安全怎么办呢？</p>
+<p>使用Collections.synchronizedList(list)Collections.synchronizedMap(m)解决，底层使用synchronized代码块锁。</p>
+<p>虽然也是锁住了所有代码，但是锁在方法里边，并所在方法外边性能可以理解为稍有提高吧。</p>
+</li>
+<li><p>在大量并发情况下如何提高集合的效率和安全呢？</p>
+<p>提供了新的线程同步集合类，位于java.util.concurrent包（JUC）下，使用Lock锁</p>
+<ul>
+<li>ConcurrentHashMap</li>
+<li>CopyOnWriteArrayList</li>
+<li>CopyOnWriteArraySet</li>
+</ul>
+</li>
+</ul>
+<h3><span id="23-集合常用概念辨析">2.3、集合常用概念辨析</span></h3><ul>
+<li><p>集合和数组的比较</p>
+<p>数组不是面向对象的，存在明显的缺陷，集合完全弥补了数组的一些缺点。比数组更灵活更实用，可大大提高软件的开发效率而且不同的集合框架类可适用于不同场合。具体如下：</p>
+<ul>
+<li>数组容量固定且无法动态改变，集合类容量动态改变。</li>
+<li>数组能存放基本数据类型和引用数据类型的数据，而集合类中只能放引用数据类型的数据。</li>
+<li>数组无法判断其中实际存有多少元素，length只告诉了array容量；集合可以判断实际存有多少元素，而对总的容量不关心。</li>
+<li>集合有多种数据结构（顺序表、链表、哈希表、树等）、多种特征（是否有序，是否唯一）、不同适用场合（查询快，便于删除、有序），不像数组仅采用顺序表方式。</li>
+<li>集合以类的形式存在，具有封装、继承、多态等类的特性，通过简单的方法和属性调用即可实现各种复杂操作，大大提高软件的开发效率。</li>
+</ul>
+</li>
+<li><p>ArrayList和LinkedList的联系和区别</p>
+<ul>
+<li>联系：<ul>
+<li>都实现了List接口</li>
+<li>有序  不唯一</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ArrayList</p>
+<ul>
+<li>特点：在内存中分配连续的空间，实现了长度可变的数组</li>
+<li>优点：遍历元素和随机访问元素的效率比较高</li>
+<li>缺点：添加和删除需大量移动元素效率低，按照内容查询效率低</li>
+</ul>
+</li>
+</ul>
+
       
 
       
