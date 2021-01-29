@@ -8,16 +8,19 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>JavaSE | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I&#x2F;O流（Input Output Stream）">
+  <meta name="description" content="I&#x2F;O流（Input Output Stream）   IO流概述 I&#x2F;O流分类 IO流体系结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaSE">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/01/29/note17/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="I&#x2F;O流（Input Output Stream）">
+<meta property="og:description" content="I&#x2F;O流（Input Output Stream）   IO流概述 I&#x2F;O流分类 IO流体系结构">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note17/1.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note17/2.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note17/3.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note17/4.png">
 <meta property="article:published_time" content="2021-01-29T13:10:32.000Z">
-<meta property="article:modified_time" content="2021-01-29T14:30:40.674Z">
+<meta property="article:modified_time" content="2021-01-29T15:29:51.801Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="I&#x2F;O流">
 <meta name="twitter:card" content="summary">
@@ -179,24 +182,54 @@
       
         <h1><span id="io流input-output-stream">I/O流（Input Output Stream）</span></h1><!-- toc -->
 
-
-
+<ul>
+<li><a href="#io%E6%B5%81%E6%A6%82%E8%BF%B0">IO流概述</a></li>
+<li><a href="#io%E6%B5%81%E5%88%86%E7%B1%BB">I/O流分类</a></li>
+<li><a href="#io%E6%B5%81%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">IO流体系结构</a></li>
+</ul>
 <!-- tocstop -->
 
 <a id="more"></a>
 
-<p>在Java程序中，对于数据的输入/输出操作以“流”（stream）的方式进行；Java提供了各种各样的“流”类，用以获取不同种类的数据；程序中通过标准的方法输入或输出数据。Java的流类型一般位于java.io包中。</p>
+<h2><span id="io流概述">IO流概述</span></h2><p>在Java程序中，对于数据的输入/输出操作以“流”（stream）的方式进行；Java提供了各种各样的“流”类，用以获取不同种类的数据；程序中通过标准的方法输入或输出数据。Java的流类型一般位于java.io包中。</p>
 <p>数据源data source，提供原始数据的原始媒介。常见的：数据库、文件、其他程序、内存、网络连接、IO设备。</p>
 <img src="/2021/01/29/note17/1.png" class title="test">
 
 <p>流是一个抽象、动态的概念，是一连串连续动态的数据集合。</p>
-<p>I/O流分类</p>
-<p>按流的方向分类：</p>
+<h2><span id="io流分类">I/O流分类</span></h2><p><strong>按流的方向分类：</strong></p>
 <ul>
 <li>输入流：数据流向是数据源到程序（以InputStream、Reader结尾的流）。</li>
 <li>输出流：数据流向是程序到目的地（以OutputStream、Writer结尾的流）。</li>
 </ul>
+<p>输入/输出流的划分是相对程序而言的，并不是相对数据源</p>
+<p><strong>按处理的数据单元分类：</strong></p>
+<ul>
+<li>字节流：以字节为单位获取数据，命名上以Stream结尾的流一般是字节流，顶级类InputStream、OutputStream。</li>
+<li>字符流：以字符为单位获取数据，命名上以Reader/Writer结尾的流一般是字符流，顶级类Reader、Writer。</li>
+</ul>
+<p><strong>按处理对象不同分类：</strong></p>
+<ul>
+<li>节点流：可以直接从数据源或目的地读写数据，如FileInputStream、FileReader等</li>
+<li>处理流：不直接连接到数据源或目的地，是“处理流的流”。通过对其他流的处理提高程序的性能，如BufferedInputStream、BufferedReader等。处理流也叫包装流。</li>
+</ul>
+<p><strong>节点流处于IO操作的第一线，所有操作必须通过它们进行；处理流可以对节点流进行包装，提高性能或提高程序的灵活性。</strong></p>
+<h2><span id="io流体系结构">IO流体系结构</span></h2><p><strong>InputStream和OutputStream</strong></p>
+<ul>
+<li>Java语言中最基本的两个字节输入输出类。</li>
+<li>其他所有字节输入输出流类都继承自这两个基类。</li>
+<li>这两个类都是抽象类，不能创建它们的实例，只能使用它们的子类。</li>
+</ul>
+<img src="/2021/01/29/note17/2.png" class title="test">
 
+<p><strong>Reader和Writer</strong></p>
+<ul>
+<li>Java语言中最基本的两个字符输入输出类。</li>
+<li>其他所有字符输入输出流类都继承自这两个基类。</li>
+<li>这两个类都是抽象类，不能创建它们的实例，只能使用它们的子类。</li>
+</ul>
+<img src="/2021/01/29/note17/3.png" class title="test">
+
+<img src="/2021/01/29/note17/4.png" class title="test">
       
 
       
