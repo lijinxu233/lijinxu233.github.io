@@ -16,7 +16,7 @@
 <meta property="og:description" content="集合   1、集合的其他内容 1.1、Iterator 1.2、ListIterator 1.3、Collections   2、集合的其他内容 2.1、旧的集合类 2.2、新一代并发集合类 2.3、集合常用概念辨析">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-28T14:30:36.000Z">
-<meta property="article:modified_time" content="2021-01-28T16:23:09.320Z">
+<meta property="article:modified_time" content="2021-01-29T07:48:30.276Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="Iterator">
 <meta name="twitter:card" content="summary">
@@ -209,7 +209,7 @@
 </li>
 <li><p>哪些集合可以使用Iterator遍历</p>
 <ul>
-<li>层次1：Collection、List、Set可以，Map不可以。</li>
+<li>层次1：Collection、List、Set可以，Map不可以。前者实现了Iterable接口，而Map没有实现Iterable接口。</li>
 <li>层次2：提供iterator（）方法的就可以将元素交给Iterator。</li>
 <li>层次3：实现Iterator接口的集合类都可以使用迭代器遍历。</li>
 </ul>
@@ -220,8 +220,15 @@
 <li>凡是可以使用for-each循环（遍历的集合），肯定也可以使用Iterator进行遍历。</li>
 </ul>
 </li>
+<li><p>for-each循环和Iterator的区别</p>
+<ul>
+<li>for-each还能遍历数组（但遍历数组时，底层使用for循环），Iterator只能遍历集合。</li>
+<li>使用for-each遍历集合时不能删除元素，会抛出异常ConcurrentModificationException。</li>
+<li>使用Iterator遍历集合时能删除元素。</li>
+</ul>
+</li>
 <li><p>Iterator是一个接口，它的实现类在哪里？</p>
-<p>在相应的结婚实现类中，比如在ArrayList中存在一个内部类Itr</p>
+<p>在相应的集合实现类中，比如在ArrayList中存在一个内部类 Itr </p>
 <p>implements Iterator</p>
 </li>
 <li><p>为什么Iterator不设计成一个类，而是一个接口？</p>
@@ -231,7 +238,64 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.container03.other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestIterator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;JavaSE&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;MySQL&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;JavaEE&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;Java&quot;</span>);</span><br><span class="line"><span class="comment">//        for (String elem : list) &#123;</span></span><br><span class="line"><span class="comment">//            if (elem.equals(&quot;JavaSE&quot;))&#123;</span></span><br><span class="line"><span class="comment">//                list.remove(elem);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 报错，并发修改的异常</span></span><br><span class="line"><span class="comment">         * Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span></span><br><span class="line"><span class="comment">         * 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)</span></span><br><span class="line"><span class="comment">         * 	at java.util.ArrayList$Itr.next(ArrayList.java:861)</span></span><br><span class="line"><span class="comment">         * 	at com.container03.other.TestIterator.main(TestIterator.java:14)</span></span><br><span class="line"><span class="comment">         * */</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line">        Iterator&lt;String&gt; it = list.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext())&#123;</span><br><span class="line">            String elem = it.next();</span><br><span class="line">              <span class="keyword">if</span> (<span class="string">&quot;JavaSE&quot;</span>.equals(elem))&#123;</span><br><span class="line">              <span class="comment">//list.remove(elem);</span></span><br><span class="line">              it.remove();<span class="comment">//就是删除elem</span></span><br><span class="line">              &#125;</span><br><span class="line">            <span class="comment">//使用迭代器时，就不能用list删除元素</span></span><br><span class="line">            System.out.println(elem);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-<h3><span id="12-listiterator">1.2、ListIterator</span></h3><h3><span id="13-collections">1.3、Collections</span></h3><h2><span id="2-集合的其他内容">2、集合的其他内容</span></h2><h3><span id="21-旧的集合类">2.1、旧的集合类</span></h3><h3><span id="22-新一代并发集合类">2.2、新一代并发集合类</span></h3><h3><span id="23-集合常用概念辨析">2.3、集合常用概念辨析</span></h3>
+<h3><span id="12-listiterator">1.2、ListIterator</span></h3><ul>
+<li>ListIterator和Iterator的关系<ul>
+<li>public interface ListIterator<e> extends Iterator<e></e></e></li>
+<li>都可以遍历List</li>
+</ul>
+</li>
+<li>ListIterator和Iterator的区别<ul>
+<li>使用范围不同<ul>
+<li>Iterator可以应用于更多的集合。Set、List和这些集合的子类型。</li>
+<li>ListIterator只能用于List及其子类型。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>遍历顺序不同<ul>
+<li>Iterator只能 顺序向后遍历；ListIterator还可以逆序向前遍历</li>
+</ul>
+</li>
+<li>Iterator可以在遍历的过程中remove（）；ListIterator可以在遍历的过程中remove（）、add（）、set（）</li>
+<li>ListIterator可以定位当前的索引位置，nextIndex（）和previousIndex（）可以实现。Iterator没有此功能。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.container03.other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ListIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestListIterator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;JavaSE&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;MySQL&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;JavaEE&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;SSM&quot;</span>);</span><br><span class="line">        ListIterator&lt;String&gt; lit = list.listIterator();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (lit.hasNext())&#123;</span><br><span class="line">            String next = lit.next();</span><br><span class="line">            System.out.println(next);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;=========================&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (lit.hasPrevious())&#123;</span><br><span class="line">            String elem = lit.previous();</span><br><span class="line">            System.out.println(elem);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * JavaSE</span></span><br><span class="line"><span class="comment">             * MySQL</span></span><br><span class="line"><span class="comment">             * JavaEE</span></span><br><span class="line"><span class="comment">             * SSM</span></span><br><span class="line"><span class="comment">             * =========================</span></span><br><span class="line"><span class="comment">             * SSM</span></span><br><span class="line"><span class="comment">             * JavaEE</span></span><br><span class="line"><span class="comment">             * MySQL</span></span><br><span class="line"><span class="comment">             * JavaSE</span></span><br><span class="line"><span class="comment">             * */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3><span id="13-collections">1.3、Collections</span></h3><ul>
+<li>关于集合操作的工具类，好比Arrays，Math</li>
+<li>唯一的构造方法private，不允许在类的外部创建对象</li>
+<li>提供了大量的static方法，可以通过类名直接调用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.container03.other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CopyOnWriteArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestCollections</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        Arrays.toString(null);</span></span><br><span class="line"><span class="comment">//        Math.random();</span></span><br><span class="line">        <span class="comment">//类构造方法是私有的</span></span><br><span class="line">        <span class="comment">//1.添加元素</span></span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//List&lt;Integer&gt; list2 = new LinkedList&lt;&gt;();</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line">        Collections.addAll(list,<span class="number">45</span>,<span class="number">67</span>,<span class="number">34</span>,<span class="number">78</span>,<span class="number">56</span>,<span class="number">23</span>,<span class="number">98</span>);<span class="comment">//底层还是一个一个添加</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.排序</span></span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.查找:必须自然有序</span></span><br><span class="line">        <span class="keyword">int</span> index = Collections.binarySearch(list, <span class="number">34</span>);</span><br><span class="line">        System.out.println(index);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.最大值最小值</span></span><br><span class="line">        <span class="keyword">int</span> max = Collections.max(list);</span><br><span class="line">        <span class="keyword">int</span> min = Collections.min(list);</span><br><span class="line">        System.out.println(max);</span><br><span class="line">        System.out.println(min);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//5.填充</span></span><br><span class="line">        Collections.fill(list,<span class="number">100</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//6.复制</span></span><br><span class="line">        List list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(list2,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">0</span>);</span><br><span class="line">        System.out.println(list2);</span><br><span class="line">        Collections.copy(list2,list);</span><br><span class="line">        System.out.println(list2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//7.同步</span></span><br><span class="line">        <span class="comment">//第一代的集合类Vector、Hashtable  线程安全   效率低  有synchronized  多线程</span></span><br><span class="line">        Vector v;</span><br><span class="line">        <span class="comment">//第二代集合类：ArrayList、HashMap   线程不安全   效率高    单线程</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果既效希望率高，又希望线程安全，但是不使用第一代集合类，有办法吗？</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//方法1：多线程情况下，对第二代集合类加锁</span></span><br><span class="line">        list = Collections.synchronizedList(list);<span class="comment">//list不是集合类，它只是指向了集合类</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//方法2：使用第三代的并发集合类</span></span><br><span class="line">        <span class="comment">//CopyOnWriteArrayList</span></span><br><span class="line">        <span class="comment">//ConcurrentHashMap</span></span><br><span class="line">        <span class="comment">//JDK1.5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="2-集合的其他内容">2、集合的其他内容</span></h2><h3><span id="21-旧的集合类">2.1、旧的集合类</span></h3><ul>
+<li><p>Vector</p>
+<ul>
+<li>实现原理和ArrayList相同，功能相同，都是长度可变的数组结构，很多情况下可以互用</li>
+<li>两者的主要区别如下<ul>
+<li>Vector是早期JDK接口，ArrayList是替代Vector的新接口</li>
+<li>Vector线程安全，效率低下；ArrayList重速度轻安全，线程非安全</li>
+<li>长度需要增长时，Vector默认增长一倍，ArrayList增长50%</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Hashtable类</p>
+<ul>
+<li>实现原理和HashMap相同，功能相同，底层都是哈希表结构，查询速度快，很多情况下可互用</li>
+<li>两者的区别主要如下<ul>
+<li>Hashtable是早期JDK提供，HashMap是新版JDK提供</li>
+<li>Hashtable继承Dictionary类，HashMap实现Map接口</li>
+<li>Hashtable线程安全，HashMap线程非安全</li>
+<li>Hashtable不允许null值，HashMap允许null值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="22-新一代并发集合类">2.2、新一代并发集合类</span></h3><h3><span id="23-集合常用概念辨析">2.3、集合常用概念辨析</span></h3>
       
 
       
