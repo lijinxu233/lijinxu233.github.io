@@ -16,8 +16,9 @@
 <meta property="og:description" content="多线程   线程简介 1、进程和线程 2、线程的定义和创建 2.1、继承Thread类 2.2、实现Runable接口 2.3、实现Callable接口   3、线程的生命周期 4、线程控制 5、线程同步 5.1、同步代码块 5.2、同步方法 5.3、Lock锁">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note18/1.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note18/2.png">
 <meta property="article:published_time" content="2021-01-29T13:26:44.000Z">
-<meta property="article:modified_time" content="2021-01-31T07:16:38.943Z">
+<meta property="article:modified_time" content="2021-01-31T14:39:33.439Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
@@ -276,7 +277,81 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.thread3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.FutureTask;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomCallable</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"><span class="comment">//        if (true) &#123;</span></span><br><span class="line"><span class="comment">//            throw new Exception();</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Random().nextInt(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException,InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">//创建一个线程对象</span></span><br><span class="line">        Callable&lt;Integer&gt; callable = <span class="keyword">new</span> RandomCallable();</span><br><span class="line">        FutureTask&lt;Integer&gt; task = <span class="keyword">new</span> FutureTask(callable);</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(task);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//启动线程</span></span><br><span class="line">        thread.start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取返回值</span></span><br><span class="line">        <span class="keyword">int</span> result = task.get();</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-<h2><span id="3-线程的生命周期">3、线程的生命周期</span></h2><h2><span id="4-线程控制">4、线程控制</span></h2><h2><span id="5-线程同步">5、线程同步</span></h2><h3><span id="51-同步代码块">5.1、同步代码块</span></h3><h3><span id="52-同步方法">5.2、同步方法</span></h3><h3><span id="53-lock锁">5.3、Lock锁</span></h3>
+<h2><span id="3-线程的生命周期">3、线程的生命周期</span></h2><img src="/2021/01/29/note18/2.png" class title="test">
+
+<ul>
+<li><p>新生状态</p>
+<ul>
+<li>用new关键字建立一个线程对象后，该线程对象就处于新生状态。</li>
+<li>处于新生状态的线程有自己的内存空间，通过调用start进入就绪状态。</li>
+</ul>
+</li>
+<li><p>就绪状态</p>
+<ul>
+<li>处于就绪状态线程具备了运行条件，但还没分配到CPU，处于线程就绪队列，等待系统为其分配CPU</li>
+<li>当系统选定一个等待执行的线程后，他就会从就绪状态进入执行状态，该动作称之为“cpu调度”。</li>
+</ul>
+</li>
+<li><p>运行状态</p>
+<ul>
+<li>在运行状态的线程执行自己的run方法中代码，直到等待某资源而阻塞或完成任务而死亡。</li>
+<li>如果在给定时间内没执行结束，就会被系统给换下来回到等待执行状态。</li>
+</ul>
+</li>
+<li><p>阻塞状态</p>
+<ul>
+<li>处于运行状态的线程在某些情况下，如执行了sleep（睡眠）方法，或等待I/O设备等资源，将让出CPU并暂时停止自己的运行，进入阻塞状态。</li>
+<li>在阻塞状态的线程不能进入就绪队列。只有当引起阻塞的原因消除时。如睡眠时间已到，或等待的I/O设备空闲下来，线程便转入就绪状态，重新到就绪队列中排队等待，被系统选中后从原来停止的位置开始继续运行。</li>
+</ul>
+</li>
+<li><p>死亡状态</p>
+<ul>
+<li>死亡状态是线程生命周期中最后一个阶段。线程死亡原因有三个。一个是正常运行的线程完成了它的全部工作；另一个是线程被强制性地终止，如通过执行stop方法来终止一个线程[不推荐使用]，三是线程抛出未捕获的异常。</li>
+</ul>
+</li>
+</ul>
+<h2><span id="4-线程控制">4、线程控制</span></h2><p>理解了线程生命周期的基础上，可以使用Java提供的线程控制命令对线程的生命周期进行干预。</p>
+<ul>
+<li><p>join（）</p>
+<p>阻塞指定线程等到另一个线程完成以后再继续执行。</p>
+</li>
+<li><p>sleep（）</p>
+<p>使线程停止运行一段时间，让出CPU，将处于阻塞状态。</p>
+<p>如果调用了sleep方法后，没有其他等待执行的线程，这个时候当前线程不会马上恢复执行。</p>
+<p>实际开发中经常使用Thread.sleep（）来模拟线程切换，暴露线程安全问题。</p>
+</li>
+<li><p>yield（）</p>
+<p>让当前正在执行的线程暂停，不是阻塞线程，而是将线程转入就绪状态。</p>
+<p>如果调用了yield方法之后，没有其他等待执行的线程，这个时候当前线程就会马上恢复执行。</p>
+</li>
+<li><p>setDaemon（）</p>
+<p>可以将指定的线程设置成后台线程。</p>
+<p>创建后台线程的线程结束时，后台线程也随之消亡。</p>
+<p>只能在线程启动之前把它设为后台线程。</p>
+</li>
+<li><p>interrupt（）</p>
+<p>并没有直接中断线程，只是修改了一下线程的状态，还需要线程本身检查状态的变化。</p>
+</li>
+<li><p>stop（）</p>
+<p>结束线程，不推荐使用。</p>
+</li>
+</ul>
+<h2><span id="5-线程同步">5、线程同步</span></h2><p><strong><em>应用场景：</em></strong></p>
+<ul>
+<li>多个用户同时操作一个银行账户。每次取款400元，取款前先检查余额是否足够。如果不够，放弃取款</li>
+</ul>
+<p><strong><em>分析：</em></strong></p>
+<ul>
+<li>使用多线程解决</li>
+<li>开发一个取款线程类，每个用户对应一个线程对象</li>
+<li>因为多个线程共享同一个银行账户，使用Runnable方式解决</li>
+</ul>
+<p><strong><em>思路：</em></strong></p>
+<ul>
+<li>创建银行账户类Account</li>
+<li>创建取款线程AccountRunnable</li>
+</ul>
+<h3><span id="51-同步代码块">5.1、同步代码块</span></h3><h3><span id="52-同步方法">5.2、同步方法</span></h3><h3><span id="53-lock锁">5.3、Lock锁</span></h3>
       
 
       
@@ -533,10 +608,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
@@ -545,15 +616,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
