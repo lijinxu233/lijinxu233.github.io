@@ -16,7 +16,7 @@
 <meta property="og:description" content="多线程   线程简介 1、进程和线程 2、线程的定义和创建 2.1、继承Thread类 2.2、实现Runable接口 2.3、实现Callable接口   3、线程的生命周期 4、线程控制 5、线程同步 5.1、同步代码块 5.2、同步方法 5.3、Lock锁">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-29T13:26:44.000Z">
-<meta property="article:modified_time" content="2021-01-31T04:40:21.826Z">
+<meta property="article:modified_time" content="2021-01-31T04:44:57.125Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
@@ -209,6 +209,19 @@
 </li>
 <li><p>进程 Process</p>
 <p>进程是指一种正在运行的程序，有自己的地址空间</p>
+<ul>
+<li>进程的特点<ul>
+<li>动态性</li>
+<li>并发性</li>
+<li>独立性</li>
+<li>并发和并行的区别<ul>
+<li>并行：多个CPU同时执行多个任务</li>
+<li>并发：一个CPU（采用时间片）同时执行多个任务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 <h2><span id="2-线程的定义和创建">2、线程的定义和创建</span></h2><h3><span id="21-继承thread类">2.1、继承Thread类</span></h3><h3><span id="22-实现runable接口">2.2、实现Runable接口</span></h3><h3><span id="23-实现callable接口">2.3、实现Callable接口</span></h3><h2><span id="3-线程的生命周期">3、线程的生命周期</span></h2><h2><span id="4-线程控制">4、线程控制</span></h2><h2><span id="5-线程同步">5、线程同步</span></h2><h3><span id="51-同步代码块">5.1、同步代码块</span></h3><h3><span id="52-同步方法">5.2、同步方法</span></h3><h3><span id="53-lock锁">5.3、Lock锁</span></h3>
@@ -314,6 +327,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/01/31/note19/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2021/01/29/note17/" id="article-nav-older" class="article-nav-link-wrap">
@@ -471,19 +493,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
               </li>
              
               <li class="article-tag-list-item">
