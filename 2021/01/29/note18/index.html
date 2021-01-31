@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note18/1.png">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/01/29/note18/2.png">
 <meta property="article:published_time" content="2021-01-29T13:26:44.000Z">
-<meta property="article:modified_time" content="2021-01-31T16:15:07.645Z">
+<meta property="article:modified_time" content="2021-01-31T16:28:30.210Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
@@ -364,11 +364,21 @@
 
 
 <h3><span id="53-lock锁">5.3、Lock锁</span></h3><p><strong>JDK1.5中推出了新一代的线程同步方式：Lock锁</strong></p>
-<ul>
+<h4><span id="531-lock锁">5.3.1、Lock锁：</span></h4><ul>
 <li>JDK1.5后新增功能，与采用synchronized相比，lock可提供多种锁方案，更灵活</li>
 <li>java.util.concurrent.lock中的Lock框架是锁定的一个抽象，它允许把锁定的实现作为Java类，而不是作为语言的特性来实现。这就为Lock的多种实现留下了空间，各种实现可能有不同的调度算法、性能特性或者锁定语义。</li>
 <li>ReentrantLock类实现了Lock，它拥有与synchronized相同的并发性和内存语义，但是添加了类似锁投票、定时锁等候和可中断锁等候的一些特性。此外，它还提供了在激烈争用情况下更佳的性能。</li>
 <li>注意：如果同步代码有异常，要将unlock（）写入finally语句块</li>
+</ul>
+<h4><span id="532-lock和synchronized的区别">5.3.2、Lock和synchronized的区别</span></h4><ul>
+<li>Lock是显式锁（手动开启和关闭锁，别忘记关闭锁），synchronized是隐式锁，遇到异常自动解锁</li>
+<li>Lock只有代码块锁，synchronized有代码块锁和方法锁</li>
+<li>Lock可以对读不加锁，对写加锁，synchronized不可以</li>
+<li>Lock锁可以有多种获取锁的方式，可以从sleep的线程中抢到锁，synchronized不可以</li>
+<li>使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。并且具有更好的扩展性（提供更多的子类）</li>
+</ul>
+<h4><span id="533-优先使用顺序">5.3.3、优先使用顺序</span></h4><ul>
+<li>Lock—同步代码块（已经进入了方法体，分配了相应资源）—同步方法（在方法体之外）</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.synch3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 取款的线程</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Account account = <span class="keyword">new</span> Account();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//购买一把锁</span></span><br><span class="line">    <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程体：取款的步骤</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//上锁</span></span><br><span class="line">        lock.lock();<span class="comment">//一直上锁，知道能上锁为止</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (account.getBalance()&gt;=<span class="number">400</span>)&#123;<span class="comment">//余额足够就取款</span></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                account.withDraw(<span class="number">400</span>);</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;取款成功，当前余额&quot;</span>+account.getBalance());</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;<span class="comment">//余额不足给出提示</span></span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;取款失败，余额不足，当前余额&quot;</span>+account.getBalance());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//解锁</span></span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -628,11 +638,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
