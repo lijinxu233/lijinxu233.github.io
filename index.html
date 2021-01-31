@@ -152,6 +152,203 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-note20" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/31/note20/">笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/31/note20/" class="archive-article-date">
+  	<time datetime="2021-01-31T05:23:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="java-callable接口-future接口-futuretask接口">Java —— Callable接口、Future接口、FutureTask接口</span></h1><h3><span id="callable接口与runnable接口的区别">Callable接口与Runnable接口的区别</span></h3><ol>
+<li>Callable功能更强大些。</li>
+<li>相比run()方法，可以有返回值。</li>
+<li>方法可以抛出异常。</li>
+<li>支持泛型的返回值。</li>
+<li>需要借助FutureTask类，比如获取返回结果。</li>
+</ol>
+<h3><span id="callable接口"><strong><em>Callable接口</em></strong></span></h3><p><code>Callable</code>接口类似于<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/lang/Runnable.html"><code>Runnable</code></a> ，因为它们都是为其实例可能由另一个线程执行的类设计的。 然而，<code>Runnable</code>不返回结果，也不能抛出被检查的异常。</p>
+<p><strong><em>方法</em></strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">类型和返回值</th>
+<th align="left">方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>V</code></td>
+<td align="left"><code>call()</code>计算一个结果，如果不能这样做，就会抛出一个异常。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Callable</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">V <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="future接口">Future接口</span></h3><p>可以对具体Runnable、Callable任务的执行结果进行取消、查询是 否完成、获取结果等。FutrueTask是Futrue接口的唯一的实现类。 FutureTask 同时实现了Runnable, Future接口。它既可以作为 Runnable被线程执行，又可以作为Future得到Callable的返回值。</p>
+<p>提供方法来检查计算是否完成，等待其完成，并检索计算结果。 结果只能在计算完成后使用方法<code>get</code>进行检索，如有必要，阻塞，直到准备就绪。 取消由<code>cancel</code>方法执行。 提供其他方法来确定任务是否正常完成或被取消。 计算完成后，不能取消计算。 如果您想使用<code>Future</code> ，以便不可撤销，但不提供可用的结果，则可以声明<code>Future&lt;?&gt;</code>表格的类型，并返回<code>null</code>作为基础任务的结果。</p>
+<p><strong><em>方法</em></strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">类型和返回值</th>
+<th align="left">方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>boolean</code></strong></td>
+<td align="left"><strong><code>cancel(boolean mayInterruptIfRunning)</code>**</strong>尝试取消执行此任务。**</td>
+</tr>
+<tr>
+<td align="left"><strong><code>V</code></strong></td>
+<td align="left"><strong><code>get()</code><strong>**<em>\</em>等待计算完成，然后检索其结果。\</strong></strong></td>
+</tr>
+<tr>
+<td align="left"><code>V</code></td>
+<td align="left"><code>get(long timeout, TimeUnit unit)</code>如果需要等待最多在给定的时间计算完成，然后检索其结果（如果可用）。</td>
+</tr>
+<tr>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>isCancelled()</code>如果此任务在正常完成之前被取消，则返回 <code>true</code> 。</td>
+</tr>
+<tr>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>isDone()</code>返回 <code>true</code>如果任务已完成。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Future</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">cancel</span><span class="params">(<span class="keyword">boolean</span> mayInterruptIfRunning)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isCancelled</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isDone</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException</span>;</span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> InterruptedException, ExecutionException, TimeoutException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="futuretask接口">FutureTask接口</span></h3><p>该类提供了一个<code>Future</code>的<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/util/concurrent/Future.html">基本实现</a>（FutrueTask是Futrue接口的唯一的实现类），具有启动和取消计算的方法，查询计算是否完整，并检索计算结果。 结果只能在计算完成后才能检索; 如果计算尚未完成，则<code>get</code>方法将阻止。 一旦计算完成，则无法重新启动或取消计算（除非使用<code>runAndReset()</code>调用<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/util/concurrent/FutureTask.html#runAndReset--">计算</a> ）。<code>FutureTask</code>可用于包装<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/util/concurrent/Callable.html"><code>Callable</code></a>或<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/lang/Runnable.html"><code>Runnable</code></a>对象。 因为<code>FutureTask</code>实现<code>Runnable</code> ，一个<code>FutureTask</code>可以提交到一个<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/util/concurrent/Executor.html"><code>Executor</code></a>执行。</p>
+<p>除了作为独立类之外，此类还提供了<code>protected</code>功能，在创建自定义任务类时可能很有用。</p>
+<p><strong>构造方法</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">构造方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>FutureTask(Callable&lt;V&gt; callable)</code>创建一个 <code>FutureTask</code> ，它将在运行时执行给定的 <code>Callable</code> 。</td>
+</tr>
+<tr>
+<td align="left"><code>FutureTask(Runnable runnable, V result)</code>创建一个 <code>FutureTask</code> ，将在运行时执行给定的 <code>Runnable</code> ，并安排 <code>get</code>将在成功完成后返回给定的结果。</td>
+</tr>
+</tbody></table>
+<p><strong>方法</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">修饰语和类型</th>
+<th align="left">方法和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>boolean</code></strong></td>
+<td align="left"><strong><code>cancel(boolean mayInterruptIfRunning)</code>**</strong>尝试取消执行此任务。**</td>
+</tr>
+<tr>
+<td align="left"><code>protected void</code></td>
+<td align="left"><code>done()</code>此任务转换到状态 <code>isDone</code> （无论是正常还是通过取消）调用的受保护方法。</td>
+</tr>
+<tr>
+<td align="left"><strong><code>V</code></strong></td>
+<td align="left"><strong><code>get()</code><strong>**<em>\</em>等待计算完成，然后检索其结果。\</strong></strong></td>
+</tr>
+<tr>
+<td align="left"><code>V</code></td>
+<td align="left"><code>get(long timeout, TimeUnit unit)</code>如果需要等待最多在给定的时间计算完成，然后检索其结果（如果可用）。</td>
+</tr>
+<tr>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>isCancelled()</code>如果此任务在正常完成之前取消，则返回 <code>true</code> 。</td>
+</tr>
+<tr>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>isDone()</code>返回 <code>true</code>如果任务已完成。</td>
+</tr>
+<tr>
+<td align="left"><code>void</code></td>
+<td align="left"><code>run()</code>将此未来设置为其计算结果，除非已被取消。</td>
+</tr>
+<tr>
+<td align="left"><code>protected boolean</code></td>
+<td align="left"><code>runAndReset()</code>执行计算而不设置其结果，然后将此将来重置为初始状态，如果计算遇到异常或被取消，则不执行此操作。</td>
+</tr>
+<tr>
+<td align="left"><code>protected void</code></td>
+<td align="left"><code>set(V v)</code>将此未来的结果设置为给定值，除非此未来已被设置或已被取消。</td>
+</tr>
+<tr>
+<td align="left"><code>protected void</code></td>
+<td align="left"><code>setException(Throwable t)</code>导致这个未来报告一个<a target="_blank" rel="noopener" href="https://blog.csdn.net/java/util/concurrent/ExecutionException.html"><code>ExecutionException</code></a>与给定的可抛弃的原因，除非这个未来已经被设置或被取消。</td>
+</tr>
+</tbody></table>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.FutureTask;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SumTotal</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt;</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i%<span class="number">20</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;sleep&quot;</span>);</span><br><span class="line">                Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">&quot;  &quot;</span> + i);</span><br><span class="line">            &#125;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main7</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//实例化对象</span></span><br><span class="line">        SumTotal sumTotal = <span class="keyword">new</span> SumTotal();</span><br><span class="line">        <span class="comment">//创建FutureTask</span></span><br><span class="line">        FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;Integer&gt;(sumTotal);</span><br><span class="line">        <span class="comment">//执行线程任务</span></span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(futureTask);</span><br><span class="line">        thread.setName(<span class="string">&quot;线程1&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="comment">//获取线程任务返回值</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = futureTask.get();</span><br><span class="line">            System.out.println(sum);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36761831/article/details/90517323?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control">https://blog.csdn.net/qq_36761831/article/details/90517323?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control</a></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/31/note20/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-note19" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -965,89 +1162,6 @@
 
 
   
-    <article id="post-note10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/26/note10/">随笔</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/26/note10/" class="archive-article-date">
-  	<time datetime="2021-01-26T06:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><ul>
-<li><p>final: Final用于修饰类、成员变量和成员方法。</p>
-</li>
-<li><p>final修饰的类，不能被继承（String、StringBuilder、StringBuffer、Math，不可变类），其中所有的方法都不能被重写(这里需要注意的是不能被重写，但是可以被重载，这里很多人会弄混)，所以不能同时用abstract和final修饰类（abstract修饰的类是抽象类，抽象类是用于被子类继承的，和final起相反的作用）。</p>
-</li>
-<li><p>Final修饰的成员变量是不可变的，如果成员变量是基本数据类型，初始化之后成员变量的值不能被改变，如果成员变量是引用类型，那么它只能指向初始化时指向的那个对象，不能再指向别的对象，但是对象当中的内容是允许改变的。</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2021/01/26/note10/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/26/note10/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1181,11 +1295,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
