@@ -8,16 +8,17 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>JavaSE笔记 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="线程池 ThreadPoolExecutor   1、什么是线程池 2、使用线程池执行大量的Runnable命令 3、使用线程池执行大量的Callable任务 4、线程池API总结">
+  <meta name="description" content="线程池 ThreadPoolExecutor   1、什么是线程池 2、使用线程池执行大量的Runnable命令 3、使用线程池执行大量的Callable任务 4、线程池API总结   ForkJoin框架 工作窃取算法（work-stealing） 主要类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaSE笔记">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/02/01/note23/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="线程池 ThreadPoolExecutor   1、什么是线程池 2、使用线程池执行大量的Runnable命令 3、使用线程池执行大量的Callable任务 4、线程池API总结">
+<meta property="og:description" content="线程池 ThreadPoolExecutor   1、什么是线程池 2、使用线程池执行大量的Runnable命令 3、使用线程池执行大量的Callable任务 4、线程池API总结   ForkJoin框架 工作窃取算法（work-stealing） 主要类">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/01/note23/1.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/01/note23/2.png">
 <meta property="article:published_time" content="2021-02-01T09:37:07.000Z">
-<meta property="article:modified_time" content="2021-02-01T11:20:36.336Z">
+<meta property="article:modified_time" content="2021-02-01T14:11:07.024Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="线程池">
 <meta name="twitter:card" content="summary">
@@ -185,6 +186,13 @@
 <li><a href="#3-%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%89%A7%E8%A1%8C%E5%A4%A7%E9%87%8F%E7%9A%84callable%E4%BB%BB%E5%8A%A1">3、使用线程池执行大量的Callable任务</a></li>
 <li><a href="#4-%E7%BA%BF%E7%A8%8B%E6%B1%A0api%E6%80%BB%E7%BB%93">4、线程池API总结</a></li>
 </ul>
+<ul>
+<li><a href="#forkjoin%E6%A1%86%E6%9E%B6">ForkJoin框架</a><ul>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E7%AA%83%E5%8F%96%E7%AE%97%E6%B3%95work-stealing">工作窃取算法（work-stealing）</a></li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E7%B1%BB">主要类</a></li>
+</ul>
+</li>
+</ul>
 <!-- tocstop -->
 
 <a id="more"></a>
@@ -260,7 +268,63 @@
 <li>corePoolSize和maximumPoolSize之间的线程数会自动释放，小于等于corePoolSize的不会释放，当大于了这个值就会将任务由一个丢弃处理机制来处理。</li>
 </ul>
 </li>
+<li>keepAliveTime：线程没有任务时最多保持多长时间后会终止<ul>
+<li>默认只限于corePoolSize和maximumPoolSize间的线程</li>
 </ul>
+</li>
+<li>TimeUnit：<ul>
+<li>keepAliveTime的时间单位</li>
+</ul>
+</li>
+<li>BlockingQueue：<ul>
+<li>存储等待执行的任务的阻塞队列，有多种选择，可以是顺序队列、链式队列等。</li>
+</ul>
+</li>
+<li>ThreadFactory：<ul>
+<li>线程工厂，默认是DefaultThreadFactory，Executors的静态内部类</li>
+</ul>
+</li>
+<li>RejectedExecutionHandler：<ul>
+<li>拒绝处理任务时的策略，如果线程池的线程已经饱和，并且任务队列也已满，对新的任务应该采取什么策略。</li>
+<li>比如抛出异常、直接舍弃、丢弃队列中最旧任务等，默认是直接抛出异常。<ul>
+<li>1.CallerRunsPolicy：如果发现线程池还在运行，就直接运行这个线程。</li>
+<li>2.DiscardOldestPolicy：在线程池的等待队列中，将头取出一个抛弃，然后将当前线程放进去。</li>
+<li>3.DiscardPolicy：什么也不做。</li>
+<li>4.AbortPolicy：java默认，抛出一个异常。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span id="forkjoin框架">ForkJoin框架</span></h1><p>虽然目前处理器核心数已经发展到很大数目，但是按任务并发处理并不能完全充分的利用处理器资源，因为一般的应用程序没有那么多的并发处理任务，基于这种现状，考虑把一个任务拆分成多个单元，每个单元分别得到执行，最后合并每个单元的结果。</p>
+<p>Fork/Join框架是Java7提供的一个用于并行执行任务的框架，是一个把大任务分割成若干小任务，最后汇总每个小任务结果得到大任务结果的框架。</p>
+<img src="/2021/02/01/note23/2.png" class title="test">
+
+<h3><span id="工作窃取算法work-stealing">工作窃取算法（work-stealing）</span></h3><p>一个大任务拆分成多个小任务，为了减少线程间的竞争，把这些任务分别放到不同的队列中，并且每个队列都有单独的线程来执行队列里的任务，线程和队列一一对应。</p>
+<p>但是会出现这样一种情况：A线程处理完了自己队列的任务，B线程的队列里还有很多任务要处理。</p>
+<p>A是一个很热情的线程，想过去帮忙，但是如果两个线程访问同一个队列，会产生竞争，所以A想了一个办法，从双端队列的尾部拿任务执行。而B线程永远是从双端队列的头部拿任务执行。</p>
+<p><strong>注意：</strong></p>
+<p>线程池中的每个线程都有自己的队列，这一点和ThreadPoolExecutor是不同的，ThreadPoolExecutor是所有线程公用一个工作队列，所有线程都从这个工作队列中取任务，当自己队列中的任务都完成后，会从其他线程的工作队列中偷一个任务执行，这样可以充分利用资源。</p>
+<p>工作窃取算法的优点：</p>
+<p>​        利用了线程进行并行计算，减少了线程间的竞争。</p>
+<p>工作窃取算法的缺点：</p>
+<p>​        1.如果双端队列中只有一个任务时，线程间会存在竞争。</p>
+<p>​        2.窃取算法消耗了更多的系统资源，如会创建多个线程和多个双端对列。</p>
+<h3><span id="主要类">主要类</span></h3><ul>
+<li><p>ForkJoinTask：</p>
+<p>使用该框架，需要创建一个ForkJoin任务，他提供在任务中执行fork和join操作的机制。一般情况下，我们并不需要直接继承ForkJoinTask类，只需要继承它的子类，它的子类有两个：</p>
+<ul>
+<li>RecursiveAction：用于返回没有结果的任务。</li>
+<li>RecursiveTask：用于返回有结果的任务。</li>
+</ul>
+</li>
+<li><p>ForkJoinPool：</p>
+<p>任务ForkJoinTask需要通过ForkJoinPool来执行。</p>
+</li>
+<li><p>ForkJoinWorkerThread：</p>
+<p>ForkJoinPool线程池中的一个执行任务的线程。</p>
 </li>
 </ul>
 
@@ -511,11 +575,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,11 +591,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+                <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,11 +615,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Set Map</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">Set Map</a>
               </li>
              
               <li class="article-tag-list-item">
