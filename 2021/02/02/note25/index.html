@@ -16,7 +16,7 @@
 <meta property="og:description" content="集合   1、手写ArrayList 1.1、ArrayList底层原理细节   2、手写单链表 3、手写LinkedList 4、手写HashMap 5、手写HashSet 6、最新并发集合类">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-02T03:41:01.000Z">
-<meta property="article:modified_time" content="2021-02-02T03:54:57.688Z">
+<meta property="article:modified_time" content="2021-02-02T04:32:52.660Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="集合">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,23 @@
 <p>优点：</p>
 <p>1.节省存储空间，因为分配给数据的存储单元全用存放结点的数据（不考虑c/c++语言中数组需指定大小的情况），结点之间的逻辑关系没有占用额外的存储空间。</p>
 <p>2.索引查找效率高，即每一个结点对应一个序号，由该序号可以直接计算出来结点的存储地址。</p>
-<p>假设线性表的每个数据元素需占用K个存储单元，并以元素所占的第一个存储单元的地址作为数据元素的存储地址。则线性表中序号为i的数据元素的存储地址LOC（ai）与序号为i+1的数据元素的存储地址LOC（ai+1）之间的</p>
+<p>假设线性表的每个数据元素需占用K个存储单元，并以元素所占的第一个存储单元的地址作为数据元素的存储地址。则线性表中序号为i的数据元素的存储地址<br>$$<br>LOC(a_i)<br>$$<br>与序号为i+1的数据元素的存储地址<br>$$<br>LOC(a_i+1)<br>$$<br>之间的关系为：<br>$$<br>LOC(a_i+1)=LOC(a_i)+K<br>$$<br>通常来说，线性表i号元素a_i的存储地址为：<br>$$<br>LOC(a_i)=LOC(a_0)+i*K<br>$$</p>
+<p>其中，LOC（a_0）为0号元素的存储地址，通常称为线性表的起始地址。</p>
+<p>缺点：</p>
+<p>1.插入和删除操作需要移动元素，效率较低。</p>
+<p>2.必须提前分配固定数量的空间，如果存储元素少，可能导致空闲浪费。</p>
+<p>3.按照内容查询效率低，因为需要逐个比较判断。</p>
+<ul>
+<li><p>通过无参构造方法创建对象时，JDK1.7初始长度是10；JDK1.8初始长度是0，在第一次添加元素时就进行扩容。</p>
+</li>
+<li><p>容量不足时，每次扩容50%。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity&gt;&gt;<span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>提供一个内部类Itr，实现了Iterator接口。用来对ArrayList进行遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Iterator&lt;E&gt;interator()&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Itr();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
 <h2><span id="2-手写单链表">2、手写单链表</span></h2><h2><span id="3-手写linkedlist">3、手写LinkedList</span></h2><h2><span id="4-手写hashmap">4、手写HashMap</span></h2><h2><span id="5-手写hashset">5、手写HashSet</span></h2><h2><span id="6-最新并发集合类">6、最新并发集合类</span></h2>
       
 
@@ -476,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
