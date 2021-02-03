@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/02/note25/4.png">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/02/note25/5.png">
 <meta property="article:published_time" content="2021-02-02T03:41:01.000Z">
-<meta property="article:modified_time" content="2021-02-03T13:08:31.309Z">
+<meta property="article:modified_time" content="2021-02-03T13:37:12.918Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="集合">
 <meta name="twitter:card" content="summary">
@@ -323,6 +323,21 @@
 </ul>
 <h4><span id="copyonwrite原理写时复制">CopyOnWrite原理：写时复制。</span></h4><p>通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素。</p>
 <p>添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
+<p>对于读操作远远多于写操作的应用非常适合，特别在并发情况下，可以提供高性能的并发读取。</p>
+<p>CopyOnWrite容器只能保证数据的最终一致性，不能保证数据实时一致性，所以如果你希望写入的数据，马上能读到，请不要使用CopyOnWrite容器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Object[] elements = getArray();</span><br><span class="line">        <span class="keyword">int</span> len = elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + <span class="number">1</span>);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>CopyOnWriteArraySet：CopyOnWrite+Lock锁</strong></p>
+<p>CopyOnWriteArraySet的底层就是CopyOnWriteArrayList</p>
+<p>CopyOnWriteArraySet是线程安全的无序的集合，可以将它理解为线程安全的HashSet。有意思的是，CopyOnWriteArraySet和HashSet虽然都继承于共同的父类AbstractSet；但是，HashSet是通过“散列表（HashMap）”实现的，而CopyOnWriteArraySet则是通过动态数组“（CopyOnWriteArrayList）”实现的，并不是散列表。</p>
+<p><strong>CopyOnWriteArraySet在CopyOnWriteArrayList的基础上使用了Java的装饰模式，所以底层是相同的。</strong>而CopyOnWriteArrayList本质是个动态数组队列，所以CopyOnWriteArraySet相当于通过动态数组实现的集合。</p>
+<p>CopyOnWriteArrayList中允许有重复的元素，但CopyOnWriteArraySet是一个集合，所以 它不能有重复元素。因此，CopyOnWriteArrayList额外提供了addIfAbsent（）和addAllAbsent（）这两个添加元素的API，通过这些API来添加元素时，只有当元素不存在时才执行添加操作。</p>
+<p>ArrayList是有序、不唯一的</p>
+<p>Set对顺序没有特别的要求、唯一的</p>
+<p>用以下方法保证唯一性</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">addIfAbsent</span><span class="params">(E e, Object[] snapshot)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Object[] current = getArray();</span><br><span class="line">        <span class="keyword">int</span> len = current.length;</span><br><span class="line">        <span class="keyword">if</span> (snapshot != current) &#123;</span><br><span class="line">            <span class="comment">// Optimize for lost race to another addXXX operation</span></span><br><span class="line">            <span class="keyword">int</span> common = Math.min(snapshot.length, len);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; common; i++)</span><br><span class="line">                <span class="keyword">if</span> (current[i] != snapshot[i] &amp;&amp; eq(e, current[i]))</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (indexOf(e, current, common, len) &gt;= <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(current, len + <span class="number">1</span>);</span><br><span class="line">        newElements[len] = e;</span><br><span class="line">        setArray(newElements);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -426,6 +441,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/02/03/note26/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JavaSE笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2021/02/02/note24/" id="article-nav-older" class="article-nav-link-wrap">
