@@ -175,9 +175,34 @@
         <h1 id="员工管理系统"><a href="#员工管理系统" class="headerlink" title="员工管理系统"></a>员工管理系统</h1><!-- toc -->
 
 <ul>
-<li><a href="#%E9%A1%B9%E7%9B%AE%E5%8A%9F%E8%83%BD">项目功能：</a></li>
-<li><a href="#%E9%A1%B9%E7%9B%AE%E6%8A%80%E8%83%BD">项目技能：</a></li>
-<li><a href="#%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%A1%86%E6%9E%B6">搭建项目框架</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD">功能：</a></li>
+<li><a href="#%E6%8A%80%E8%83%BD">技能：</a></li>
+</ul>
+<ul>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E4%B8%80">迭代一</a><ul>
+<li><a href="#%E6%90%AD%E5%BB%BA%E6%A1%86%E6%9E%B6">搭建框架</a></li>
+<li><a href="#%E5%AE%8C%E6%88%90%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD">完成查询功能</a></li>
+<li><a href="#%E6%8F%90%E5%8F%96%E5%B7%A5%E5%85%B7%E7%B1%BBdbutil%E5%A4%8D%E7%94%A8%E4%BB%A3%E7%A0%81">提取工具类DBUtil，复用代码</a></li>
+<li><a href="#%E5%AE%8C%E6%88%90%E6%9B%B4%E6%96%B0%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD">完成更新删除功能</a></li>
+<li><a href="#%E5%AE%8C%E5%96%84dbutil">完善DBUtil</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E4%BA%8C">迭代二</a><ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%B8%BB%E8%8F%9C%E5%8D%95">添加主菜单</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8properties%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E8%BF%9E%E6%8E%A5%E5%8F%82%E6%95%B0">使用properties文件存放连接参数</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8log4j%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97-log-for-java">使用log4j记录日志 log  for  Java</a><ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%A5%E5%BF%97log">1、什么是日志log</a></li>
+<li><a href="#2-%E5%A6%82%E4%BD%95%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">2、如何记录日志</a></li>
+<li><a href="#3-log4j%E6%97%A5%E5%BF%97%E7%9A%84%E7%BA%A7%E5%88%AB">3、log4j日志的级别</a></li>
+<li><a href="#4-%E4%BD%BF%E7%94%A8log4j%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">4、使用log4j记录日志</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87">使用连接池提高效率</a><ul>
+<li><a href="#%E6%89%8B%E5%86%99%E8%BF%9E%E6%8E%A5%E6%B1%A0">手写连接池</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
         
@@ -195,7 +220,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小练习</a>
         		</li>
       		
 		</ul>
@@ -1166,11 +1191,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color4">常用类</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">常用类</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1178,19 +1203,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ArrayList LinkedList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color1">ArrayList LinkedList</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1207,10 +1232,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线程池</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1243,6 +1264,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JDBC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小练习</a>
               </li>
              
               <li class="article-tag-list-item">
