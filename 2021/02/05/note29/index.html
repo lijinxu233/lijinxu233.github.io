@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>JavaSE笔记 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="员工管理系统   功能： 技能：   迭代一 搭建框架 完成查询功能 提取工具类DBUtil，复用代码 完成更新删除功能 完善DBUtil   迭代二 添加主菜单 使用properties文件存放连接参数 使用log4j记录日志 log  for  Java 1、什么是日志log 2、如何记录日志 3、log4j日志的级别 4、使用log4j记录日志   使用连接池提高效率 手写连接池">
+  <meta name="description" content="员工管理系统   功能： 技能：   迭代一 搭建框架 完成查询功能 提取工具类DBUtil，复用代码 完成更新删除功能 完善DBUtil   迭代二 添加主菜单 使用properties文件存放连接参数 使用log4j记录日志 log  for  Java 1、什么是日志log 2、如何记录日志 3、log4j日志的级别 4、使用log4j记录日志 5、理解日志格式化字符的含义   使用连接池提">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaSE笔记">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/02/05/note29/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="员工管理系统   功能： 技能：   迭代一 搭建框架 完成查询功能 提取工具类DBUtil，复用代码 完成更新删除功能 完善DBUtil   迭代二 添加主菜单 使用properties文件存放连接参数 使用log4j记录日志 log  for  Java 1、什么是日志log 2、如何记录日志 3、log4j日志的级别 4、使用log4j记录日志   使用连接池提高效率 手写连接池">
+<meta property="og:description" content="员工管理系统   功能： 技能：   迭代一 搭建框架 完成查询功能 提取工具类DBUtil，复用代码 完成更新删除功能 完善DBUtil   迭代二 添加主菜单 使用properties文件存放连接参数 使用log4j记录日志 log  for  Java 1、什么是日志log 2、如何记录日志 3、log4j日志的级别 4、使用log4j记录日志 5、理解日志格式化字符的含义   使用连接池提">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/05/note29/1.png">
 <meta property="article:published_time" content="2021-02-05T14:26:43.000Z">
-<meta property="article:modified_time" content="2021-02-06T09:38:08.378Z">
+<meta property="article:modified_time" content="2021-02-07T04:50:05.509Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="小练习">
 <meta name="twitter:card" content="summary">
@@ -200,12 +200,10 @@
 <li><a href="#2-%E5%A6%82%E4%BD%95%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">2、如何记录日志</a></li>
 <li><a href="#3-log4j%E6%97%A5%E5%BF%97%E7%9A%84%E7%BA%A7%E5%88%AB">3、log4j日志的级别</a></li>
 <li><a href="#4-%E4%BD%BF%E7%94%A8log4j%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">4、使用log4j记录日志</a></li>
+<li><a href="#5-%E7%90%86%E8%A7%A3%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E7%9A%84%E5%90%AB%E4%B9%89">5、理解日志格式化字符的含义</a></li>
 </ul>
 </li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87">使用连接池提高效率</a><ul>
-<li><a href="#%E6%89%8B%E5%86%99%E8%BF%9E%E6%8E%A5%E6%B1%A0">手写连接池</a></li>
-</ul>
-</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87">使用连接池提高效率</a></li>
 </ul>
 </li>
 </ul>
@@ -283,7 +281,7 @@
 <li>INFO：指报告信息，这些信息在粗粒度级别上突出显示应用程序的进程</li>
 <li>DEBUG：指细粒度信息事件，对于应用程序的调试是最有用的</li>
 </ul>
-<h3><span id="4-使用log4j记录日志">4、使用log4j记录日志</span></h3><h4><span id="1-加入jar包-log4j-1212jar">1、加入jar包      log4j-1.2.12.jar</span></h4><h4><span id="2-加入属性文件-src下log4jproperties">2、加入属性文件     src下log4j.properties</span></h4><h4><span id="3">3、</span></h4><h4><span id="4">4、</span></h4><h4><span id="5-理解日志格式化字符的含义">5、理解日志格式化字符的含义</span></h4><ul>
+<h3><span id="4-使用log4j记录日志">4、使用log4j记录日志</span></h3><h4><span id="1-加入jar包-log4j-1212jar">1、加入jar包      log4j-1.2.12.jar</span></h4><h4><span id="2-加入属性文件-src下log4jproperties">2、加入属性文件     src下log4j.properties</span></h4><h3><span id="5-理解日志格式化字符的含义">5、理解日志格式化字符的含义</span></h3><ul>
 <li><p>%p：输出日志信息的优先级</p>
 </li>
 <li><p>%d：输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，如：%d{yyyy/MM/dd HH:mm:ss,SSS}</p>
@@ -304,7 +302,41 @@
 <li><p>%L：输出代码中的行号</p>
 </li>
 </ul>
-<h2><span id="使用连接池提高效率">使用连接池提高效率</span></h2><h3><span id="手写连接池">手写连接池</span></h3>
+<h2><span id="使用连接池提高效率">使用连接池提高效率</span></h2><p>建立数据库连接的两种方式：</p>
+<ul>
+<li><p>传统连接方式</p>
+<ul>
+<li>首先调用Class.forName()方法加载数据库驱动。</li>
+<li>然后调用DriverManager.getConnection()方法建立连接。</li>
+</ul>
+</li>
+<li><p>连接池技术</p>
+<ul>
+<li>连接池解决方案是在应用程序启动时就预先建立多个数据库连接对象，然后将连接对象保存到连接池中。</li>
+<li>当客户请求到来时，从池中取出一个连接对象为客户服务。</li>
+<li>当请求完成时，客户程序调用close（）方法，将连接对象放回池中。</li>
+<li>对于多于连接池中连接数的请求，排队等待。</li>
+<li>应用程序还可根据连接池中连接的使用率，动态增加或减少池中的连接数。</li>
+</ul>
+</li>
+<li><p>传统的数据库连接方式的缺点</p>
+<ul>
+<li>一个连接对象对应一个物理连接</li>
+<li>每次操作都打开一个物理连接</li>
+<li>使用完都关闭连接，造成系统性能低下</li>
+</ul>
+</li>
+<li><p>连接池技术的优点</p>
+<ul>
+<li>客户程序得到的连接对象是连接池中物理连接的一个句柄</li>
+<li>调用连接对象的close（）方法，物理连接并没有关闭，数据源的实现只是删除了客户程序中的连接对象和池中的连接对象之间的联系。</li>
+</ul>
+</li>
+<li><p>数据库连接的建立及关闭是耗费系统资源的操作，在大型应用中对系统的性能影响尤为明显。为了能重复利用数据库连接对象，缩短请求的响应时间和提高服务器性能，支持更多的客户，应采用连接池技术。</p>
+</li>
+</ul>
+<h4><span id="连接池的实现">连接池的实现</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lee.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 连接池</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionPool</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 存放多个数据库连接（空闲）</span></span><br><span class="line"><span class="comment">     * 获取连接：出队    删除    删除第一个</span></span><br><span class="line"><span class="comment">     * 关闭连接：入队    添加    添加到末尾</span></span><br><span class="line"><span class="comment">     * 建议使用LinkedList</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> LinkedList&lt;Connection&gt; list = <span class="keyword">new</span> LinkedList&lt;Connection&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 第一次加载类的时候执行一次，就只执行这一次，建立多个数据库连接放入到LinkedList中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        String driver = <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(driver);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                <span class="comment">//2.建立和数据库的连接</span></span><br><span class="line">                Connection conn = newConnection();</span><br><span class="line">                list.addLast(conn);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建一个新的链接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Connection <span class="title">newConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String url = <span class="string">&quot;jdbc:mysql://127.0.0.1:3306/mydb?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai&quot;</span>;</span><br><span class="line">        String user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line">        String password = <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        Connection conn = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            conn = DriverManager.getConnection(url, user, password);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> conn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从连接池中获取连接</span></span><br><span class="line"><span class="comment">     * 如果有空闲的连接，直接返回</span></span><br><span class="line"><span class="comment">     * 如果没有空闲的连接，直接新创建一个物理连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> list.removeFirst();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> newConnection();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 数据库连接使用完毕，放回连接池</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">returnConnection</span><span class="params">(Connection conn)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list.size()&lt;<span class="number">10</span>)&#123;</span><br><span class="line">            list.addLast(conn);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;<span class="comment">//如果连接池满，直接物理关闭</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">                throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        Connection conn = getConnection();//1</span></span><br><span class="line"><span class="comment">//        System.out.println(conn);</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//2</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//3</span></span><br><span class="line"><span class="comment">//        System.out.println(conn);</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//4</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//5</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//6</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//7</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//8</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//9</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//10</span></span><br><span class="line"><span class="comment">//        System.out.println(getConnection());//!!!</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line"><span class="comment">//            DBUtil.getConnection();</span></span><br><span class="line">            Connection conn = ConnectionPool.getConnection();</span><br><span class="line">            ConnectionPool.returnConnection(conn);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">        System.out.println(endTime-startTime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -407,6 +439,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/02/07/note30/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JavaSE
+        
+      </div>
+    </a>
   
   
     <a href="/2021/02/05/note28/" id="article-nav-older" class="article-nav-link-wrap">
@@ -606,6 +647,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">

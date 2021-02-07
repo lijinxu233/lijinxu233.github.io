@@ -152,6 +152,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-note30" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/07/note30/">JavaSE</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/07/note30/" class="archive-article-date">
+  	<time datetime="2021-02-07T04:51:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><!-- toc -->
+
+<ul>
+<li><a href="#%E5%8F%8D%E5%B0%84%E5%BC%95%E5%85%A5">反射引入</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84%E7%9A%84%E5%85%A5%E5%8F%A3-class%E7%B1%BB">反射的入口-Class类</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1">使用反射创建对象</a></li>
+</ul>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/02/07/note30/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/07/note30/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-note29" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -195,12 +278,10 @@
 <li><a href="#2-%E5%A6%82%E4%BD%95%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">2、如何记录日志</a></li>
 <li><a href="#3-log4j%E6%97%A5%E5%BF%97%E7%9A%84%E7%BA%A7%E5%88%AB">3、log4j日志的级别</a></li>
 <li><a href="#4-%E4%BD%BF%E7%94%A8log4j%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">4、使用log4j记录日志</a></li>
+<li><a href="#5-%E7%90%86%E8%A7%A3%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E7%9A%84%E5%90%AB%E4%B9%89">5、理解日志格式化字符的含义</a></li>
 </ul>
 </li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87">使用连接池提高效率</a><ul>
-<li><a href="#%E6%89%8B%E5%86%99%E8%BF%9E%E6%8E%A5%E6%B1%A0">手写连接池</a></li>
-</ul>
-</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87">使用连接池提高效率</a></li>
 </ul>
 </li>
 </ul>
@@ -981,90 +1062,6 @@
 
 
   
-    <article id="post-note20" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/31/note20/">笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/31/note20/" class="archive-article-date">
-  	<time datetime="2021-01-31T05:23:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-——-Callable接口、Future接口、FutureTask接口"><a href="#Java-——-Callable接口、Future接口、FutureTask接口" class="headerlink" title="Java —— Callable接口、Future接口、FutureTask接口"></a>Java —— Callable接口、Future接口、FutureTask接口</h1><!-- toc -->
-
-<ul>
-<li><a href="#callable%E6%8E%A5%E5%8F%A3%E4%B8%8Erunnable%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB">Callable接口与Runnable接口的区别</a></li>
-<li><a href="#callable%E6%8E%A5%E5%8F%A3"><strong><em>Callable接口</em></strong></a></li>
-<li><a href="#future%E6%8E%A5%E5%8F%A3">Future接口</a></li>
-<li><a href="#futuretask%E6%8E%A5%E5%8F%A3">FutureTask接口</a></li>
-</ul>
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/01/31/note20/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/31/note20/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1232,6 +1229,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
