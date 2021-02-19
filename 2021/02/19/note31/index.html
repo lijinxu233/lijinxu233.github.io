@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>JavaSE笔记 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="注解和JDK新特征   注解 1、内置注解 2、元注解 3、自定义注解 4、使用反射获取注解 5、JDK新特征 5.1、JDK8新特征">
+  <meta name="description" content="注解和JDK新特征   注解 1、内置注解 2、元注解 3、自定义注解 4、使用反射获取注解 5、JDK新特征 5.1、JDK8新特征 5.2、JDK9的新特征 5.3、JDK10新特征 5.4、JDK11的新特征">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaSE笔记">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/02/19/note31/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="注解和JDK新特征   注解 1、内置注解 2、元注解 3、自定义注解 4、使用反射获取注解 5、JDK新特征 5.1、JDK8新特征">
+<meta property="og:description" content="注解和JDK新特征   注解 1、内置注解 2、元注解 3、自定义注解 4、使用反射获取注解 5、JDK新特征 5.1、JDK8新特征 5.2、JDK9的新特征 5.3、JDK10新特征 5.4、JDK11的新特征">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/19/note31/1.png">
 <meta property="article:published_time" content="2021-02-19T08:53:48.000Z">
-<meta property="article:modified_time" content="2021-02-19T14:52:35.977Z">
+<meta property="article:modified_time" content="2021-02-19T16:17:38.041Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="注解">
 <meta name="twitter:card" content="summary">
@@ -187,6 +187,9 @@
 <li><a href="#4-%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%B3%A8%E8%A7%A3">4、使用反射获取注解</a></li>
 <li><a href="#5-jdk%E6%96%B0%E7%89%B9%E5%BE%81">5、JDK新特征</a><ul>
 <li><a href="#51-jdk8%E6%96%B0%E7%89%B9%E5%BE%81">5.1、JDK8新特征</a></li>
+<li><a href="#52-jdk9%E7%9A%84%E6%96%B0%E7%89%B9%E5%BE%81">5.2、JDK9的新特征</a></li>
+<li><a href="#53-jdk10%E6%96%B0%E7%89%B9%E5%BE%81">5.3、JDK10新特征</a></li>
+<li><a href="#54-jdk11%E7%9A%84%E6%96%B0%E7%89%B9%E5%BE%81">5.4、JDK11的新特征</a></li>
 </ul>
 </li>
 </ul>
@@ -263,7 +266,7 @@
 <li>@FunctionalInterface - Java8开始支持，标识一个匿名函数或函数式接口。</li>
 <li>@Repeatable - Java8开始支持，标识某注解可以在同一个声明上使用多次。</li>
 </ul>
-<h2><span id="2-元注解">2、元注解</span></h2><p>元注解是指定义注解的注解，在JDK1.5中提供了4个标准的用来对注解类型进行注解的注解类。可以使用这4个元注解来对我们自定义的注解类型进行注解。</p>
+<h2><span id="2-元注解">2、元注解</span></h2><p>​        元注解是指定义注解的注解，在JDK1.5中提供了4个标准的用来对注解类型进行注解的注解类。可以使用这4个元注解来对我们自定义的注解类型进行注解。</p>
 <p>1、@Retention - 用来约束注解的生命周期，分别有三个值，源码级别（source），类文件级别（class）或者运行时级别（runtime），若没有@Retention，则默认是RetentionPolicy.Class。其含有如下：</p>
 <ul>
 <li>SOURCE：注解将被编译器丢弃（该类型的注解信息只会保留在源码里，源码经过编译后，注解信息会被丢弃，不会保留在编译好的class文件里）</li>
@@ -290,7 +293,7 @@
 <p>注解常见的API及其关系如下</p>
 <img src="/2021/02/19/note31/1.png" class title="test">
 
-<h2><span id="4-使用反射获取注解">4、使用反射获取注解</span></h2><p>目前大部分框架（如Spring、MyBatis、SpringMVC）都使用了注解简化代码并提高编码的效率（使用注解之前使用的xml进行配置）。</p>
+<h2><span id="4-使用反射获取注解">4、使用反射获取注解</span></h2><p>​        目前大部分框架（如Spring、MyBatis、SpringMVC）都使用了注解简化代码并提高编码的效率（使用注解之前使用的xml进行配置）。</p>
 <ul>
 <li><p>ORM</p>
 <p>Object Relational Mapping（对象关系映射，简称ORM）是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。</p>
@@ -304,17 +307,17 @@
 <p>学习了反射机制后，我们可以定义注解处理流程读取这些注解，实现更加复杂的功能。</p>
 </li>
 </ul>
-<h2><span id="5-jdk新特征">5、JDK新特征</span></h2><h3><span id="51-jdk8新特征">5.1、JDK8新特征</span></h3><h4><span id="1-lamada表达式">1、Lamada表达式</span></h4><p>Lamada表达式是JDK8的一个新特性，可以取代大部分的匿名内部类，写出更优雅的Java代码，尤其在集合的遍历和其他集合操作中，可以极大地优化代码结构。</p>
-<p>Lamada表达式是一种匿名函数（不是匿名内部类），简单地说，它是没有声明的方法，也即没有访问修饰符、返回值声明和名字。它实质属于函数式编程的概念。</p>
-<p>Lamada表达式只能引用标记了final的外层局部变量。lamada表达式的局部变量可以不用声明为final，但是必须不可被后面的代码修改（即隐性的具有final的语义）。</p>
-<p>虽然使用Lamada表达式可以对某些接口进行简单的实现，但并不是所有的接口都可以使用Lamada表达式来实现。<strong>Lamada规定接口中只能有一个需要被实现的抽象方法，不是规定接口中只能有一个方法。称为函数式接口。</strong></p>
+<h2><span id="5-jdk新特征">5、JDK新特征</span></h2><h3><span id="51-jdk8新特征">5.1、JDK8新特征</span></h3><h4><span id="1-lamada表达式">1、Lamada表达式</span></h4><p>​        Lamada表达式是JDK8的一个新特性，可以取代大部分的匿名内部类，写出更优雅的Java代码，尤其在集合的遍历和其他集合操作中，可以极大地优化代码结构。</p>
+<p>​        Lamada表达式是一种匿名函数（不是匿名内部类），简单地说，它是没有声明的方法，也即没有访问修饰符、返回值声明和名字。它实质属于函数式编程的概念。</p>
+<p>​        Lamada表达式只能引用标记了final的外层局部变量。lamada表达式的局部变量可以不用声明为final，但是必须不可被后面的代码修改（即隐性的具有final的语义）。</p>
+<p>​        虽然使用Lamada表达式可以对某些接口进行简单的实现，但并不是所有的接口都可以使用Lamada表达式来实现。<strong>Lamada规定接口中只能有一个需要被实现的抽象方法，不是规定接口中只能有一个方法。称为函数式接口。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jdknew.jdk8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"><span class="keyword">import</span> java.util.TreeSet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLamada</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//使用线程执行一个任务</span></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;==============&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;System.out.println(<span class="string">&quot;==============&quot;</span>)).start();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用TreeSet存储多个分数（逆序排列）</span></span><br><span class="line">        <span class="comment">//定义外部比较器</span></span><br><span class="line"><span class="comment">//        Comparator comparator = new Comparator&lt;Integer&gt;()&#123;</span></span><br><span class="line"><span class="comment">//            @Override</span></span><br><span class="line"><span class="comment">//            public int compare(Integer o1, Integer o2) &#123;</span></span><br><span class="line"><span class="comment">//                return o2.intValue()-o1.intValue();</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;;</span></span><br><span class="line"><span class="comment">//        TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(comparator);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用Lamada表达式</span></span><br><span class="line">        TreeSet&lt;Integer&gt; set = <span class="keyword">new</span> TreeSet&lt;&gt;((o1,o2)-&gt;-(o1-o2));</span><br><span class="line"></span><br><span class="line">        Collections.addAll(set,<span class="number">40</span>,<span class="number">60</span>,<span class="number">80</span>,<span class="number">50</span>,<span class="number">50</span>);</span><br><span class="line">        System.out.println(set);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-<h4><span id="2-函数式接口">2、函数式接口</span></h4><p>函数式接口：只能有一个抽象方法，其他的可以有default、static、Object里的public方法等。</p>
-<p>JDK8专门提供了@FunctionInterface注解，用来进行编译检查。</p>
-<p>作用：在Java中主要用在Lamada表达式和方法引用（实际上也可以认为是Lamada表达式）上。</p>
-<p>JDK提供了大量的内置函数式接口，使得Lamada表达式的运用更加方便、高效。这些内置的函数式接口已经可以解决我们开发过程中绝大部分的问题，只有一小部分比较特殊得情况需要我们自己去定义函数式接口。常用的4大接口：</p>
+<h4><span id="2-函数式接口">2、函数式接口</span></h4><p>​        函数式接口：只能有一个抽象方法，其他的可以有default、static、Object里的public方法等。</p>
+<p>​        JDK8专门提供了@FunctionInterface注解，用来进行编译检查。</p>
+<p>​        作用：在Java中主要用在Lamada表达式和方法引用（实际上也可以认为是Lamada表达式）上。</p>
+<p>​        JDK提供了大量的内置函数式接口，使得Lamada表达式的运用更加方便、高效。这些内置的函数式接口已经可以解决我们开发过程中绝大部分的问题，只有一小部分比较特殊得情况需要我们自己去定义函数式接口。常用的4大接口：</p>
 <ul>
 <li>Consumer<t>：消费型接口（void accept（T t））。有参数，无返回值</t></li>
 <li>Supplier<t>：供给型接口（T get（））。只有返回值，没有入参</t></li>
@@ -324,12 +327,28 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jdknew.jdk8;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Consumer;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Predicate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFunctionInterface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(list,<span class="string">&quot;Java&quot;</span>,<span class="string">&quot;HTML&quot;</span>,<span class="string">&quot;MySQL&quot;</span>,<span class="string">&quot;SSM&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String elem : list) &#123;</span><br><span class="line">            System.out.println(elem);</span><br><span class="line">        &#125;</span><br><span class="line">        Consumer&lt;String&gt; consumer = <span class="keyword">new</span> Consumer&lt;String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//System.out.println(s);</span></span><br><span class="line">                System.out.println(s.toUpperCase());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        list.forEach(consumer);<span class="comment">//闭包   函数编程</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;=======================&quot;</span>);</span><br><span class="line">        list.forEach((s)-&gt; System.out.println(s.toUpperCase()));</span><br><span class="line"></span><br><span class="line">        Predicate&lt;String&gt; filter = <span class="keyword">new</span> Predicate&lt;String&gt;()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> s.length()==<span class="number">4</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        list.removeIf(filter);</span><br><span class="line">        System.out.println(list);<span class="comment">//[MySQL, SSM]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用Lamada表达式更简单</span></span><br><span class="line">        list.removeIf((s)-&gt;s.length()==<span class="number">3</span>);</span><br><span class="line">        System.out.println(list);<span class="comment">//[MySQL]</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-<h4><span id="3-stream-api">3、Stream API</span></h4><p>Stream作为Java8的一大亮点，它与java.io包里的InputStream和OutputStream是完全不同的概念。它是对容器对象功能的增强，它专注于对容器对象进行各种非常便利、高效的聚合操作或者大批量数据操作。</p>
-<p>Stream API借助于同样新出现的Lamada表达式，极大的提高编程效率和程序可读性。同时，它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势，使用fork/join并行来拆分任务和加速处理过程。所以说，Java8中首次出现的java.util.stream是一个函数式语言+多核时代综合影响的产物。</p>
+<h4><span id="3-stream-api">3、Stream API</span></h4><p>​        Stream作为Java8的一大亮点，它与java.io包里的InputStream和OutputStream是完全不同的概念。它是对容器对象功能的增强，它专注于对容器对象进行各种非常便利、高效的聚合操作或者大批量数据操作。</p>
+<p>​        Stream API借助于同样新出现的Lamada表达式，极大的提高编程效率和程序可读性。同时，它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势，使用fork/join并行来拆分任务和加速处理过程。所以说，Java8中首次出现的java.util.stream是一个函数式语言+多核时代综合影响的产物。</p>
 <p>Stream有如下三个操作步骤：</p>
 <p>1、创建Stream：从一个数据源，如集合、数组中获取流。</p>
 <p>2、中间操作：一个操作的中间链，对数据源的数据进行操作。</p>
 <p>3、终止操作：一个终止操作，执行中间操作链，并产生结果。</p>
+<p>​        当数据源的数据上了流水线后，这个过程对数据进行的所有操作都称为“中间操作”。中间操作仍然会返回一个流对象，因此多个中间操作可以串连起来形成一个流水线。比如map（mapToInt、flatMap等）、fliter、distinct、sorted、peek、limit、skip、parallel、sequential、unordered。</p>
+<p>​        当所有的中间操作完成后，若要将数据从流水线上拿下来，则需要执行终止操作。终止操作将返回一个执行结果，这就是你想要的数据。比如：forEach、forEachOrdered、toArray、reduce、collect、min、max、count、anyMatch、allMatch、noneMatch、findFirst、findAny、iterator。</p>
+<p>​        多个中间操作可以连接起来形成一个流水线，除非流水线上触发终止操作，否则中间操作不会执行任何处理！而在终止操作时一次性全部处理，称作“惰性求值”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jdknew.jdk8;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.SQLOutput;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStream</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建一个Stream</span></span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(list,<span class="number">32</span>,<span class="number">34</span>,<span class="number">54</span>,<span class="number">324</span>,<span class="number">4</span>,<span class="number">345</span>,<span class="number">6</span>,<span class="number">342</span>,<span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">        Stream&lt;Integer&gt; stream = list.stream();</span><br><span class="line">        <span class="comment">//Stream&lt;Integer&gt; integerStream = list.parallelStream();</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//中间操作</span></span><br><span class="line">        stream.filter((o)-&gt;o&gt;=<span class="number">60</span>)</span><br><span class="line">                .sorted((o1,o2)-&gt;o2-o1)<span class="comment">//逆序排序</span></span><br><span class="line">                .limit(<span class="number">2</span>)<span class="comment">//前两个数</span></span><br><span class="line">                <span class="comment">//.forEach(System.out::println)//方法引用   Lamada表达式的进一步简化</span></span><br><span class="line">                .forEach((o)-&gt; System.out.println(o));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//终止操作</span></span><br><span class="line">        <span class="comment">//stream.forEach((o)-&gt; System.out.println(o));</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4><span id="4-新的日期类">4、新的日期类</span></h4><h3><span id="52-jdk9的新特征">5.2、JDK9的新特征</span></h3><p>​        <strong>模块化系统</strong>：可以说是JDK9最重要和最令人激动的功能。一个大型的项目，比如淘宝商城，都会包含多个模块，如订单模块，前台模块，后台管理模块，广告位模块，会员模块等等，各个模块之间会相互调用，不过这种情况会很少，只针对特殊情况，如果一个项目有30个模块系统进行开发，但是只要某个单独模块运行时，都会带动所有的模块，这样对于JVM来说在内存和性能上会很低。<br>​        所以Java9提供了这一个特性，某一个模块运行的时候，JVM只会启动和它有依赖的模块，并不会加载所有的模块到内存中，这样性能大大的提高了。<br>本质上讲，模块化，就是在package外面包裹一层。<strong>成员的作用范围在当前包和当前项目之间又增加了一个层次：模块。</strong><br>​        <strong>String 类的底层由 char数组变为byte数组</strong>，节省空间，同时通过一个coder成员变量作为编码格式的标识，使用LATIN1还是UTF-16，这个是在String生成的时候自动的，如果字符串中都是能用LATIN1就能表示的就是0，否则就是UTF-16。<br><strong>接口中可以定义private的非抽象方法</strong>，便于将多个方法中的冗余代码进行提取，并且不对外公开。减少冗余、也实现了代码隐藏。</p>
+<h3><span id="53-jdk10新特征">5.3、JDK10新特征</span></h3><p><strong>局部变量类型推断</strong>：将前端思想var关键字引入Java后端，自动监测所属类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;ABC&quot;</span>; <span class="comment">//根据推断为 字符串类型</span></span><br><span class="line"><span class="keyword">var</span> l = <span class="number">10L</span>;<span class="comment">//根据10L 推断long 类型</span></span><br><span class="line"><span class="keyword">var</span> flag = <span class="keyword">true</span>;<span class="comment">//根据 true推断 boolean 类型</span></span><br><span class="line"><span class="keyword">var</span> flag1 = <span class="number">1</span>;<span class="comment">//这里会推断boolean类型。0表示false 非0表示true</span></span><br><span class="line"><span class="keyword">var</span> list = <span class="keyword">new</span> ArrayList&lt;String&gt;();  <span class="comment">// 推断 ArrayList&lt;String&gt;</span></span><br><span class="line"><span class="keyword">var</span> stream = list.stream();          <span class="comment">// 推断 Stream&lt;String&gt;</span></span><br></pre></td></tr></table></figure>
+<p>class文件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">&quot;ABC&quot;</span>;</span><br><span class="line"><span class="keyword">long</span> l = <span class="number">10L</span>;</span><br><span class="line"><span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">int</span> flag1 = <span class="keyword">true</span>;</span><br><span class="line">ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">Stream&lt;String&gt; stream = list.stream();</span><br></pre></td></tr></table></figure>
+<h3><span id="54-jdk11的新特征">5.4、JDK11的新特征</span></h3><p>​        主打的特性就是引入了两种新的垃圾收集器，其中包括也许是跨时代意义的ZGC，虽然ZGC还是实验特性，但是从能力上来，这是JDK的一个巨大突破，可以让GC的暂停时间不超过10毫秒，是以前我们进行GC调优做不到的，是能与不能的问题！</p>
+<p><strong>Epsilon</strong><br>        （A No-Op Garbage Collector）垃圾回收器控制内存分配，但是回收工作不执行任何垃圾。No-Op–&gt;no operation设计的目的是提供一个完全消极的GC实现，一旦java的堆被耗尽jvm就直接关闭。以后我们要是用Epsilon垃圾收集器，只要保证内存足够大，不溢出，效率立马就高了！</p>
+<p>​        启用Epsilon的配置：<br>​        -XX：+UnlockExperimentalVMOptions-XX：+UseEpsilonGC</p>
+<p><strong>ZGC</strong></p>
+<p>​        A Scalable Low-Latency Garbage collector（Experimental）是JDK11最为瞩目的特性，没有之一，但是后面带了Experimental，说明这还不建议用到生产环境，仍然在实验当中。Scalable 可伸缩的和Low-Latency短延迟是ZGC主要的特点。以前的GC后台运行很消耗时间的，ZGC短延迟！暂时时间不会超过10ms，非常快了！<br>​        ZGC：平均时间：1.091ms左右        最大时间：1.681ms </p>
+<p>​        G1：平均时间：156.806ms=0.15s        最大时间：543.846ms=0.5s</p>
+<p>​        强调：GC在清除垃圾的时候，其余所有线程都要停下来这样GC才可以真正工作，以免造成混乱，这个过程就叫STW（stop the world），STW越长，就越影响应用的响应时间。这个停顿在所难免，能做的就是尽量减少停顿时间！<br>​        启用ZGC的配置<br>​        -XX：+UnlockExperimentalVMOptions-XX：+UseZGC但是很遗憾，ZGC在windows操作系统的jdk中还没有支持呢！</p>
 
       
 
@@ -607,11 +626,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color1">ArrayList LinkedList</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ArrayList LinkedList</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,10 +655,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,6 +687,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">反射</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
