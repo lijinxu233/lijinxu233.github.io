@@ -177,13 +177,26 @@
 <ul>
 <li><a href="#1-powerdesigner%E6%A6%82%E8%BF%B0">1、PowerDesigner概述</a></li>
 <li><a href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E6%A8%A1">2、数据库建模</a><ul>
-<li><a href="#21-%E9%83%A8%E9%97%A8dept%E5%92%8C%E5%91%98%E5%B7%A5emp%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB">2.1、部门dept和员工emp，一对多关系</a></li>
-<li><a href="#22-%E5%AD%A6%E7%94%9F%E5%92%8C%E8%AF%BE%E7%A8%8B-%E5%A4%9A%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB">2.2、学生和课程 - 多对多关系</a></li>
-<li><a href="#23-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BB%BA%E6%A8%A1-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B">2.3、数据库建模 - 逆向工程</a></li>
+<li><a href="#21-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%89%E7%A7%8D%E5%85%B3%E7%B3%BB">2.1、数据库之间的三种关系</a></li>
+<li><a href="#22-%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F">2.2、三大范式</a></li>
+<li><a href="#23-%E7%AC%AC%E4%B8%80%E8%8C%83%E5%BC%8F">2.3、第一范式</a></li>
+<li><a href="#24-%E7%AC%AC%E4%BA%8C%E8%8C%83%E5%BC%8F">2.4、第二范式</a></li>
+<li><a href="#25-%E7%AC%AC%E4%B8%89%E8%8C%83%E5%BC%8F">2.5、第三范式</a></li>
+<li><a href="#26-%E8%8C%83%E5%BC%8F%E4%BC%98%E7%BC%BA%E7%82%B9">2.6、范式优缺点</a></li>
+<li><a href="#27-%E6%80%BB%E7%BB%93">2.7、总结</a></li>
 </ul>
 </li>
-<li><a href="#3-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1uml%E5%BB%BA%E6%A8%A1">3、面向对象建模(UML建模)</a></li>
-<li><a href="#4-%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BEbpm">4、业务流程图（BPM）</a></li>
+<li><a href="#3-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1uml%E5%BB%BA%E6%A8%A1">3、面向对象建模(UML建模)</a><ul>
+<li><a href="#31-%E8%AE%A4%E8%AF%86uml">3.1、认识UML</a></li>
+<li><a href="#32-%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%846%E7%A7%8D%E5%85%B3%E7%B3%BB">3.2、类和类的6种关系</a></li>
+<li><a href="#33-%E7%94%A8%E4%BE%8B%E5%9B%BE">3.3、用例图</a></li>
+</ul>
+</li>
+<li><a href="#4-%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BEbpm">4、业务流程图（BPM）</a><ul>
+<li><a href="#41-%E6%97%B6%E5%BA%8F%E5%9B%BE">4.1、时序图</a></li>
+<li><a href="#42-%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BE">4.2、业务流程图</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
         
@@ -1219,11 +1232,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1231,7 +1244,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">线程同步</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,7 +1252,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程同步</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
