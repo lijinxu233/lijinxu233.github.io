@@ -6,22 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
-  <title>Java | Lee</title>
+  <title>Tag: MyBatis | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言前两天jdk12如约而至发布了，而我们绝大部分人估计都还在用着jdk8，12其实是一个非LTS（long time support）版本，而11与8一样是LTS版，意味着下个通用的版本将从8直接到11，毕竟11包含了9和10的所有新特性，因此9和10估计就直接被废弃啦。不过9、10、11、12面向开发者的新特性其实并不是很多，大部分都是一些优化、收集器加强以及增加了一些新功能等等">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java">
-<meta property="og:url" content="https://lijinxu233.github.io/2021/02/20/note32/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Lee">
+<meta property="og:url" content="https://lijinxu233.github.io/tags/MyBatis/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="前言前两天jdk12如约而至发布了，而我们绝大部分人估计都还在用着jdk8，12其实是一个非LTS（long time support）版本，而11与8一样是LTS版，意味着下个通用的版本将从8直接到11，毕竟11包含了9和10的所有新特性，因此9和10估计就直接被废弃啦。不过9、10、11、12面向开发者的新特性其实并不是很多，大部分都是一些优化、收集器加强以及增加了一些新功能等等">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328200848824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM4MDAxODE0,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-02-20T05:28:25.000Z">
-<meta property="article:modified_time" content="2021-02-20T05:37:15.312Z">
 <meta property="article:author" content="李晋旭">
-<meta property="article:tag" content="JDK">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190328200848824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM4MDAxODE0,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
   
@@ -157,293 +150,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-note32" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/02/20/note34/" class="archive-article-date">
+  	<time datetime="2021-02-20T11:24:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-20</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/02/20/note34/">Java笔记</a>
     </h1>
   
 
-        
-        <a href="/2021/02/20/note32/" class="archive-article-date">
-  	<time datetime="2021-02-20T05:28:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2><span id="前言">前言</span></h2><p>前两天jdk12如约而至发布了，而我们绝大部分人估计都还在用着jdk8，12其实是一个非LTS（long time support）版本，而11与8一样是LTS版，意味着下个通用的版本将从8直接到11，毕竟11包含了9和10的所有新特性，因此9和10估计就直接被废弃啦。不过9、10、11、12面向开发者的新特性其实并不是很多，大部分都是一些优化、收集器加强以及增加了一些新功能等等</p>
-<a id="more"></a>
-
-<p>而我们开发人员最为关注的肯定是对我们搬砖有用的特性，虽然可能还用不太上，但这边还是先记录一下从jdk9-12的新特性：</p>
-<p>12/26 更新jdk13的部分特性</p>
-<blockquote>
-<p>转自<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_38001814/article/details/88831037">https://blog.csdn.net/m0_38001814/article/details/88831037</a></p>
-</blockquote>
-<h2><span id="jdk9新特性">jdk9新特性</span></h2><p><strong>1、集合加强</strong></p>
-<p>jdk9为所有集合（List/Set/Map）都增加了of和copyOf方法，用来创建不可变集合，即一旦创建就无法再执行添加、删除、替换、排序等操作，否则将报java.lang.UnsupportedOperationException异常。一般在特定场景下用还是可以的，不过如果引用了guava库的话推荐还是使用guava把hhhh，例子如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List strs = List.of(<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;World&quot;</span>);</span><br><span class="line"></span><br><span class="line">List strsCopy = List. copyOf(strs);</span><br><span class="line"></span><br><span class="line">Set strs = Set.of(<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;World&quot;</span>);</span><br><span class="line"></span><br><span class="line">Map maps = Map.of(<span class="string">&quot;Hello&quot;</span>, <span class="number">1</span>, <span class="string">&quot;World&quot;</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-<p><strong><em>2、私有接口方法</em></strong></p>
-<p>jdk8提供了接口的默认方法（default）和静态方法，打破了之前接口只能定义方法而不能存在行为。jdk9则是允许接口定义私有方法，私有方法可以作为通用方法放在默认方法中调用，不过实际中并无多大用处，至少对我来说。</p>
-<p><strong><em>3、垃圾收集机制</em></strong></p>
-<p>jdk9把G1作为默认的垃圾收集器实现，替换了jdk7和jdk8的默认垃圾收集器实现：Parallel Scavenge（新生代）+Parallel Old（老年代）。</p>
-<p><strong><em>4、I/O流加强</em></strong></p>
-<p>java.io.InputStream 中增加了新的方法来读取和复制 InputStream 中包含的数据：</p>
-<p>readAllBytes：读取 InputStream 中的所有剩余字节</p>
-<p>readNBytes： 从 InputStream 中读取指定数量的字节到数组中</p>
-<p>transferTo：读取 InputStream 中的全部字节并写入到指定的 OutputStream 中 </p>
-<p><strong><em>5、JShell工具</em></strong></p>
-<p>jdk9引入了jshell这个交互性工具，让Java也可以像脚本语言一样来运行，可以从控制台启动 jshell ，在 jshell 中直接输入表达式并查看其执行结果。当需要测试一个方法的运行效果，或是快速的对表达式进行求值时，jshell 都非常实用。举个例子：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190328200848824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM4MDAxODE0,size_16,color_FFFFFF,t_70" alt="img"></p>
-<p>…… 更多新特性请自行度娘</p>
-<h2><span id="jdk10新特性">jdk10新特性</span></h2><p><strong><em>1、局部变量类型推断</em></strong></p>
-<p>局部变量类型推断可以说是jdk10中最值得注意的特性，这是Java语言开发人员为了简化Java应用程序的编写而采取的又一步，举个例子：</p>
-<p>原先我们需要这么定义一个list</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-<p>使用局部类型推断var关键词定义</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-<p><strong>不过局部变量类型推断仅仅适用在：</strong></p>
-<p>有初始化值的局部变量</p>
-<p>增强 for 循环中的索引</p>
-<p>传统 for 循环中声明的局部变量</p>
-<p><strong>Oracle 的 Java 团队申明，以下不支持局部变量类型推断</strong>：</p>
-<p>方法参数</p>
-<p>构造函数参数</p>
-<p>方法返回类型</p>
-<p>字段</p>
-<p>catch 代码块（或任何其他类型的变量声明）</p>
-<p><strong><em>2、线程本地握手</em></strong></p>
-<p>jdk10将引入一种在线程上执行回调的新方法，因此这将会很方便能停止单个线程而不是停止全部线程或者一个都不停。说实话并不是很懂是什么意思…</p>
-<p><strong><em>3、GC改进和内存管理</em></strong></p>
-<p>jdk10中有2个JEP专门用于改进当前的垃圾收集元素。</p>
-<p>第一个垃圾收集器接口是（JEP 304），它将引入一个纯净的垃圾收集器接口，以帮助改进不同垃圾收集器的源代码隔离。</p>
-<p>预定用于Java 10的第二个JEP是针对G1的并行完全GC（JEP 307），其重点在于通过完全GC并行来改善G1最坏情况的等待时间。G1是Java 9中的默认GC，并且此JEP的目标是使G1平行。</p>
-<p>……</p>
-<h2><span id="jdk11新特性">jdk11新特性</span></h2><p><strong><em>1、字符串加强</em></strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断字符串是否为空白</span></span><br><span class="line"><span class="string">&quot; &quot;</span>.isBlank(); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 去除首尾空格</span></span><br><span class="line"><span class="string">&quot; Javastack &quot;</span>.strip(); <span class="comment">// &quot;Javastack&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 去除尾部空格 </span></span><br><span class="line"><span class="string">&quot; Javastack &quot;</span>.stripTrailing(); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 去除首部空格 </span></span><br><span class="line"><span class="string">&quot; Javastack &quot;</span>.stripLeading(); <span class="comment">// &quot;Javastack &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制字符串</span></span><br><span class="line"><span class="string">&quot;Java&quot;</span>.repeat(<span class="number">3</span>); <span class="comment">// &quot;JavaJavaJava&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 行数统计</span></span><br><span class="line"><span class="string">&quot;A\nB\nC&quot;</span>.lines().count(); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-<p><strong><em>\</em>2、HttClient Api**</strong></p>
-<p>这是 Java 9 开始引入的一个处理 HTTP 请求的的孵化 HTTP Client API，该 API 支持同步和异步，而在 Java 11 中已经为正式可用状态，你可以在java.net包中找到这个 Api</p>
-<p><strong><em>3、用于 Lambda 参数的局部变量语法</em></strong></p>
-<p>用于 Lambda 参数的局部变量语法简单来说就是支持类型推导：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> A();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> x : xs) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> (<span class="keyword">var</span> x = ...) &#123; ... &#125; <span class="keyword">catch</span> ...</span><br></pre></td></tr></table></figure>
-<p><strong><em>4、ZGC</em></strong></p>
-<p>从JDK 9开始，JDK使用G1作为默认的垃圾回收器。G1可以说是GC的一个里程碑，G1之前的GC回收，还是基于固定的内存区域，而G1采用了一种“细粒度”的内存管理策略，不在固定的区分内存区域属于surviors、eden、old，而我们不需要再去对于年轻代使用一种回收策略，老年代使用一种回收策略，取而代之的是一种整体的内存回收策略。这种回收策略在我们当下cpu、内存、服务规模都越来越大的情况下提供了更好的表现，而这一代ZGC更是有了突破性的进步。</p>
-<p>从原理上来理解，ZGC可以看做是G1之上更细粒度的内存管理策略。由于内存的不断分配回收会产生大量的内存碎片空间，因此需要整理策略防止内存空间碎片化，在整理期间需要将对于内存引用的线程逻辑暂停，这个过程被称为”Stop the world”。只有当整理完成后，线程逻辑才可以继续运行，一般而言，主要有如下几种方式优化”Stop the world”：</p>
-<ul>
-<li>使用多个线程同时回收（并行回收）</li>
-<li>回收过程分为多次停顿（增量回收）</li>
-<li>在程序运行期间回收，不需要停顿或只停顿很短时间（并发回收）</li>
-<li>只回收内存而不整理内存</li>
-</ul>
-<p>ZGC主要采用的是并发回收的策略，相较于G1 ZGC最主要的提升是使用Load Barrier技术实现，引用R大对于ZGC的评价：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">与标记对象的传统算法相比，ZGC在指针上做标记，在访问指针时加入Load Barrier（读屏障），比如当对象正被GC移动，指针上的颜色就会不对，这个屏障就会先把指针更新为有效地址再返回，也就是，永远只有单个对象读取时有概率被减速，而不存在为了保持应用与GC一致而粗暴整体的Stop The World。</span><br></pre></td></tr></table></figure>
-<p>……</p>
-<h2><span id="jdk12新特性">jdk12新特性</span></h2><p><strong><em>1、Switch Expressions</em></strong></p>
-<p>这是一个为开发者准备的特性，我们可以利用具体代码快速了解一下，下面是传统 statement 形式的 switch 语法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (day) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> MONDAY:</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> FRIDAY:</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> SUNDAY:</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> TUESDAY:</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> THURSDAY:</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> SATURDAY:</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> WEDNESDAY:</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果有编码经验，你一定知道，switch 语句如果漏写了一个 break，那么逻辑往往就跑偏了，这种方式既繁琐，又容易出错。如果换成 switch 表达式，Pattern Matching 机制能够自然地保证只有单一路径会被执行，请看下面的代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (day) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; System.out.println(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> TUESDAY -&gt; System.out.println(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> THURSDAY, SATURDAY -&gt; System.out.println(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> WEDNESDAY -&gt; System.out.println(<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>更进一步，下面的表达式，为我们提供了优雅地表达特定场合计算逻辑的方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> numLetters = <span class="keyword">switch</span> (day) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> TUESDAY -&gt; <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> THURSDAY, SATURDAY -&gt; <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> WEDNESDAY -&gt; <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Switch Expressions 或者说起相关的 Pattern Matching 特性，为我们提供了勾勒出了 Java 语法进化的一个趋势，将开发者从复杂繁琐的低层次抽象中逐渐解放出来，以更高层次更优雅的抽象，既降低代码量，又避免意外编程错误的出现，进而提高代码质量和开发效率。</p>
-<p><strong><em>2、Shenandoah GC</em></strong></p>
-<p>新增了一个名为 Shenandoah 的 GC 算法，通过与正在运行的 Java 线程同时进行 evacuation 工作来减少 GC 暂停时间。使用 Shenandoah 的暂停时间与堆大小无关，这意味着无论堆是 200 MB 还是 200 GB，都将具有相同的暂停时间。</p>
-<p>…….</p>
-<h2><span id="jdk13新特性">jdk13新特性</span></h2><p><strong>1、switch优化更新</strong></p>
-<p><strong>jdk11以及之前的版本：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (day) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> MONDAY:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> FRIDAY:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> SUNDAY:</span><br><span class="line"></span><br><span class="line">         System.out.println(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> TUESDAY:</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>; <span class="keyword">case</span> THURSDAY:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> SATURDAY:</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line"></span><br><span class="line">         System.out.println(<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>jdk12版本：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (day) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; System.out.println(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> TUESDAY -&gt; System.out.println(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> THURSDAY, SATURDAY -&gt; System.out.println(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> WEDNESDAY -&gt; System.out.println(<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>jdk13版本：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">howMany</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (k) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span>  <span class="number">1</span> -&gt; <span class="string">&quot;one&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span>  <span class="number">2</span> -&gt; <span class="string">&quot;two&quot;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span> -&gt; <span class="string">&quot;many&quot;</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>2、文本块升级</strong></p>
-<p><strong>jdk13之前：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String html = <span class="string">&quot;&lt;html&gt;\n&quot;</span> +</span><br><span class="line"></span><br><span class="line">              <span class="string">&quot;    &lt;body&gt;\n&quot;</span> +</span><br><span class="line"></span><br><span class="line">              <span class="string">&quot;        &lt;p&gt;Hello, world&lt;/p&gt;\n&quot;</span> +</span><br><span class="line"></span><br><span class="line">              <span class="string">&quot;    &lt;/body&gt;\n&quot;</span> +</span><br><span class="line"></span><br><span class="line">              <span class="string">&quot;&lt;/html&gt;\n&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>jdk13优化后：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String html = <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">              &lt;html&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                  &lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                      &lt;p&gt;Hello, world&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                  &lt;/body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">              &lt;/html&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">              &quot;</span><span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p>其重点便是”””</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">line 1</span><br><span class="line"></span><br><span class="line">line 2</span><br><span class="line"></span><br><span class="line">line 3</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
-<p>上面这一串相当于字符串文字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;line 1\nline 2\nline 3\n&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>3、重新实现旧版套接字API</strong></p>
-<p>使用更简单、更现代的实现替换java.net.Socket和java.net.ServerSocket API使用的底层实现，易于维护和调试。新的实现很容易适应用户模式线程，也就是光纤。之前的底层实现可以追溯到jdk1.0，实现是遗留java和c代码的混合，维护和调试很痛苦，该实现使用线程堆栈作为I/O缓冲区，这种方式需要多次增加默认线程堆栈大小。</p>
-<p><strong>4、核心库/java.util中：I18N</strong></p>
-<p>支持Unicode12.1，此版本将Unicode支持升级到12.1，其中包括以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Character支持12.1级的Unicode字符数据库，其中12.0从11.0开始增加554个字符，总共137,928个 字符。</span><br><span class="line"></span><br><span class="line">这些新增内容包括4个新脚本，总共150个脚本，以及61个新的表情符号字符。U+32FF SQUARE ERA NAME REIWA</span><br><span class="line"></span><br><span class="line">从 12.0开始，12.1只添加一个字符。java.text.Bidi和java.text.Normalizer类分别支持12.0级的Unicode标准附件， ＃9和＃15。java.util.regexpackage支持基于12.0级Unicode标准附件＃29的扩展字形集群。</span><br></pre></td></tr></table></figure>
-<p><strong>5、取消使用未使用的内存</strong></p>
-<p>增加ZGC以将未使用的堆内存返回给操作系统。ZGC目前没有取消提交并将内存返回给操作系统，即使该内存长时间未使用。对于所有类型的应用程序和环境，此行为并非最佳， 尤其是那些需要关注内存占用的应用程序和环境 例如：通过使用支付资源的容器环境。应用程序可能长时间处于空闲状态并与许多其 他应用程序共享或竞争资源的环境。应用程序在执行期间可能具有非常不同的堆空间要求。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如，启动期间所需的堆可能大于稳态执行期间稍后所需的堆。HotSpot中的其他垃圾收集器，如G1和Shenandoah，今天提供 了这种功能，某些类别的用户发现它非常有用。将此功能添加到ZGC将受到同一组用户的欢迎。</span><br></pre></td></tr></table></figure>
-<h2><span id></span></h2><h2><span id="jdk14新特性">jdk14新特性</span></h2><p>部分名词解释：</p>
-<ul>
-<li>预览版：该功能在当前版本可以使用，如果效果不是很好的话，可能以后的其他版本就会删去该功能。</li>
-<li>最终版：该功能在之前版本效果很好，之后的每个版本中都会存在该功能。</li>
-</ul>
-<p><strong>1、switch优化变更为最终版</strong></p>
-<p>与之前的jdk12、13功能一样，只是从之前的预览版变为最终版</p>
-<p><strong>2、垃圾回收相关</strong></p>
-<p>1）删除cms垃圾收集器</p>
-<p>2）弃用 ParallelScavenge + SerialOld GC 的垃圾回收算法组合</p>
-<p>3）将 zgc 垃圾回收器移植到 macOS 和 windows 平台 </p>
-<p><strong>3、instanceof的模式匹配（预览版）</strong></p>
-<p>instanceof运算符支持模式匹配来增强java语言，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String s) &#123; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// can use s here </span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// can&#x27;t use s here </span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>4、删除了安全库java.security.acl API</strong></p>
-<p><strong>5、货币格式（优化）</strong></p>
-<p>可以通过 NumberFormat.getCurrencyInstance(Locale)使用“ u-cf-account” Unicode区域设置扩展名来获得具有记帐样式的<br>货币格式实例，其中金额在某些区域设置中用括号表示，例如，Locale.US,它将格式化为($3.27)而不是-$3.27。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JDK</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lijinxu233.github.io/2021/02/20/note32/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2021/02/20/note33/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JavaSE笔记
-        
-      </div>
-    </a>
   
   
-    <a href="/2021/02/19/note31/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaSE笔记</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -466,9 +226,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
