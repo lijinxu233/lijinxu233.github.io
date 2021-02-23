@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>Spring | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring   框架介绍 一、问题： 二、解决： 三、实现方案： 四、jar包文件的介绍 五、框架的概念和使用   Spring框架 优点： 使用范围：任何java程序 作用： 内容：   SpringIOC原理 SpringIOC的基本使用 1、作用： 2、场合： 3、基本使用流程： 4、IOC创建对象的方式 5、Spring配置 6、依赖注入 7、Bean的自动装配 8、使用注解开发 9、完">
+  <meta name="description" content="Spring   前言 框架介绍   1、Spring框架 优点： 使用范围：任何java程序 作用： 内容：   2、SpringIOC原理 3、SpringIOC的基本使用 1、作用： 2、场合： 3、基本使用流程：   4、IOC创建对象的方式 5、Spring配置 6、依赖注入 7、Bean的自动装配 8、使用注解开发 9、完全使用Java的方式配置Spring 10、代理模式 11、AO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/02/23/note41/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="Spring   框架介绍 一、问题： 二、解决： 三、实现方案： 四、jar包文件的介绍 五、框架的概念和使用   Spring框架 优点： 使用范围：任何java程序 作用： 内容：   SpringIOC原理 SpringIOC的基本使用 1、作用： 2、场合： 3、基本使用流程： 4、IOC创建对象的方式 5、Spring配置 6、依赖注入 7、Bean的自动装配 8、使用注解开发 9、完">
+<meta property="og:description" content="Spring   前言 框架介绍   1、Spring框架 优点： 使用范围：任何java程序 作用： 内容：   2、SpringIOC原理 3、SpringIOC的基本使用 1、作用： 2、场合： 3、基本使用流程：   4、IOC创建对象的方式 5、Spring配置 6、依赖注入 7、Bean的自动装配 8、使用注解开发 9、完全使用Java的方式配置Spring 10、代理模式 11、AO">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/23/note41/blog/source_posts/note41.assets/image-20210223172216745.png">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/23/note41/blog/source_posts/note41.assets/image-20210223175519995.png">
@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/23/note41/blog/source_posts/note41.assets/image-20210224043104538.png">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/23/note41/blog/source_posts/note41.assets/image-20210224060646076.png">
 <meta property="article:published_time" content="2021-02-23T08:41:09.000Z">
-<meta property="article:modified_time" content="2021-02-23T23:26:41.815Z">
+<meta property="article:modified_time" content="2021-02-23T23:37:09.053Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
@@ -191,26 +191,24 @@
         <h1><span id="spring">Spring</span></h1><!-- toc -->
 
 <ul>
-<li><a href="#%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D">框架介绍</a><ul>
-<li><a href="#%E4%B8%80-%E9%97%AE%E9%A2%98">一、问题：</a></li>
-<li><a href="#%E4%BA%8C-%E8%A7%A3%E5%86%B3">二、解决：</a></li>
-<li><a href="#%E4%B8%89-%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88">三、实现方案：</a></li>
-<li><a href="#%E5%9B%9B-jar%E5%8C%85%E6%96%87%E4%BB%B6%E7%9A%84%E4%BB%8B%E7%BB%8D">四、jar包文件的介绍</a></li>
-<li><a href="#%E4%BA%94-%E6%A1%86%E6%9E%B6%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%BF%E7%94%A8">五、框架的概念和使用</a></li>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a><ul>
+<li><a href="#%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D">框架介绍</a></li>
 </ul>
 </li>
-<li><a href="#spring%E6%A1%86%E6%9E%B6">Spring框架</a><ul>
+<li><a href="#1-spring%E6%A1%86%E6%9E%B6">1、Spring框架</a><ul>
 <li><a href="#%E4%BC%98%E7%82%B9">优点：</a></li>
 <li><a href="#%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4%E4%BB%BB%E4%BD%95java%E7%A8%8B%E5%BA%8F">使用范围：任何java程序</a></li>
 <li><a href="#%E4%BD%9C%E7%94%A8">作用：</a></li>
 <li><a href="#%E5%86%85%E5%AE%B9">内容：</a></li>
 </ul>
 </li>
-<li><a href="#springioc%E5%8E%9F%E7%90%86">SpringIOC原理</a></li>
-<li><a href="#springioc%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">SpringIOC的基本使用</a><ul>
+<li><a href="#2-springioc%E5%8E%9F%E7%90%86">2、SpringIOC原理</a></li>
+<li><a href="#3-springioc%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">3、SpringIOC的基本使用</a><ul>
 <li><a href="#1-%E4%BD%9C%E7%94%A8">1、作用：</a></li>
 <li><a href="#2-%E5%9C%BA%E5%90%88">2、场合：</a></li>
 <li><a href="#3-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B">3、基本使用流程：</a></li>
+</ul>
+</li>
 <li><a href="#4-ioc%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F">4、IOC创建对象的方式</a></li>
 <li><a href="#5-spring%E9%85%8D%E7%BD%AE">5、Spring配置</a></li>
 <li><a href="#6-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5">6、依赖注入</a></li>
@@ -218,14 +216,13 @@
 <li><a href="#8-%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91">8、使用注解开发</a></li>
 <li><a href="#9-%E5%AE%8C%E5%85%A8%E4%BD%BF%E7%94%A8java%E7%9A%84%E6%96%B9%E5%BC%8F%E9%85%8D%E7%BD%AEspring">9、完全使用Java的方式配置Spring</a></li>
 <li><a href="#10-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F">10、代理模式</a></li>
-</ul>
-</li>
+<li><a href="#11-aop">11、AOP</a></li>
 </ul>
 <!-- tocstop -->
 
 <a id="more"></a>
 
-<h2><span id="框架介绍">框架介绍</span></h2><h3><span id="一-问题">一、问题：</span></h3><p>目前我们实现一个功能的基本流程如下：</p>
+<h2><span id="前言">前言</span></h2><h3><span id="框架介绍">框架介绍</span></h3><h4><span id="一-问题">一、问题：</span></h4><p>目前我们实现一个功能的基本流程如下：</p>
 <ul>
 <li>创建一个web项目</li>
 <li>创建数据库</li>
@@ -237,19 +234,19 @@
 <p>发现在后台基于MVC整个代码实现流程中，如果功能实现是分为10个步骤，发现有7个步骤是重复的。比如数据库操作</p>
 <p>使用原生的jdbc来操作数据库，查询所有的学生信息和查询所有的班级信息</p>
 <p>这两个代码除了sql语句以及结果遍历不同外，其他的全部相同。也就是说不同功能的代码中出现了相同的代码部分。造成重复的代码需要在不同的功能中，重复编写，极大的影响了开发的效率</p>
-<h3><span id="二-解决">二、解决：</span></h3><p>不同的功能重复的代码不再重复声明，只声明功能相关的代码即可。也就是说重复的代码我们虽然不写了，但是JDK在执行的时候这部分重复的代码仍然是存在的，执行的是重复的+自己的</p>
-<h3><span id="三-实现方案">三、实现方案：</span></h3><ul>
+<h4><span id="二-解决">二、解决：</span></h4><p>不同的功能重复的代码不再重复声明，只声明功能相关的代码即可。也就是说重复的代码我们虽然不写了，但是JDK在执行的时候这部分重复的代码仍然是存在的，执行的是重复的+自己的</p>
+<h4><span id="三-实现方案">三、实现方案：</span></h4><ul>
 <li>不同的方法中出现了重复代码–&gt;将重复代码封装为工具方法，然后在自己的方法中调用工具方法，同时声明自己的代码。</li>
 <li>不同的类中出现了重复的代码–&gt;封装工具类</li>
 <li><strong>不同的项目出现了重复代码–&gt;封装jar包</strong></li>
 </ul>
-<h3><span id="四-jar包文件的介绍">四、jar包文件的介绍</span></h3><h4><span id="jar包的本质">jar包的本质</span></h4><p>其实就是代码的class文件的压缩包，jdk可以直接调用无需解压。</p>
-<h4><span id="jar包的使用">jar包的使用</span></h4><p>将jar包资源，需要添加为库</p>
-<h4><span id="jar包的特点">jar包的特点</span></h4><p>在项目中引入其他已经完成的代码的同时，<strong>保证项目原有代码的结构层次。</strong></p>
-<h3><span id="五-框架的概念和使用">五、框架的概念和使用</span></h3><h4><span id="1-框架的概念">1、框架的概念：</span></h4><p>不同的项目会使用相同的代码开发。而这部分代码如果要进行封装不是一个类或者一个方法就能搞定的，需要封装出来很多的类文件，于是为了方便其他人使用，我们再次将这些代码封装为jar包，所以，框架其实就是不用的项目都会使用的代码的封装，软件的半成品</p>
-<h4><span id="2-框架的本质">2、框架的本质</span></h4><p>就是别人封装好的功能代码</p>
-<h4><span id="3-框架的具体表现形式">3、框架的具体表现形式</span></h4><p>一堆jar包，封装好了公共代码。</p>
-<h4><span id="4-框架的使用">4、框架的使用</span></h4><ul>
+<h4><span id="四-jar包文件的介绍">四、jar包文件的介绍</span></h4><h5><span id="jar包的本质">jar包的本质</span></h5><p>其实就是代码的class文件的压缩包，jdk可以直接调用无需解压。</p>
+<h5><span id="jar包的使用">jar包的使用</span></h5><p>将jar包资源，需要添加为库</p>
+<h5><span id="jar包的特点">jar包的特点</span></h5><p>在项目中引入其他已经完成的代码的同时，<strong>保证项目原有代码的结构层次。</strong></p>
+<h4><span id="五-框架的概念和使用">五、框架的概念和使用</span></h4><h5><span id="1-框架的概念">1、框架的概念：</span></h5><p>不同的项目会使用相同的代码开发。而这部分代码如果要进行封装不是一个类或者一个方法就能搞定的，需要封装出来很多的类文件，于是为了方便其他人使用，我们再次将这些代码封装为jar包，所以，框架其实就是不用的项目都会使用的代码的封装，软件的半成品</p>
+<h5><span id="2-框架的本质">2、框架的本质</span></h5><p>就是别人封装好的功能代码</p>
+<h5><span id="3-框架的具体表现形式">3、框架的具体表现形式</span></h5><p>一堆jar包，封装好了公共代码。</p>
+<h5><span id="4-框架的使用">4、框架的使用</span></h5><ul>
 <li>将jar包导入到自己的项目中</li>
 <li>查阅API文档，调用jar包中的资源进行功能开发</li>
 <li>配置框架的配置文件（框架代码运行需要的常量数据）<ul>
@@ -257,8 +254,8 @@
 </ul>
 </li>
 </ul>
-<h4><span id="5-框架的学习">5、框架的学习</span></h4><p>就是使用别人的代码完成自己功能的开发。其实就是学习如何使用别人的代码。相当于JavaSE阶段学习常用类。</p>
-<h2><span id="spring框架">Spring框架</span></h2><p>官网：<a target="_blank" rel="noopener" href="https://spring.io/projects/spring-framework">https://spring.io/projects/spring-framework</a></p>
+<h5><span id="5-框架的学习">5、框架的学习</span></h5><p>就是使用别人的代码完成自己功能的开发。其实就是学习如何使用别人的代码。相当于JavaSE阶段学习常用类。</p>
+<h2><span id="1-spring框架">1、Spring框架</span></h2><p>官网：<a target="_blank" rel="noopener" href="https://spring.io/projects/spring-framework">https://spring.io/projects/spring-framework</a></p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://repo.spring.io/release/org/springframework/spring/">https://repo.spring.io/release/org/springframework/spring/</a></p>
 <p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -307,7 +304,7 @@
 </ul>
 <p>因为现在大多数公司都在使用SpringBoot进行快速开发，SpringBoot的前提，需要完全掌握Spring及SpringMVC！承上启下的作用！</p>
 <p><strong>弊端：发展了太久，违背了原有的理念！配置十分繁琐，人称：“配置地狱！”</strong></p>
-<h2><span id="springioc原理">SpringIOC原理</span></h2><p>1、UserDao接口</p>
+<h2><span id="2-springioc原理">2、SpringIOC原理</span></h2><p>1、UserDao接口</p>
 <p>2、UserDaoImpl实现类</p>
 <p>3、UserService业务接口</p>
 <p>4、UserServiceImpl业务实现类</p>
@@ -321,13 +318,13 @@
 <p><img src="/2021/02/23/note41/blog\source_posts\note41.assets\image-20210223181129768.png" alt="image-20210223181129768"></p>
 <p>当我们不知道要创建哪个对象的时候，用反射，反射创建对象传的是对象全限定路径的字符串，改的是一个字符串数据，可以通过IO流读取，而new对象是关键字，改的是代码，不能通过IO读进来。</p>
 <p>IOC本质<br>控制反转loC（Inversion of Control），是一种设计思想，DI（依赖注入）是实现loC的一种方法，也有人认为DI只是loC的另一种说法。没有loC的程序中，我们使用面向对象编程，对象的创建与对象间的依赖关系完全硬编码在程序中，对象的创建由程序自己控制，控制反转后将对象的创建转移给第三方，个人认为所谓控制反转就是：获得依赖对象的方式反转了。<br>采用XML方式配置Bean的时候，Bean的定义信息是和实现分离的，而采用注解的方式可以把两者合为一体，Bean的定义信息直接以注解的形式定义在实现类中，从而达到了零配置的目的。<br><strong>控制反转是一种通过描述（XML或注解）并通过第三方去生产或获取特定对象的方式。在Spring中实现控制反转的是loC容器，其实现方法是依赖注入（Dependency Injection，DI）。</strong></p>
-<h2><span id="springioc的基本使用">SpringIOC的基本使用</span></h2><h3><span id="1-作用">1、作用：</span></h3><p>IOC将耦合性高的对象解耦</p>
+<h2><span id="3-springioc的基本使用">3、SpringIOC的基本使用</span></h2><h3><span id="1-作用">1、作用：</span></h3><p>IOC将耦合性高的对象解耦</p>
 <h3><span id="2-场合">2、场合：</span></h3><p>什么时候使用IOC对对象进行解耦是一个主观问题，应当根据代码的结构以及功能的需求进行分析，然后决定哪些对象之间需要使用IOC解耦.一般情况下，在MVC代码结构中，会将Servlet和Service之间解耦，Service和mapper之间解耦.</p>
 <h3><span id="3-基本使用流程">3、基本使用流程：</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lee.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String str;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getStr</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStr</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.str = str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;str=&#x27;&quot;</span> + str + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--使用spring来创建对象，在Spring中这些都称为Bean</span></span><br><span class="line"><span class="comment">    类型 变量名 = new 类型();</span></span><br><span class="line"><span class="comment">    Hello hello = new Hello();</span></span><br><span class="line"><span class="comment">    bean=对象</span></span><br><span class="line"><span class="comment">    id = 变量名</span></span><br><span class="line"><span class="comment">    class = new 的对象;</span></span><br><span class="line"><span class="comment">    property 相当于给对象中的属性设置一个值！</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;hello&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.lee.pojo.Hello&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;str&quot;</span> <span class="attr">value</span>=<span class="string">&quot;spring&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.lee.pojo.Hello;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//获取Spring的上下文对象</span></span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//我们的对象现在都在Spring中管理了，我们要使用，直接去里面取出来就可以！</span></span><br><span class="line">        Hello hello = (Hello) context.getBean(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        System.out.println(hello.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>这个过程就叫控制反转：<br>控制：谁来控制对象的创建，传统应用程序的对象是由程序本身控制创建的，使用Spring后，对象是由Spring来创建的.<br>反转：程序本身不创建对象，而变成被动的接收对象.<br>依赖注入：就是利用set方法来进行注入的.<br>IOC是一种编程思想，由主动的编程变成被动的接收.<br>可以通过newClassPathXmlApplicationContext去浏览一下底层源码.<br>OK，到了现在，我们彻底不用再程序中去改动了，要实现不同的操作，只需要在xml配置文件中进行修改，所谓的loC，一句话搞定：对象由Spring来创建，管理，装配！</p>
-<h3><span id="4-ioc创建对象的方式">4、IOC创建对象的方式</span></h3><p>1、使用无参构造方法创建对象</p>
+<h2><span id="4-ioc创建对象的方式">4、IOC创建对象的方式</span></h2><p>1、使用无参构造方法创建对象</p>
 <p>2、假设我们要使用有参构造创建对象</p>
 <ul>
 <li>下标赋值</li>
@@ -342,7 +339,7 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.lee.pojo.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;李晋旭&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>总结：在配置文件加载的时候，容器中管理的对象就已经初始化了</p>
-<h3><span id="5-spring配置">5、Spring配置</span></h3><h4><span id="51-别名">5.1、别名</span></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--别名，如果添加了别名，我们也可以使用别名获取到这个对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;userNew&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2><span id="5-spring配置">5、Spring配置</span></h2><h4><span id="51-别名">5.1、别名</span></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--别名，如果添加了别名，我们也可以使用别名获取到这个对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;userNew&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4><span id="52-bean的配置">5.2、Bean的配置</span></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">id:bean的唯一标识符，也就是相当于我们学的对象名</span></span><br><span class="line"><span class="comment">class：bean对象所对应的全限定名：包名+类型</span></span><br><span class="line"><span class="comment">name：也是别名，而且name可以同时取多个别名</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.lee.pojo.User&quot;</span> <span class="attr">name</span>=<span class="string">&quot;user2,user3&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;singleton&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;李晋旭&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4><span id="53-import">5.3、import</span></h4><p>这个import一般用于团队开发使用，他可以将多个配置文件导入</p>
 <p>假设，现在项目中有多个人开发，这三个人复制不同的类开发，不同的类需要注册在不同的bean中，我们可以利用import将所有人的beans.xml合并为一个总的！</p>
@@ -351,7 +348,7 @@
 <li>applicationContext.xml</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">&quot;beans.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">import</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">&quot;beans2.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">import</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">&quot;beans3.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">import</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="6-依赖注入">6、依赖注入</span></h3><h4><span id="61-构造器注入">6.1、构造器注入</span></h4><h4><span id="62-set方式注入重点">6.2、Set方式注入（重点）</span></h4><ul>
+<h2><span id="6-依赖注入">6、依赖注入</span></h2><h4><span id="61-构造器注入">6.1、构造器注入</span></h4><h4><span id="62-set方式注入重点">6.2、Set方式注入（重点）</span></h4><ul>
 <li><p>依赖注入：Set注入！</p>
 <ul>
 <li>依赖：bean对象的创建依赖于容器</li>
@@ -420,7 +417,7 @@
 
 <h5><span id="2-原型模式每次从容器中get的时候都会产生一个新对象">2、原型模式：每次从容器中get的时候，都会产生一个新对象！</span></h5><p><img src="/2021/02/23/note41/blog\source_posts\note41.assets\image-20210223223918898.png" alt="image-20210223223918898"></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.something.DefaultAccountService&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h5><span id="3-其余的request-session-application这些只能在web开发中使用">3、其余的request、session、application这些只能在web开发中使用！</span></h5><h3><span id="7-bean的自动装配">7、Bean的自动装配</span></h3><ul>
+<h5><span id="3-其余的request-session-application这些只能在web开发中使用">3、其余的request、session、application这些只能在web开发中使用！</span></h5><h2><span id="7-bean的自动装配">7、Bean的自动装配</span></h2><ul>
 <li>自动装配是Spring满足bean依赖的一种方式</li>
 <li>Spring会在上下文中自动寻找，并给bean装配属性</li>
 </ul>
@@ -458,7 +455,7 @@
 <li>@Resource默认通过ByName的方式实现，如果找不到名字，则通过ByType实现！如果两个都找不到，就报错</li>
 <li>执行顺序不同：@Autowired通过ByType的方式实现。@Resource默认通过ByName的方式实现</li>
 </ul>
-<h3><span id="8-使用注解开发">8、使用注解开发</span></h3><p>在Spring4之后，要使用注解开发，必须要保证aop的包导入了</p>
+<h2><span id="8-使用注解开发">8、使用注解开发</span></h2><p>在Spring4之后，要使用注解开发，必须要保证aop的包导入了</p>
 <p><img src="/2021/02/23/note41/blog\source_posts\note41.assets\image-20210224000711206.png" alt="image-20210224000711206"></p>
 <p>使用注解需要导入context约束，增加注解的支持！</p>
 <p>1、bean</p>
@@ -494,7 +491,7 @@
 </li>
 <li><p>我们在使用的过程中，只需要注意一个问题：必须让注解生效，即开启注解支持</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--指定要扫描的包，这个包下的注解就会生效--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.lee&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--开启注解的支持--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="9-完全使用java的方式配置spring">9、完全使用Java的方式配置Spring</span></h3></li>
+<h2><span id="9-完全使用java的方式配置spring">9、完全使用Java的方式配置Spring</span></h2></li>
 </ul>
 <p>我们现在要完全不使用Spring的xml配置了，全权交给Java来做！</p>
 <p>JavaConfig是Spring的一个子项目，在Spring4之后</p>
@@ -514,7 +511,7 @@
 <p>测试类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.lee.config.MyConfig;</span><br><span class="line"><span class="keyword">import</span> com.lee.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果完全使用了配置类去做，我们就只能通过AnnotationConfigApplicationContext来获取</span></span><br><span class="line">        AnnotationConfigApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(MyConfig.class);</span><br><span class="line">        User getUser = (User)context.getBean(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        System.out.println(getUser.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>这种纯Java的配置方式，在SpringBoot中随处可见</p>
-<h3><span id="10-代理模式">10、代理模式</span></h3><p>为什么要学习代理模式？因为这就是SpringAOP的底层！**[SpringAOP和SpringMVC很重要]**</p>
+<h2><span id="10-代理模式">10、代理模式</span></h2><p>为什么要学习代理模式？因为这就是SpringAOP的底层！**[SpringAOP和SpringMVC很重要]**</p>
 <p>代理模式的分类：</p>
 <ul>
 <li>静态代理</li>
@@ -583,7 +580,7 @@
 <li><strong>一个动态代理类代理的是一个接口，一般就是对应的一类业务</strong></li>
 <li><strong>一个动态代理类可以代理多个类，只要是实现了同一个接口即可！</strong></li>
 </ul>
-
+<h2><span id="11-aop">11、AOP</span></h2>
       
 
       
@@ -897,11 +894,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">
