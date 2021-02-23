@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
-  <title>Archives | Lee</title>
+  <title>设计模式 | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lee">
-<meta property="og:url" content="https://lijinxu233.github.io/archives/page/5/index.html">
+  <meta name="description" content="一、设计模式概念   1、定义 2、目的 3、设计模式的六大原则 3.1开闭原则 3.2里氏替换原则 3.3依赖倒转原则 3.4接口隔离原则 3.5最少知道原则 3.6合成复用原则   4、设计模式的分类   二、常用的几种设计模式 1、单例模式 1.1、懒汉式单例 1.2、饿汉式单例   2、工厂方法模式 2.1简单工厂模式 2.2静态工厂模式 3.3工厂方法模式   3、抽象工厂模式 总结：对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="https://lijinxu233.github.io/2021/02/24/note45/index.html">
 <meta property="og:site_name" content="Lee">
+<meta property="og:description" content="一、设计模式概念   1、定义 2、目的 3、设计模式的六大原则 3.1开闭原则 3.2里氏替换原则 3.3依赖倒转原则 3.4接口隔离原则 3.5最少知道原则 3.6合成复用原则   4、设计模式的分类   二、常用的几种设计模式 1、单例模式 1.1、懒汉式单例 1.2、饿汉式单例   2、工厂方法模式 2.1简单工厂模式 2.2静态工厂模式 3.3工厂方法模式   3、抽象工厂模式 总结：对">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194116878-768699801.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194155020-912204818.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194222517-1238015925.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194251407-1693493888.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194439992-689086482.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194516222-893972306.png">
+<meta property="article:published_time" content="2021-02-23T21:30:24.000Z">
+<meta property="article:modified_time" content="2021-02-23T21:33:33.957Z">
 <meta property="article:author" content="李晋旭">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lijinxu233.github.io/2021/02/24/note45/blog/source_posts/note45.assets/2162786-20201027194116878-768699801.png">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
   
@@ -150,318 +162,255 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-note45" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式
+    </h1>
+  
+
+        
+        <a href="/2021/02/24/note45/" class="archive-article-date">
+  	<time datetime="2021-02-23T21:30:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-24</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="一-设计模式概念">一、设计模式概念</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#1-%E5%AE%9A%E4%B9%89">1、定义</a></li>
+<li><a href="#2-%E7%9B%AE%E7%9A%84">2、目的</a></li>
+<li><a href="#3-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99">3、设计模式的六大原则</a><ul>
+<li><a href="#31%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99">3.1开闭原则</a></li>
+<li><a href="#32%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99">3.2里氏替换原则</a></li>
+<li><a href="#33%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99">3.3依赖倒转原则</a></li>
+<li><a href="#34%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99">3.4接口隔离原则</a></li>
+<li><a href="#35%E6%9C%80%E5%B0%91%E7%9F%A5%E9%81%93%E5%8E%9F%E5%88%99">3.5最少知道原则</a></li>
+<li><a href="#36%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99">3.6合成复用原则</a></li>
+</ul>
+</li>
+<li><a href="#4-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB">4、设计模式的分类</a></li>
+</ul>
+<ul>
+<li><a href="#%E4%BA%8C-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">二、常用的几种设计模式</a><ul>
+<li><a href="#1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">1、单例模式</a><ul>
+<li><a href="#11-%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B">1.1、懒汉式单例</a></li>
+<li><a href="#12-%E9%A5%BF%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B">1.2、饿汉式单例</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F">2、工厂方法模式</a><ul>
+<li><a href="#21%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F">2.1简单工厂模式</a></li>
+<li><a href="#22%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F">2.2静态工厂模式</a></li>
+<li><a href="#33%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F">3.3工厂方法模式</a></li>
+</ul>
+</li>
+<li><a href="#3-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F">3、抽象工厂模式</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93%E5%AF%B9%E4%BA%8E%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E7%94%A8%E9%80%94">总结：对于简单工厂，工厂方法模式和抽象工厂的区别和用途</a></li>
+<li><a href="#8-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95">8、模板方法</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<a id="more"></a>
+
+<h2><span id="1-定义">1、定义</span></h2><p> Java包含23种设计模式，是一套对代码设计经验的总结，被人们反复利用，多人熟知的代码设计方式。</p>
+<h2><span id="2-目的">2、目的</span></h2><p> 为了提高代码的可读性，可扩展性以及代码的复用性，为了解决在写代码过程中遇到的代码设计问题。</p>
+<h2><span id="3-设计模式的六大原则">3、设计模式的六大原则</span></h2><h3><span id="31开闭原则">3.1开闭原则</span></h3><p> 对扩展开放，对修改关闭（尽可能对代码少修改）</p>
+<h3><span id="32里氏替换原则">3.2里氏替换原则</span></h3><p> 它是面向对象基本原则之一，任何父类（基类）出现的地方，子类都可以出现，也就是子类可以替换父类的任何功能（体现了父类的可扩展性）</p>
+<h3><span id="33依赖倒转原则">3.3依赖倒转原则</span></h3><p> 尽可能面向接口编程，依赖接口而不依赖类</p>
+<h3><span id="34接口隔离原则">3.4接口隔离原则</span></h3><p> 一个类如果能实现多个接口，尽可能实现多个，为了降低依赖，降低耦合</p>
+<h3><span id="35最少知道原则">3.5最少知道原则</span></h3><p> 一个实体尽可能少的与其他实体产生相互关联关系，将实体的功能独立</p>
+<h3><span id="36合成复用原则">3.6合成复用原则</span></h3><p> 尽量使用合成，聚合的方式，而不使用继承</p>
+<h2><span id="4-设计模式的分类">4、设计模式的分类</span></h2><p><strong>Java设计模式分为三大类</strong></p>
+<p><strong>创建型模式：对象实例化的模式，创建型模式用于解耦对象的实例化过程。</strong></p>
+<p><strong>结构型模式：把类或对象结合在一起形成一个更大的结构。</strong></p>
+<p><strong>行为型模式：类和对象如何交互，及划分责任和算法。</strong></p>
+<p>如下图所示：</p>
+<p><img src="/2021/02/24/note45/blog\source_posts\note45.assets\2162786-20201027194116878-768699801.png" alt="img"></p>
+<h1><span id="二-常用的几种设计模式">二、常用的几种设计模式</span></h1><h2><span id="1-单例模式">1、单例模式</span></h2><p>单例模式是创建对象的一种特殊方式，程序从始至终都只创建一个对象叫单例（单实例）</p>
+<p>分为两类</p>
+<h3><span id="11-懒汉式单例">1.1、懒汉式单例</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="comment">//为了不让其他类直接访问该成员	懒汉式单例，在使用时创建对象</span></span><br><span class="line">    <span class="comment">//1、私有静态变量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Person person=<span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">//2、将构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3、提供一个静态方法，并返回该类的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(person==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="comment">//第一次访问</span></span><br><span class="line">            person=<span class="keyword">new</span> Person();;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> person;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;sayHello方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="12-饿汉式单例">1.2、饿汉式单例</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1、 饿汉式单例模式，  在类加载时创建一个对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Student student = <span class="keyword">new</span> Student();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2 构造器私有化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Student</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3 提供返回类对象的静态方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Student <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(student !=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> student;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="2-工厂方法模式">2、工厂方法模式</span></h2><p>创建对象的过程不再由当前类实例化，而是由工厂类完成，在工厂类中只需要告知对象类型即可。工厂模式中必须依赖接口</p>
+<h3><span id="21简单工厂模式">2.1简单工厂模式</span></h3><p> 简单工厂模式的工厂类一般是使用静态方法，通过接收的参数的不同来返回不同的对象实例。不修改代码的话，是无法扩展的。</p>
+<p><img src="/2021/02/24/note45/blog\source_posts\note45.assets\2162786-20201027194155020-912204818.png" alt="img"></p>
+<p> 以生产“电脑”为例，电脑有办公的功能，可以生产一体机或笔记本</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码与静态工厂一样</span><br></pre></td></tr></table></figure>
+<h3><span id="22静态工厂模式">2.2静态工厂模式</span></h3><p><img src="/2021/02/24/note45/blog\source_posts\note45.assets\2162786-20201027194222517-1238015925.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//电脑接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Computer</span> </span>&#123;</span><br><span class="line">    <span class="comment">//电脑办公</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//笔记本</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonComputer</span> <span class="keyword">implements</span>  <span class="title">Computer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是笔记本电脑，正在办公&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//一体机</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkComputer</span> <span class="keyword">implements</span>  <span class="title">Computer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是一体机正在办公&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//用于生产电脑的工厂 （这个工厂既可以生产台式机也可以生产笔记本）</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComputerFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据不同的类型 生产不同的产品</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> type</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Computer <span class="title">produce</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">        Computer computer =<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(type.equals(<span class="string">&quot;personComputer&quot;</span>))&#123;</span><br><span class="line">            computer = <span class="keyword">new</span> PersonComputer();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(type.equals(<span class="string">&quot;workComputer&quot;</span>))&#123;</span><br><span class="line">            computer = <span class="keyword">new</span> WorkComputer();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;不能生产&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> computer;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//静态工厂方法模式</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComputerFactory2</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  静态工厂方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> type</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Computer <span class="title">produce</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 定义一个接口的引用    通过接口new 一个实现类的对象</span></span><br><span class="line">        <span class="comment">// 提高扩展性</span></span><br><span class="line">        Computer computer=<span class="keyword">null</span>;</span><br><span class="line">         <span class="keyword">if</span>(type.equals(<span class="string">&quot;workComputer&quot;</span>))&#123;</span><br><span class="line">             computer = <span class="keyword">new</span> WorkComputer();</span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span>(type.equals(<span class="string">&quot;personComputer&quot;</span>))&#123;</span><br><span class="line">             computer = <span class="keyword">new</span> PersonComputer();</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">             System.out.println(<span class="string">&quot;不能创建对象&quot;</span>);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> computer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         <span class="comment">// 通过工厂类创建对象</span></span><br><span class="line">        ComputerFactory factory = <span class="keyword">new</span> ComputerFactory();</span><br><span class="line">        <span class="comment">// 要对象 找工厂</span></span><br><span class="line">        Computer computer1 = factory.produce(<span class="string">&quot;workComputer&quot;</span>);</span><br><span class="line">        computer1.work();</span><br><span class="line">        <span class="comment">// 创建笔记本</span></span><br><span class="line">        Computer computer2 = factory.produce(<span class="string">&quot;personComputer&quot;</span>);</span><br><span class="line">        computer2.work();</span><br><span class="line"></span><br><span class="line">        Computer computer3 = ComputerFactory2.produce(<span class="string">&quot;workComputer&quot;</span>);</span><br><span class="line">        computer3.work();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="33工厂方法模式">3.3工厂方法模式</span></h3><p> 工厂方法是针对每一种产品提供一个工厂类。通过不同的工厂实例来创建不同的产品实例。在同一等级结构中，支持增加任意产品。</p>
+<p><img src="/2021/02/24/note45/blog\source_posts\note45.assets\2162786-20201027194251407-1693493888.png" alt="img"></p>
+<p>例如：</p>
+<p><img src="/2021/02/24/note45/blog\source_posts\note45.assets\2162786-20201027194439992-689086482.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//汽车接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">showInfo</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AudiCar</span> <span class="keyword">implements</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是一台奥迪汽车。。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BMWCar</span> <span class="keyword">implements</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是一台宝马汽车。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">生产汽车的工厂接口</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">produce</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AudiCarFactory</span> <span class="keyword">implements</span>  <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">produce</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>  <span class="keyword">new</span> AudiCar();<span class="comment">// 这里AudiCar是Car的实现类</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BMWCarFactory</span> <span class="keyword">implements</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">produce</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BMWCar();<span class="comment">// 因为BWMCar是Car的实现类</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//先创建 汽车工厂</span></span><br><span class="line">            CarFactory bmwFactory = <span class="keyword">new</span> BMWCarFactory();</span><br><span class="line">            <span class="comment">// 这个工厂生产的汽车就是 宝马</span></span><br><span class="line">            Car bmw = bmwFactory.produce();</span><br><span class="line">            bmw.showInfo();</span><br><span class="line">    </span><br><span class="line">            <span class="comment">//这个模式对于同一级别的产品，可扩展性高</span></span><br><span class="line">            <span class="comment">//可以扩展不同品牌的汽车，此时不需要修改代码，只需要增加代码即可</span></span><br><span class="line">            <span class="comment">// 创建一个新的品牌汽车  大众汽车</span></span><br><span class="line">    </span><br><span class="line">            CarFactory dazhongFactory = <span class="keyword">new</span> DazhongCarFactory();</span><br><span class="line">            Car car = dazhongFactory.produce();</span><br><span class="line">            car.showInfo();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="3-抽象工厂模式">3、抽象工厂模式</span></h2><p> 对于在工厂方法的基础上，对同一个品牌的产品有不同的分类，并对分类产品创建的过程 ，一个汽车产品 会分为不同的种类（迷你汽车 ，SUV汽车 ）</p>
+<p><img src="/2021/02/24/note45/blog\source_posts\note45.assets\2162786-20201027194516222-893972306.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 迷你汽车接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MiniCar</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * SUV汽车接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SUVCar</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AudiMiniCar</span> <span class="keyword">implements</span>  <span class="title">MiniCar</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是奥迪迷你汽车 &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BMWMiniCar</span> <span class="keyword">implements</span>  <span class="title">MiniCar</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是宝马Cooper迷你汽车&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AudiSUVCar</span> <span class="keyword">implements</span>  <span class="title">SUVCar</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是一辆 奥迪SUV汽车&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BMWSUVCar</span> <span class="keyword">implements</span>  <span class="title">SUVCar</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这宝马的SUV系列&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">//生成不同型号的汽车 ，两条产品线</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MiniCar <span class="title">produceMiniCar</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SUVCar <span class="title">produceSUVCar</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AudiCarFactory</span> <span class="keyword">implements</span>  <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MiniCar <span class="title">produceMiniCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AudiMiniCar();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SUVCar <span class="title">produceSUVCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AudiSUVCar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BMWCarFactory</span> <span class="keyword">implements</span>  <span class="title">CarFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 生成迷你汽车的方法，返回MiniCar</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MiniCar <span class="title">produceMiniCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BMWMiniCar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//生成SUV汽车的方法， 返回SUVCar</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SUVCar <span class="title">produceSUVCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BMWSUVCar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建宝马迷你汽车  找工厂</span></span><br><span class="line">        CarFactory factory = <span class="keyword">new</span> BMWCarFactory();</span><br><span class="line">        MiniCar car = factory.produceMiniCar();</span><br><span class="line">        car.showInfo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="总结对于简单工厂工厂方法模式和抽象工厂的区别和用途">总结：对于简单工厂，工厂方法模式和抽象工厂的区别和用途</span></h2><p>小结：</p>
+<p>★工厂模式中，重要的是工厂类，而不是产品类。产品类可以是多种形式，多层继承或者是单个类都是可以的。但要明确的，工厂模式的接口只会返回一种类型的实例，这是在设计产品类的时候需要注意的，最好是有父类或者共同实现的接口。</p>
+<p>★使用工厂模式，返回的实例一定是工厂创建的，而不是从其他对象中获取的。</p>
+<p>★工厂模式返回的实例可以不是新创建的，返回由工厂创建好的实例也是可以的。</p>
+<p>区别：</p>
+<p>1、对于简单工厂，用于生产同一结构中的任意产品，对于新增产品不适用。</p>
+<p>2、对于工厂方法，在简单工厂的基础上，生产同一等级结构中笃定产品，可以支持新增产品。</p>
+<p>3、抽象工厂，用于生产不同种类（品牌）的相同类型（迷你，SUV），对于新增品牌可以，不支持新增类型</p>
+<h2><span id="8-模板方法">8、模板方法</span></h2><p>定义：</p>
+<p> 模板方法是一种行为模式，父类的一个方法定义完成这个方法的步骤，但不具体实现具体细节，由子类完成各个步骤的实现，在创建子类对象时，最终实现过程是子类的方法。</p>
+<p>模板方法的准备：</p>
+<p> 1、继承关系</p>
+<p> 2、父类是抽象类：抽象类实现了模板方法，定义了算法的估计</p>
+<p> 3、子类继承抽象类：实现抽象方法，完成完整的算法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractPerson</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  定义一个模板方法，用于实现这个方法的基本“骨架”</span></span><br><span class="line"><span class="comment">     *  每一步骤的具体实现由子类完成</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preparedSchool</span><span class="params">()</span></span>&#123;</span><br><span class="line">        getUp();</span><br><span class="line">        dressing();</span><br><span class="line">        eat();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//起床</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">getUp</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//穿衣服</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dressing</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//吃早餐</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">AbstractPerson</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生起床，起不来，闹钟响3次&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dressing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生穿衣服，找不到衣服&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生吃早餐，来不及吃早餐&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span>  <span class="title">AbstractPerson</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;老师起床，7点半起床&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dressing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;老师要衣服得体，穿工装&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;老师吃早餐。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">          stu.preparedSchool();</span><br><span class="line"></span><br><span class="line">          Teacher teacher = <span class="keyword">new</span> Teacher();</span><br><span class="line">          teacher.preparedSchool();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>转自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/hss945/p/13887028.html">https://www.cnblogs.com/hss945/p/13887028.html</a></p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/24/note05/" class="archive-article-date">
-  	<time datetime="2021-01-24T09:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/24/note05/">JavaSE笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">异常</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lijinxu233.github.io/2021/02/24/note45/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/23/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" class="archive-article-date">
-  	<time datetime="2021-01-23T15:42:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/24/note44/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">类复用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/23/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/">Java学习计划</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计划</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/23/note04/" class="archive-article-date">
-  	<time datetime="2021-01-23T11:28:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/23/note04/">JavaSE笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">OOP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/22/note03/" class="archive-article-date">
-  	<time datetime="2021-01-22T12:15:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/22/note03/">JavaSE笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/22/note02/" class="archive-article-date">
-  	<time datetime="2021-01-22T04:44:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/22/note02/">JavaSE笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/21/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/" class="archive-article-date">
-  	<time datetime="2021-01-21T11:54:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/21/%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/">有趣的代码注释</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">注释</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/21/note01/" class="archive-article-date">
-  	<time datetime="2021-01-21T06:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/21/note01/">JavaSE笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">语法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/17/Typora%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-01-17T07:19:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/17/Typora%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">我的博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span>
-    </nav>
   
 
 
@@ -485,8 +434,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
