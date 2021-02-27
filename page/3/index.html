@@ -152,6 +152,301 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-note31" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/19/note31/">JavaSE笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/19/note31/" class="archive-article-date">
+  	<time datetime="2021-02-19T08:53:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="注解和JDK新特征"><a href="#注解和JDK新特征" class="headerlink" title="注解和JDK新特征"></a>注解和JDK新特征</h1><!-- toc -->
+
+<ul>
+<li><a href="#%E6%B3%A8%E8%A7%A3">注解</a><ul>
+<li><a href="#1-%E5%86%85%E7%BD%AE%E6%B3%A8%E8%A7%A3">1、内置注解</a></li>
+<li><a href="#2-%E5%85%83%E6%B3%A8%E8%A7%A3">2、元注解</a></li>
+<li><a href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3">3、自定义注解</a></li>
+<li><a href="#4-%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%B3%A8%E8%A7%A3">4、使用反射获取注解</a></li>
+<li><a href="#5-jdk%E6%96%B0%E7%89%B9%E5%BE%81">5、JDK新特征</a><ul>
+<li><a href="#51-jdk8%E6%96%B0%E7%89%B9%E5%BE%81">5.1、JDK8新特征</a></li>
+<li><a href="#52-jdk9%E7%9A%84%E6%96%B0%E7%89%B9%E5%BE%81">5.2、JDK9的新特征</a></li>
+<li><a href="#53-jdk10%E6%96%B0%E7%89%B9%E5%BE%81">5.3、JDK10新特征</a></li>
+<li><a href="#54-jdk11%E7%9A%84%E6%96%B0%E7%89%B9%E5%BE%81">5.4、JDK11的新特征</a></li>
+<li><a href="#55-jdk12%E7%9A%84%E6%96%B0%E7%89%B9%E5%BE%81">5.5、JDK12的新特征</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/02/19/note31/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">注解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/19/note31/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-note30" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/07/note30/">JavaSE</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/07/note30/" class="archive-article-date">
+  	<time datetime="2021-02-07T04:51:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><!-- toc -->
+
+<ul>
+<li><a href="#%E5%8F%8D%E5%B0%84%E5%BC%95%E5%85%A5">反射引入</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84%E7%9A%84%E5%85%A5%E5%8F%A3-class%E7%B1%BB">反射的入口-Class类</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1">使用反射创建对象</a><ul>
+<li><a href="#%E8%B0%83%E7%94%A8%E6%97%A0%E5%8F%82%E6%95%B0%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1">调用无参数构造方法创建对象</a></li>
+<li><a href="#%E8%B0%83%E7%94%A8%E6%9C%89%E5%8F%82%E6%95%B0%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1">调用有参数构造方法创建对象</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E6%93%8D%E4%BD%9C%E5%B1%9E%E6%80%A7">使用反射操作属性</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95">使用反射执行方法</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E6%93%8D%E4%BD%9C%E6%B3%9B%E5%9E%8B">使用反射操作泛型</a><ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E8%8E%B7%E5%8F%96%E6%B3%9B%E5%9E%8B">使用反射获取泛型</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E7%AA%81%E7%A0%B4%E6%B3%9B%E5%9E%8B%E9%99%90%E5%88%B6">使用反射突破泛型限制</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/02/07/note30/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/07/note30/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-note29" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/05/note29/">JavaSE笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/05/note29/" class="archive-article-date">
+  	<time datetime="2021-02-05T14:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="员工管理系统"><a href="#员工管理系统" class="headerlink" title="员工管理系统"></a>员工管理系统</h1><!-- toc -->
+
+<ul>
+<li><a href="#%E5%8A%9F%E8%83%BD">功能：</a></li>
+<li><a href="#%E6%8A%80%E8%83%BD">技能：</a></li>
+</ul>
+<ul>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E4%B8%80">迭代一</a><ul>
+<li><a href="#%E6%90%AD%E5%BB%BA%E6%A1%86%E6%9E%B6">搭建框架</a></li>
+<li><a href="#%E5%AE%8C%E6%88%90%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD">完成查询功能</a></li>
+<li><a href="#%E6%8F%90%E5%8F%96%E5%B7%A5%E5%85%B7%E7%B1%BBdbutil%E5%A4%8D%E7%94%A8%E4%BB%A3%E7%A0%81">提取工具类DBUtil，复用代码</a></li>
+<li><a href="#%E5%AE%8C%E6%88%90%E6%9B%B4%E6%96%B0%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD">完成更新删除功能</a></li>
+<li><a href="#%E5%AE%8C%E5%96%84dbutil">完善DBUtil</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E4%BA%8C">迭代二</a><ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%B8%BB%E8%8F%9C%E5%8D%95">添加主菜单</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8properties%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E8%BF%9E%E6%8E%A5%E5%8F%82%E6%95%B0">使用properties文件存放连接参数</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8log4j%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97-log-for-java">使用log4j记录日志 log  for  Java</a><ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%A5%E5%BF%97log">1、什么是日志log</a></li>
+<li><a href="#2-%E5%A6%82%E4%BD%95%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">2、如何记录日志</a></li>
+<li><a href="#3-log4j%E6%97%A5%E5%BF%97%E7%9A%84%E7%BA%A7%E5%88%AB">3、log4j日志的级别</a></li>
+<li><a href="#4-%E4%BD%BF%E7%94%A8log4j%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">4、使用log4j记录日志</a></li>
+<li><a href="#5-%E7%90%86%E8%A7%A3%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E7%9A%84%E5%90%AB%E4%B9%89">5、理解日志格式化字符的含义</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87">使用连接池提高效率</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/02/05/note29/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小练习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/05/note29/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-note28" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -793,250 +1088,6 @@
 
 
   
-    <article id="post-note21" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/01/note21/">JavaSE笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/01/note21/" class="archive-article-date">
-  	<time datetime="2021-01-31T16:32:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="多线程练习"><a href="#多线程练习" class="headerlink" title="多线程练习"></a>多线程练习</h1><!-- toc -->
-
-
-
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/02/01/note21/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线程同步</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/01/note21/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-note20" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/31/note20/">笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/31/note20/" class="archive-article-date">
-  	<time datetime="2021-01-31T05:23:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-——-Callable接口、Future接口、FutureTask接口"><a href="#Java-——-Callable接口、Future接口、FutureTask接口" class="headerlink" title="Java —— Callable接口、Future接口、FutureTask接口"></a>Java —— Callable接口、Future接口、FutureTask接口</h1><!-- toc -->
-
-<ul>
-<li><a href="#callable%E6%8E%A5%E5%8F%A3%E4%B8%8Erunnable%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB">Callable接口与Runnable接口的区别</a></li>
-<li><a href="#callable%E6%8E%A5%E5%8F%A3"><strong><em>Callable接口</em></strong></a></li>
-<li><a href="#future%E6%8E%A5%E5%8F%A3">Future接口</a></li>
-<li><a href="#futuretask%E6%8E%A5%E5%8F%A3">FutureTask接口</a></li>
-</ul>
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/01/31/note20/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/31/note20/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-note19" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/31/note19/">笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/31/note19/" class="archive-article-date">
-  	<time datetime="2021-01-31T04:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h1><!-- toc -->
-
-
-
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/01/31/note19/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/31/note19/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1159,11 +1210,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">异常</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1227,10 +1278,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
@@ -1252,6 +1299,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1316,6 +1371,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
