@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
   <title>SpringBoot | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SpringBoot   微服务阶段">
+  <meta name="description" content="SpringBoot   微服务阶段 什么是Spring Spring是如何简化开发的 什么是SpringBoot   微服务 什么是微服务 单体应用架构 微服务架构 第一个SpringBoot项目 原理初探">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot">
 <meta property="og:url" content="https://lijinxu233.github.io/2021/02/23/note43/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="SpringBoot   微服务阶段">
+<meta property="og:description" content="SpringBoot   微服务阶段 什么是Spring Spring是如何简化开发的 什么是SpringBoot   微服务 什么是微服务 单体应用架构 微服务架构 第一个SpringBoot项目 原理初探">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/23/note43/blog/source_posts/note43.assets/image-20210227114116015.png">
 <meta property="article:published_time" content="2021-02-23T08:41:28.000Z">
-<meta property="article:modified_time" content="2021-02-24T02:44:56.610Z">
+<meta property="article:modified_time" content="2021-02-28T10:09:58.000Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lijinxu233.github.io/2021/02/23/note43/blog/source_posts/note43.assets/image-20210227114116015.png">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
   
@@ -179,12 +181,25 @@
 
 <ul>
 <li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%98%B6%E6%AE%B5">微服务阶段</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFspring">什么是Spring</a></li>
+<li><a href="#spring%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%80%E5%8C%96%E5%BC%80%E5%8F%91%E7%9A%84">Spring是如何简化开发的</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFspringboot">什么是SpringBoot</a></li>
+</ul>
+<ul>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1">微服务</a><ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1">什么是微服务</a></li>
+<li><a href="#%E5%8D%95%E4%BD%93%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84">单体应用架构</a></li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84">微服务架构</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E4%B8%AAspringboot%E9%A1%B9%E7%9B%AE">第一个SpringBoot项目</a></li>
+<li><a href="#%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2">原理初探</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 <a id="more"></a>
 
-<h2><span id="微服务阶段">微服务阶段</span></h2><p>JavaSE：OOP</p>
+<h3><span id="微服务阶段">微服务阶段</span></h3><p>JavaSE：OOP</p>
 <p>MySQL：持久化</p>
 <p>HTML+CSS+JS+JQuery+框架：视图、框架不熟练</p>
 <p>JavaWeb：独立开发MVC三层架构网站：原始</p>
@@ -192,6 +207,92 @@
 <p>war：tomcat</p>
 <p>Spring再简化：SpringBoot-jar：内嵌tomcat；微服务架构！</p>
 <p>服务越来越多：SpringCloud；</p>
+<h3><span id="什么是spring">什么是Spring</span></h3><ul>
+<li>Spring是一个开源框架，2003年兴起的一个轻量级的Java开发框架，作者：Rod Johnson。</li>
+<li>Spring是为了解决企业级应用开发的复杂性而创建的，简化开发。</li>
+</ul>
+<h3><span id="spring是如何简化开发的">Spring是如何简化开发的</span></h3><p>为了降低Java开发的复杂性，Spring采用了以下4种关键策略：<br>1、基于POJO的轻量级和最小侵入性编程；<br>2、通过IOC，依赖注入（Dl）和面向接口实现松耦合；<br>3、基于切面（AOP）和惯例进行声明式编程；<br>4、通过切面和模版减少样式代码；</p>
+<h3><span id="什么是springboot">什么是SpringBoot</span></h3><p>​        开发一个web应用，从最初开始接触Servlet结合Tomcat，跑出一个Hello Wolrld程序，是要经历特别多的步骤；后来就用了框架Struts，再后来是SpringMVC，到了现在的SpringBoot，过一两年又会有其他web框架出现；什么是SpringBoot呢，就是一个javaweb的开发框架，和SpringMVC类似，对比其他javaweb框架的好处，官方说是简化开发，约定大于配置，you can”just run”，能迅速的开发web应用，几行代码开一个http接口。</p>
+<p>​        所有的技术框架的发展似乎都遵循了一条主线规律：从一个复杂应用场景衍生一种规范框架，人们只需要进行各种配置而不需要自己去实现它，这时候强大的配置功能成了优点；发展到一定程度之后，人们根据实际生产应用情况，选取其中实用功能和设计精华，重构出一些轻量级的框架；之后为了提高开发效率，提倡“约定大于配置”，进而衍生出一些一站式的解决方案。</p>
+<p>​        这就是企业级应用–&gt;J2EE–&gt;Spring–&gt;SpringBoot的过程。</p>
+<p>​        随着Spring不断的发展，涉及的领域越来越多，项目整合开发需要配合各种各样的文件，慢慢变得不那么易用简单，违背了最初的理念，甚至人称配置地狱。Spring Boot正是在这样的一个背景下被抽象出来的开发框架，目的为了让大家更容易的使用Spring、更容易的集成各种常用的中间件、开源软件；</p>
+<p>​        Spring Boot 基于Spring开发，Spirng Boot 本身并不提供Spring框架的核心特性以及扩展功能，只是用于快速、敏捷地开发新一代基于Spring框架的应用程序。也就是说，它并不是用来替代Spring的解决方案，而是和Spring框架紧密结合用于提升Spring开发者体验的工具。SpringBoot以约定大于配置的核心思想，默认帮我们进行了很多设置，多数Spring Boot 应用只需要很少的Spring 配置。同时它集成了大量常用的第三方库配置（例如 Redis、MongoDB、Jpa、RabbitMQ、Quartz等等），Spring Boot应用中这些第三方库几乎可以零配置的开箱即用</p>
+<p>​        简单来说就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像maven整合了所有的jar包，spring boot整合了所有的框架。</p>
+<p>​        Spring Boot出生名门，从一开始就站在一个比较高的起点，又经过这几年的发展，生态足够完善，Spring Boot 已经当之无愧成为Java领域最热门的技术。</p>
+<p>​        SpringBoot的主要优点：</p>
+<ul>
+<li>为所有的Spring开发者更快的入门</li>
+<li>开箱即用，提供各种默认配置来简化项目配置</li>
+<li>内嵌式容器简化Web项目</li>
+<li>没有冗余代码生成和XML配置的要求</li>
+</ul>
+<p><strong>程序=数据结构+算法；程序猿</strong></p>
+<p><strong>程序=面向对象+框架；码农</strong></p>
+<h2><span id="微服务">微服务</span></h2><h3><span id="什么是微服务">什么是微服务</span></h3><p>​        微服务是一种架构风格，它要求我们在开发一个应用的时候，这个应用必须构建成一系列小服务的组合；可以通过http的方式进行互通。要说微服务架构，先得说说过去我们的单体应用架构。</p>
+<h3><span id="单体应用架构">单体应用架构</span></h3><p>​        所谓单体应用架构（all in one）是指，我们将一个应用的中的所有应用服务都封装在一个应用中。<br>无论是ERP、CRM或是其他什么系统，你都把数据库访问，web访问，等等各个功能放到一个war包内。</p>
+<ul>
+<li>这样做的好处是，易于开发和测试；也十分方便部署；当需要扩展时，只需要将war复制多份，然后放到多个服务器上，再做个负载均衡就可以了。</li>
+<li>单体应用架构的缺点是，哪怕我要修改一个非常小的地方，我都需要停掉整个服务，重新打包、部署这个应用war包。特别是对于一个大型应用，我们不可能把所有内容都放在一个应用里面，我们如何维护、如何分工合作都是问题。</li>
+</ul>
+<h3><span id="微服务架构">微服务架构</span></h3><p>​        all in one的架构方式，我们把所有的功能单元放在一个应用里面。然后我们把整个应用部署到服务器上。如果负载能力不行，我们将整个应用进行水平复制，进行扩展，然后在负载均衡。<br>​        所谓微服务架构，就是打破之前all in one的架构方式，把每个功能元素独立出来。把独立出来的功能元素的动态组合，需要的功能元素才去拿来组合，需要多一些时可以整合多个功能元素。所以微服务架构是对功能元素进行复制，而没有对整个应用进行复制。</p>
+<p>​        这样做的好处是：</p>
+<ul>
+<li>节省了调用资源。</li>
+<li>每个功能元素的服务都是一个可替换的、可独立升级的软件代码。</li>
+</ul>
+<p><img src="/2021/02/23/note43/blog\source_posts\note43.assets\image-20210227114116015.png" alt="image-20210227114116015"></p>
+<h3><span id="第一个springboot项目">第一个SpringBoot项目</span></h3><p>到底多么简单</p>
+<ul>
+<li>jdk1.8</li>
+<li>maven3.6.1</li>
+<li>springboot：最新版</li>
+<li>IDEA</li>
+</ul>
+<p>官方：提供了一个快速生成的网站！IDEA集成了这个网站！</p>
+<ul>
+<li>可以在官网直接下载后，导入idea开发</li>
+<li>直接使用idea创建一个springboot项目（一般直接在idea中创建）</li>
+</ul>
+<ul>
+<li>项目元数据信息：创建时候输入的Project Metadata部分，也就是Maven项目的基本元素，包括：groupld、artifactld、version、name、description等</li>
+<li>parent：继承 spring-boot-starter-parent的依赖管理，控制版本与打包等内容</li>
+<li>dependencies：项目具体依赖，这里包含了spring-boot-starter-web用于实现HTTP接口（该依赖中包含了Spring MVC），官网对它的描述是：使用SnringMVC均建Web（包括RESTful）<br>应用程序的入门者，<strong>使用Tomcat作为默认嵌入式容器。</strong>spring-boot-starter-test 用于编写单元测试的依赖包。更多功能模块的使用我们将在后面逐步展开。</li>
+<li>build：构建配置部分。默认使用了spring-boot-maven-plugin，配合spring-boot-starter-<br>parent 就可以把Spring Boot应用打包成JAR来直接运行。</li>
+</ul>
+<h3><span id="原理初探">原理初探</span></h3><h4><span id="自动配置">自动配置：</span></h4><h4><span id="pomxml">pom.xml</span></h4><ul>
+<li>spring-boot-dependencies：核心依赖在父工程中</li>
+<li>我们在写或者引入一些SpringBoot依赖的时候，不需要指定版本，就是因为有这些版本仓库</li>
+</ul>
+<h4><span id="启动器">启动器</span></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>启动器说白了就是SpringBoot的启动场景</p>
+</li>
+<li><p>比如spring-boot-starter-web，他就会帮我们自动导入web环境所有的依赖！</p>
+</li>
+<li><p>springboot会将所有的功能场景，都变成一个个的启动器</p>
+</li>
+<li><p>我么要使用什么功能，就只需要指定对应的启动器就可以了<code>starter</code></p>
+</li>
+</ul>
+<h4><span id="主程序">主程序</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lee;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="comment">//@SpringBootApplication：标注这个类是一个springboot的应用</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Springboot01HelloworldApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//将springboot应用启动</span></span><br><span class="line">        SpringApplication.run(Springboot01HelloworldApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>注解</p>
+<ul>
+<li><pre><code class="java">@SpringBootConfiguration：springboot的配置
+    @Configuration：spring配置类
+        @Component：说明这也是一个spring的组件
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>@EnableAutoConfiguration：自动配置
+    @AutoConfigurationPackage：自动配置包
+        @Import(AutoConfigurationPackages.Registrar.class)：自动配置：包注册
+    @Import(AutoConfigurationImportSelector.class)：自动配置导入选择
+
+```</code></pre>
 
       
 
@@ -458,11 +559,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">异常</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,11 +599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,15 +647,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,11 +695,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +711,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
+                <a href="javascript:void(0)" class="js-tag color5">官方文档</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小练习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
              
               <li class="article-tag-list-item">
