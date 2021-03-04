@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://lijinxu233.github.io">
-  <title>毕业实习 | Lee</title>
+  <title>Mockito | Lee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="毕业实习">
+  <meta name="description" content="开发中有些依赖的接口还没有开发完成、有些接口还调不通等情况，可以使用Mockito对接口进行mock，然后去测试逻辑，非常好用。 最近开发中用到对void返回值类型的方法Mock，看到一篇不错的文章，翻译出来，希望对大家有帮助。 ——————————————————-华丽的分割线——————————————————- 1、概述本文的主要内容是用Mockito来mock无返回值的方法。 下面是为测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="毕业实习">
-<meta property="og:url" content="https://lijinxu233.github.io/2021/03/01/note54/index.html">
+<meta property="og:title" content="Mockito">
+<meta property="og:url" content="https://lijinxu233.github.io/2021/03/03/note58/index.html">
 <meta property="og:site_name" content="Lee">
-<meta property="og:description" content="毕业实习">
+<meta property="og:description" content="开发中有些依赖的接口还没有开发完成、有些接口还调不通等情况，可以使用Mockito对接口进行mock，然后去测试逻辑，非常好用。 最近开发中用到对void返回值类型的方法Mock，看到一篇不错的文章，翻译出来，希望对大家有帮助。 ——————————————————-华丽的分割线——————————————————- 1、概述本文的主要内容是用Mockito来mock无返回值的方法。 下面是为测试">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-01T11:22:22.000Z">
-<meta property="article:modified_time" content="2021-03-01T12:14:44.860Z">
+<meta property="article:published_time" content="2021-03-03T00:11:38.000Z">
+<meta property="article:modified_time" content="2021-03-03T00:24:33.121Z">
 <meta property="article:author" content="李晋旭">
-<meta property="article:tag" content="毕业实习">
+<meta property="article:tag" content="Mockito">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Lee" type="application/atom+xml">
@@ -155,64 +155,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-note54" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-note58" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      毕业实习
+      Mockito
     </h1>
   
 
         
-        <a href="/2021/03/01/note54/" class="archive-article-date">
-  	<time datetime="2021-03-01T11:22:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-01</time>
+        <a href="/2021/03/03/note58/" class="archive-article-date">
+  	<time datetime="2021-03-03T00:11:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="毕业实习">毕业实习</span></h1><!-- toc -->
+        <p>开发中有些依赖的接口还没有开发完成、有些接口还调不通等情况，可以使用Mockito对接口进行mock，然后去测试逻辑，非常好用。</p>
+<p>最近开发中用到对void返回值类型的方法Mock，看到一篇不错的文章，翻译出来，希望对大家有帮助。</p>
+<p>——————————————————-华丽的分割线——————————————————-</p>
+<h2><span id="1-概述">1、概述</span></h2><p>本文的主要内容是用Mockito来mock无返回值的方法。</p>
+<p>下面是为测试准备的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyList</span> <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, String element)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// no-op</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="2-简单mock和验证">2、简单mock和验证</span></h2><p>可以用 Mockito的<em>doNothing()、doThrow()和doAnswer()</em> 来对无返回值的函数进行Mock和验证。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledVerfied</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    doNothing().when(myList).add(isA(Integer.class), isA(String.class));</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    verify(myList, times(<span class="number">1</span>)).add(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而在Mockito中d*<strong>oNothing()*</strong> 是对无返回值的方法mock的默认行为。</p>
+<p>下面代码和上面的等价</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledVerfied</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    myList(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    verify(myList, times(<span class="number">1</span>)).add(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>DoThrow()</em> 则会产生异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(expected = Exception.class)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">givenNull_AddThrows</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    doThrow().when(myList).add(isA(Integer.class), isNull());</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面将介绍<em>doAnswer()</em></p>
+<h2><span id="3-参数获取">3、参数获取</span></h2><p>重写*<strong>doNothing()*</strong> 这个默认行为的一个重要原因是获取参数。</p>
+<p>正如第二部分的例子，通过<em>verify()</em> 验证了参数传给了add()函数。</p>
+<p>那么，如果我们需要获取参数来干点其他事情该怎么做呢？</p>
+<p>依然还需要用<em>doNothing()</em> ，只不过要用到<em>ArgumentCaptor。</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledValueCaptured</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    ArgumentCaptor valueCapture = ArgumentCaptor.forClass(String.class);</span><br><span class="line"></span><br><span class="line">    doNothing().when(myList).add(any(Integer.class), valueCapture.capture());</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">0</span>, <span class="string">&quot;captured&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    assertEquals(<span class="string">&quot;captured&quot;</span>, valueCapture.getValue());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+<h2><span id="4-对void返回类型的方法构造answer">4、对void返回类型的方法构造answer</span></h2><p>方法可能不仅仅只是添加一个值那么简单。这时就需要用到 <em>Answer</em> 类来添加我们需要的其他行为。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledAnswered</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    doAnswer((Answer) invocation -&gt; &#123;</span><br><span class="line">        </span><br><span class="line">        Object arg0 = invocation.getArgument(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        Object arg1 = invocation.getArgument(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        assertEquals(<span class="number">3</span>, arg0);</span><br><span class="line"></span><br><span class="line">        assertEquals(<span class="string">&quot;answer me&quot;</span>, arg1);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;).when(myList).add(any(Integer.class), any(String.class));</span><br><span class="line">    </span><br><span class="line">    myList.add(<span class="number">3</span>, <span class="string">&quot;answer me&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>这里也支持使用lambda表达式。</p>
+<h2><span id="5-部分mock">5、部分mock</span></h2><p> Mockito的<em>doCallRealMethod()</em> 方法可以用在void函数上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledRealMethodCalled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line">    </span><br><span class="line">    doCallRealMethod().when(myList).add(any(Integer.class), any(String.class));</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">1</span>, <span class="string">&quot;real&quot;</span>);</span><br><span class="line"></span><br><span class="line">    verify(myList, times(<span class="number">1</span>)).add(<span class="number">1</span>, <span class="string">&quot;real&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数允许我们调用原始对象的实际方法同时也允许我们去调用验证。</p>
+<h2><span id="6-结论">6、结论</span></h2><p>本文介绍了Mockito中四种对void返回值的函数进行Mock的方法。</p>
+<h2><span id="7-其他">7、其他</span></h2><p>EasyMock类的文档里说了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">IExpectationSetters&lt;T&gt; <span class="title">expectLastCall</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Returns the expectation setter <span class="keyword">for</span> the last expected invocation in the</span></span><br><span class="line"><span class="function">current thread. This method is used <span class="keyword">for</span> expected invocations on <span class="keyword">void</span></span></span><br><span class="line"><span class="function">methods.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">userService.addUser(newUser1);<span class="comment">/* expect */</span> </span><br><span class="line">EasyMock.expectLastCall();</span><br><span class="line">EasyMock.replay(dbMapper);</span><br><span class="line">userService.addUser(newUser1);</span><br></pre></td></tr></table></figure>
+<p>还可以使用andAnswer:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mockObject.someMethod(eq(param1), eq(param2));</span><br><span class="line">expectLastCall().andAnswer(<span class="keyword">new</span> IAnswer() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">answer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//supply your mock implementation here...</span></span><br><span class="line">        SomeClass arg1 = (SomeClass) getCurrentArguments()[<span class="number">0</span>];</span><br><span class="line">        AnotherClass arg2 = (AnotherClass) getCurrentArguments()[<span class="number">1</span>];</span><br><span class="line">        arg1.doSomething(blah);</span><br><span class="line">        <span class="comment">//return the value to be returned by the method (null for void)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<!-- tocstop -->
-
-<a id="more"></a>
-
-<ul>
-<li><p>JavaWeb是什么？</p>
-</li>
-<li><p>框架是什么？</p>
-</li>
-<li><p>Maven是什么？Maven可以干什么？</p>
-</li>
-<li><p>Spring+SpringMVC+MyBatis分别是什么？</p>
-</li>
-<li><p>Spring核心思想是什么？</p>
-</li>
-<li><p>SpringMVC分层架构下，各层代表什么？分别有什么作用？</p>
-<ul>
-<li>controller</li>
-<li>dao</li>
-<li>domain</li>
-<li>model</li>
-<li>service</li>
-<li>util</li>
-</ul>
-</li>
-<li><p>model和service层下为什么是service接口+serviceimpl实现类</p>
-</li>
-<li><p>JDBC是什么？</p>
-</li>
-<li><p>MyBatis可以干嘛？</p>
-</li>
-<li><p><strong>国电煤炭交易平台</strong></p>
-</li>
-</ul>
 
       
 
@@ -247,7 +243,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">毕业实习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mockito</a>
         		</li>
       		
 		</ul>
@@ -303,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://lijinxu233.github.io/2021/03/01/note54/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://lijinxu233.github.io/2021/03/03/note58/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -318,8 +314,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2021/02/28/note53/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">分页插件</div>
+    <a href="/2021/03/02/note03/%E4%BA%94%E5%B1%82%E6%9E%B6%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -518,11 +514,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,11 +566,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">Swagger</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">毕业实习</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mockito</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +614,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,6 +627,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">官方文档</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">类加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,10 +643,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">注释</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -1,0 +1,115 @@
+<ul>
+<li><p>SpringMVC五层架构</p>
+</li>
+<li><p>model+service+dao</p>
+</li>
+<li><p>webapp（view层）</p>
+</li>
+</ul>
+<pre><code class="java">package com.isscollege.gdce.controller;
+
+import com.isscollege.gdce.domain.User;
+import com.isscollege.gdce.model.INewsModel;
+import org.apache.log4j.Logger;
+import org.easymock.EasyMock;
+import org.junit.Before;
+import org.junit.Test;
+import org.powermock.reflect.Whitebox;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
+
+public class LoginControllerTest {
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class);
+    private LoginController controller = null;
+    private HttpServletRequest request = null;
+    private HttpServletResponse response = null;
+//    private HttpSession session = null;
+//    private Cookie userCookie = null;
+    private Map&lt;String, String&gt; loginForm = null;
+    @Before
+    public void setUp(){
+        controller = new LoginController();
+        request = new MockHttpServletRequest();
+        response = new MockHttpServletResponse();
+//        session = EasyMock.createMock(HttpSession.class);
+//        ReflectionTestUtils.setField(controller, &quot;session&quot;, session);
+    }
+    @Test
+    public void should_do_login_is_failed() throws Exception {
+        Map&lt;String, String&gt; errors = new HashMap&lt;String, String&gt;();
+        errors = Whitebox.invokeMethod(controller,&quot;validateLogin&quot;,request, request.getSession());
+        if (errors.size() &gt; 0)
+        {
+            request.setAttribute(&quot;errors&quot;, errors);
+            try
+            {
+                request.getRequestDispatcher(&quot;/jsp/user/login.jsp&quot;).forward(request, response);
+                assertTrue(true);
+            }
+            catch (ServletException | IOException e)
+            {
+                LOGGER.error(&quot;请求转发异常&quot;, e);
+                assertTrue(false);
+            }
+            return;
+        }
+    }
+
+}</code></pre>
+<h2 id="测试私有方法"><a href="#测试私有方法" class="headerlink" title="测试私有方法"></a>测试私有方法</h2><h3 id="待测类"><a href="#待测类" class="headerlink" title="待测类"></a>待测类</h3><pre><code class="java">public class Calculator {
+    private int add(int a, int b) {
+        return a + b;
+    }
+}</code></pre>
+<ul>
+<li>使用反射机制</li>
+</ul>
+<pre><code>@Test
+public void reflectTest() throws Exception {
+    Class&lt;?&gt; clazz = Class.forName(Calculator.class.getName());
+    Calculator calculator = (Calculator) clazz.newInstance();
+    Method addMethod = clazz.getDeclaredMethod(&quot;add&quot;, int.class, int.class);
+    addMethod.setAccessible(true);
+    int result = (int) addMethod.invoke(calculator, 1, 2);
+    assertThat(result, is(equalTo(3)));
+}</code></pre>
+<ul>
+<li>使用 PowerMock 测试私有方法</li>
+</ul>
+<p>Java 单元测试中比较流行的 Mock 测试框架有jMock、EasyMock、Mockito等，但是这些 Mock 工具都不能 Mock static、final、private 方法等，而PowerMock能够做到，而且还支持对私有方法进行测试</p>
+<p>使用前需要先引入PowerMock依赖</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.powermock&lt;/groupId&gt;
+    &lt;artifactId&gt;powermock-api-mockito2&lt;/artifactId&gt;
+    &lt;version&gt;2.0.4&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+<pre><code class="java">public class CalculatorTest {
+
+    private Calculator calculator;
+
+    @Before
+    public void setUp() {
+        calculator = new Calculator();
+    }
+
+    @Test
+    public void add() throws Exception {
+        int result = Whitebox.invokeMethod(calculator, &quot;add&quot;, 1, 2);
+        assertThat(result, is(equalTo(3)));
+    }
+}</code></pre>
+<p>Whitebox.invokeMethod()前两个参数分别为需要调用的类的实例、静态方法的名称，后面的不定长参数为调用目标方法的参数。可见，使用PowerMock测试静态方法相比于反射的方式，代码更加简洁，可读性也更好</p>

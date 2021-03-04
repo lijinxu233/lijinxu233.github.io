@@ -152,33 +152,217 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-note54" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-note58" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/01/note54/">毕业实习</a>
+      <a class="article-title" href="/2021/03/03/note58/">Mockito</a>
     </h1>
   
 
         
-        <a href="/2021/03/01/note54/" class="archive-article-date">
-  	<time datetime="2021-03-01T11:22:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-01</time>
+        <a href="/2021/03/03/note58/" class="archive-article-date">
+  	<time datetime="2021-03-03T00:11:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="毕业实习"><a href="#毕业实习" class="headerlink" title="毕业实习"></a>毕业实习</h1><!-- toc -->
+        <p>开发中有些依赖的接口还没有开发完成、有些接口还调不通等情况，可以使用Mockito对接口进行mock，然后去测试逻辑，非常好用。</p>
+<p>最近开发中用到对void返回值类型的方法Mock，看到一篇不错的文章，翻译出来，希望对大家有帮助。</p>
+<p>——————————————————-华丽的分割线——————————————————-</p>
+<h2><span id="1-概述">1、概述</span></h2><p>本文的主要内容是用Mockito来mock无返回值的方法。</p>
+<p>下面是为测试准备的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyList</span> <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, String element)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// no-op</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="2-简单mock和验证">2、简单mock和验证</span></h2><p>可以用 Mockito的<em>doNothing()、doThrow()和doAnswer()</em> 来对无返回值的函数进行Mock和验证。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledVerfied</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    doNothing().when(myList).add(isA(Integer.class), isA(String.class));</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    verify(myList, times(<span class="number">1</span>)).add(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而在Mockito中d*<strong>oNothing()*</strong> 是对无返回值的方法mock的默认行为。</p>
+<p>下面代码和上面的等价</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledVerfied</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    myList(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    verify(myList, times(<span class="number">1</span>)).add(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>DoThrow()</em> 则会产生异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(expected = Exception.class)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">givenNull_AddThrows</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    doThrow().when(myList).add(isA(Integer.class), isNull());</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">0</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面将介绍<em>doAnswer()</em></p>
+<h2><span id="3-参数获取">3、参数获取</span></h2><p>重写*<strong>doNothing()*</strong> 这个默认行为的一个重要原因是获取参数。</p>
+<p>正如第二部分的例子，通过<em>verify()</em> 验证了参数传给了add()函数。</p>
+<p>那么，如果我们需要获取参数来干点其他事情该怎么做呢？</p>
+<p>依然还需要用<em>doNothing()</em> ，只不过要用到<em>ArgumentCaptor。</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledValueCaptured</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    ArgumentCaptor valueCapture = ArgumentCaptor.forClass(String.class);</span><br><span class="line"></span><br><span class="line">    doNothing().when(myList).add(any(Integer.class), valueCapture.capture());</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">0</span>, <span class="string">&quot;captured&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    assertEquals(<span class="string">&quot;captured&quot;</span>, valueCapture.getValue());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="4-对void返回类型的方法构造answer">4、对void返回类型的方法构造answer</span></h2><p>方法可能不仅仅只是添加一个值那么简单。这时就需要用到 <em>Answer</em> 类来添加我们需要的其他行为。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledAnswered</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line"></span><br><span class="line">    doAnswer((Answer) invocation -&gt; &#123;</span><br><span class="line">        </span><br><span class="line">        Object arg0 = invocation.getArgument(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        Object arg1 = invocation.getArgument(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        assertEquals(<span class="number">3</span>, arg0);</span><br><span class="line"></span><br><span class="line">        assertEquals(<span class="string">&quot;answer me&quot;</span>, arg1);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;).when(myList).add(any(Integer.class), any(String.class));</span><br><span class="line">    </span><br><span class="line">    myList.add(<span class="number">3</span>, <span class="string">&quot;answer me&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>这里也支持使用lambda表达式。</p>
+<h2><span id="5-部分mock">5、部分mock</span></h2><p> Mockito的<em>doCallRealMethod()</em> 方法可以用在void函数上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenAddCalledRealMethodCalled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    MyList myList = mock(MyList.class);</span><br><span class="line">    </span><br><span class="line">    doCallRealMethod().when(myList).add(any(Integer.class), any(String.class));</span><br><span class="line"></span><br><span class="line">    myList.add(<span class="number">1</span>, <span class="string">&quot;real&quot;</span>);</span><br><span class="line"></span><br><span class="line">    verify(myList, times(<span class="number">1</span>)).add(<span class="number">1</span>, <span class="string">&quot;real&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数允许我们调用原始对象的实际方法同时也允许我们去调用验证。</p>
+<h2><span id="6-结论">6、结论</span></h2><p>本文介绍了Mockito中四种对void返回值的函数进行Mock的方法。</p>
+<h2><span id="7-其他">7、其他</span></h2><p>EasyMock类的文档里说了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">IExpectationSetters&lt;T&gt; <span class="title">expectLastCall</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Returns the expectation setter <span class="keyword">for</span> the last expected invocation in the</span></span><br><span class="line"><span class="function">current thread. This method is used <span class="keyword">for</span> expected invocations on <span class="keyword">void</span></span></span><br><span class="line"><span class="function">methods.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">userService.addUser(newUser1);<span class="comment">/* expect */</span> </span><br><span class="line">EasyMock.expectLastCall();</span><br><span class="line">EasyMock.replay(dbMapper);</span><br><span class="line">userService.addUser(newUser1);</span><br></pre></td></tr></table></figure>
+<p>还可以使用andAnswer:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mockObject.someMethod(eq(param1), eq(param2));</span><br><span class="line">expectLastCall().andAnswer(<span class="keyword">new</span> IAnswer() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">answer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//supply your mock implementation here...</span></span><br><span class="line">        SomeClass arg1 = (SomeClass) getCurrentArguments()[<span class="number">0</span>];</span><br><span class="line">        AnotherClass arg2 = (AnotherClass) getCurrentArguments()[<span class="number">1</span>];</span><br><span class="line">        arg1.doSomething(blah);</span><br><span class="line">        <span class="comment">//return the value to be returned by the method (null for void)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mockito</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/03/note58/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
 
 
 
+
+  
+    <article id="post-note03/五层架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>SpringMVC五层架构</p>
+</li>
+<li><p>model+service+dao</p>
+</li>
+<li><p>webapp（view层）</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.isscollege.gdce.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.isscollege.gdce.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.isscollege.gdce.model.INewsModel;</span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.easymock.EasyMock;</span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.powermock.reflect.Whitebox;</span><br><span class="line"><span class="keyword">import</span> org.springframework.mock.web.MockHttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.mock.web.MockHttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.util.ReflectionTestUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = Logger.getLogger(LoginController.class);</span><br><span class="line">    <span class="keyword">private</span> LoginController controller = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> HttpServletRequest request = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> HttpServletResponse response = <span class="keyword">null</span>;</span><br><span class="line"><span class="comment">//    private HttpSession session = null;</span></span><br><span class="line"><span class="comment">//    private Cookie userCookie = null;</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, String&gt; loginForm = <span class="keyword">null</span>;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        controller = <span class="keyword">new</span> LoginController();</span><br><span class="line">        request = <span class="keyword">new</span> MockHttpServletRequest();</span><br><span class="line">        response = <span class="keyword">new</span> MockHttpServletResponse();</span><br><span class="line"><span class="comment">//        session = EasyMock.createMock(HttpSession.class);</span></span><br><span class="line"><span class="comment">//        ReflectionTestUtils.setField(controller, &quot;session&quot;, session);</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_do_login_is_failed</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Map&lt;String, String&gt; errors = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">        errors = Whitebox.invokeMethod(controller,<span class="string">&quot;validateLogin&quot;</span>,request, request.getSession());</span><br><span class="line">        <span class="keyword">if</span> (errors.size() &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            request.setAttribute(<span class="string">&quot;errors&quot;</span>, errors);</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                request.getRequestDispatcher(<span class="string">&quot;/jsp/user/login.jsp&quot;</span>).forward(request, response);</span><br><span class="line">                assertTrue(<span class="keyword">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (ServletException | IOException e)</span><br><span class="line">            &#123;</span><br><span class="line">                LOGGER.error(<span class="string">&quot;请求转发异常&quot;</span>, e);</span><br><span class="line">                assertTrue(<span class="keyword">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="测试私有方法">测试私有方法</span></h2><h3><span id="待测类">待测类</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用反射机制</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void reflectTest() throws Exception &#123;</span><br><span class="line">    Class&lt;?&gt; clazz &#x3D; Class.forName(Calculator.class.getName());</span><br><span class="line">    Calculator calculator &#x3D; (Calculator) clazz.newInstance();</span><br><span class="line">    Method addMethod &#x3D; clazz.getDeclaredMethod(&quot;add&quot;, int.class, int.class);</span><br><span class="line">    addMethod.setAccessible(true);</span><br><span class="line">    int result &#x3D; (int) addMethod.invoke(calculator, 1, 2);</span><br><span class="line">    assertThat(result, is(equalTo(3)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 PowerMock 测试私有方法</li>
+</ul>
+<p>Java 单元测试中比较流行的 Mock 测试框架有jMock、EasyMock、Mockito等，但是这些 Mock 工具都不能 Mock static、final、private 方法等，而PowerMock能够做到，而且还支持对私有方法进行测试</p>
+<p>使用前需要先引入PowerMock依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.powermock<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>powermock-api-mockito2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalculatorTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Calculator calculator;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        calculator = <span class="keyword">new</span> Calculator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = Whitebox.invokeMethod(calculator, <span class="string">&quot;add&quot;</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">        assertThat(result, is(equalTo(<span class="number">3</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Whitebox.invokeMethod()前两个参数分别为需要调用的类的实例、静态方法的名称，后面的不定长参数为调用目标方法的参数。可见，使用PowerMock测试静态方法相比于反射的方式，代码更加简洁，可读性也更好</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/02/note03/%E4%BA%94%E5%B1%82%E6%9E%B6%E6%9E%84/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-note57" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/02/note57/">类加载</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/02/note57/" class="archive-article-date">
+  	<time datetime="2021-03-02T00:01:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+
+<ul>
+<li><a href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8">类加载器</a><ul>
+<li><a href="#%E5%BC%95%E5%AF%BC%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8">引导类加载器</a></li>
+<li><a href="#sunmisclauncher">sun.misc.Launcher</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%89%A9%E5%B1%95%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8-%E5%BA%94%E7%94%A8%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8">其他类加载器（扩展类加载器、应用类加载器）</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%AE%BE%E8%AE%A1%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6">为什么要设计双亲委派机制？</a></li>
+</ul>
+</li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8">自定义类加载器</a></li>
+</ul>
 <!-- tocstop -->
         
-          <a class="article-more-a" href="/2021/03/01/note54/#more">more >></a>
+          <a class="article-more-a" href="/2021/03/02/note57/#more">more >></a>
         
       
 
@@ -192,7 +376,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">毕业实习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">类加载</a>
         		</li>
       		
 		</ul>
@@ -202,7 +386,171 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/01/note54/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/02/note57/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-note56" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/01/note56/">Spring</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/01/note56/" class="archive-article-date">
+  	<time datetime="2021-03-01T14:02:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring循环依赖"><a href="#Spring循环依赖" class="headerlink" title="Spring循环依赖"></a>Spring循环依赖</h1><!-- toc -->
+
+
+
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/03/01/note56/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/01/note56/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-note55" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/01/note55/">Swagger</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/01/note55/" class="archive-article-date">
+  	<time datetime="2021-03-01T13:45:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h1><!-- toc -->
+
+<ul>
+<li><a href="#swagger%E7%AE%80%E4%BB%8B">Swagger简介</a><ul>
+<li><a href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB">前后端分离</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/03/01/note55/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Swagger</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/01/note55/">展开全文 >></a>
         </p>
       
 
@@ -288,87 +636,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/02/28/note53/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-note52" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/28/note52/">note52</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/28/note52/" class="archive-article-date">
-  	<time datetime="2021-02-28T06:08:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.lee.mapper.UserMapper.create</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/02/28/note52/blog\source_posts\note52.assets\image-20210228141133409.png" alt="image-20210228141133409"></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">在pom.xml的build里面</span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.yml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2021/02/28/note52/blog\source_posts\note52.assets\image-20210228144730175.png" alt="image-20210228144730175"></p>
-<p><img src="/2021/02/28/note52/blog\source_posts\note52.assets\image-20210228144901427.png" alt="image-20210228144901427"></p>
-<p><img src="/2021/02/28/note52/blog\source_posts\note52.assets\image-20210228160738742.png" alt="image-20210228160738742"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;LIMIT 10, 10&#39; at line 2</span><br></pre></td></tr></table></figure>
-<p>我们知道分页查询使用 <code>limit</code>，而<code>PageHelper</code>插件的<code>PageInterceptor</code>拦截器就是对查询的sql进行拦截然后后面拼接<code>limit</code>实现分页。<br>进行拼接的时候，就需要我们的sql语句后面没有结束符号<code>;</code>分号，将sql语句的<code>;</code>分号去掉就可以解决这个问题了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/28/note52/">展开全文 >></a>
         </p>
       
 
@@ -783,300 +1050,6 @@
 
 
   
-    <article id="post-note47" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/note47/">Linux</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/25/note47/" class="archive-article-date">
-  	<time datetime="2021-02-25T00:21:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><!-- toc -->
-
-<ul>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E5%B1%9E%E6%80%A7">基本属性</a></li>
-<li><a href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E7%9C%8B">文件内容查看</a></li>
-<li><a href="#%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86">账号管理</a></li>
-<li><a href="#%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86">用户组管理</a></li>
-<li><a href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86">磁盘管理</a></li>
-<li><a href="#jdk%E5%AE%89%E8%A3%85rpm%E5%AE%89%E8%A3%85">jdk安装（rpm安装）</a></li>
-<li><a href="#tomcat%E5%AE%89%E8%A3%85%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%AE%89%E8%A3%85">Tomcat安装（解压缩安装）</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85dockeryum%E5%AE%89%E8%A3%85">安装Docker（yum安装）</a></li>
-</ul>
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/02/25/note47/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/25/note47/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-note46" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/note46/">转载</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/25/note46/" class="archive-article-date">
-  	<time datetime="2021-02-24T19:32:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34161458/article/details/106323823">https://blog.csdn.net/qq_34161458/article/details/106323823</a></p>
-</blockquote>
-<h1 id="Memcached"><a href="#Memcached" class="headerlink" title="Memcached"></a>Memcached</h1><!-- toc -->
-
-<pre><code>+ [优点](#优点)
-+ [缺点](#缺点)</code></pre>
-<ul>
-<li><a href="#redis">Redis</a><ul>
-<li><a href="#%E4%BC%98%E7%82%B9-1">优点</a></li>
-<li><a href="#%E7%BC%BA%E7%82%B9-1">缺点</a></li>
-</ul>
-</li>
-<li><a href="#mongodb">MongoDB</a><ul>
-<li><a href="#%E4%BC%98%E7%82%B9-2">优点</a></li>
-<li><a href="#%E7%BC%BA%E7%82%B9-2">缺点</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/02/25/note46/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/25/note46/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-note45" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/24/note45/">设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/24/note45/" class="archive-article-date">
-  	<time datetime="2021-02-23T21:30:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、设计模式概念"><a href="#一、设计模式概念" class="headerlink" title="一、设计模式概念"></a>一、设计模式概念</h1><!-- toc -->
-
-<ul>
-<li><a href="#1-%E5%AE%9A%E4%B9%89">1、定义</a></li>
-<li><a href="#2-%E7%9B%AE%E7%9A%84">2、目的</a></li>
-<li><a href="#3-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99">3、设计模式的六大原则</a><ul>
-<li><a href="#31%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99">3.1开闭原则</a></li>
-<li><a href="#32%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99">3.2里氏替换原则</a></li>
-<li><a href="#33%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99">3.3依赖倒转原则</a></li>
-<li><a href="#34%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99">3.4接口隔离原则</a></li>
-<li><a href="#35%E6%9C%80%E5%B0%91%E7%9F%A5%E9%81%93%E5%8E%9F%E5%88%99">3.5最少知道原则</a></li>
-<li><a href="#36%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99">3.6合成复用原则</a></li>
-</ul>
-</li>
-<li><a href="#4-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%86%E7%B1%BB">4、设计模式的分类</a></li>
-</ul>
-<ul>
-<li><a href="#%E4%BA%8C-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">二、常用的几种设计模式</a><ul>
-<li><a href="#1-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">1、单例模式</a><ul>
-<li><a href="#11-%E6%87%92%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B">1.1、懒汉式单例</a></li>
-<li><a href="#12-%E9%A5%BF%E6%B1%89%E5%BC%8F%E5%8D%95%E4%BE%8B">1.2、饿汉式单例</a></li>
-</ul>
-</li>
-<li><a href="#2-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F">2、工厂方法模式</a><ul>
-<li><a href="#21%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F">2.1简单工厂模式</a></li>
-<li><a href="#22%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F">2.2静态工厂模式</a></li>
-<li><a href="#33%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F">3.3工厂方法模式</a></li>
-</ul>
-</li>
-<li><a href="#3-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F">3、抽象工厂模式</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93%E5%AF%B9%E4%BA%8E%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E7%94%A8%E9%80%94">总结：对于简单工厂，工厂方法模式和抽象工厂的区别和用途</a></li>
-<li><a href="#8-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95">8、模板方法</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/02/24/note45/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/24/note45/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1247,11 +1220,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
+                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
+                <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1299,11 +1272,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">项目</a>
+                <a href="javascript:void(0)" class="js-tag color3">Swagger</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">毕业实习</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mockito</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1343,11 +1320,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1356,6 +1333,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">官方文档</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">类加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1368,10 +1349,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">注释</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
