@@ -34,8 +34,12 @@
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210227163359772.png">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210228184417577.png">
 <meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210228184451368.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210305164552503.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210305165332767.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210305165506523.png">
+<meta property="og:image" content="https://lijinxu233.github.io/2021/02/22/note40/blog/source_posts/note40.assets/image-20210305170400905.png">
 <meta property="article:published_time" content="2021-02-22T13:39:47.000Z">
-<meta property="article:modified_time" content="2021-02-28T12:43:27.090Z">
+<meta property="article:modified_time" content="2021-03-05T10:26:06.203Z">
 <meta property="article:author" content="李晋旭">
 <meta property="article:tag" content="JavaWeb">
 <meta name="twitter:card" content="summary">
@@ -239,8 +243,26 @@
 </li>
 <li><a href="#7-cookie-session">7、Cookie、Session</a><ul>
 <li><a href="#71-%E4%BC%9A%E8%AF%9D">7.1、会话</a></li>
+<li><a href="#72-%E4%BF%9D%E5%AD%98%E4%BC%9A%E8%AF%9D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%8A%80%E6%9C%AF">7.2、保存会话的两种技术</a></li>
+<li><a href="#74-cookie">7.4、Cookie</a></li>
+<li><a href="#74-session%E9%87%8D%E7%82%B9">7.4、Session（重点）</a></li>
+<li><a href="#jsp%E5%9B%9B%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F">JSP四大作用域</a></li>
+<li><a href="#session%E4%B8%89%E5%A4%A7%E4%BD%9C%E7%94%A8%E5%9F%9F">Session三大作用域</a></li>
 </ul>
 </li>
+<li><a href="#8-jsp">8、JSP</a><ul>
+<li><a href="#81-%E4%BB%80%E4%B9%88%E6%98%AFjsp">8.1、什么是JSP</a></li>
+<li><a href="#82-jsp%E5%8E%9F%E7%90%86">8.2、JSP原理</a></li>
+</ul>
+</li>
+<li><a href="#9-javabean">9、JavaBean</a></li>
+<li><a href="#10-mvc%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84">10、MVC三层架构</a><ul>
+<li><a href="#101-%E6%97%A9%E6%9C%9F%E7%BB%93%E6%9E%84">10.1、早期结构</a></li>
+<li><a href="#102-mvc">10.2、MVC</a></li>
+</ul>
+</li>
+<li><a href="#11-filter">11、Filter</a></li>
+<li><a href="#12-%E7%9B%91%E5%90%AC%E5%99%A8">12、监听器</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -589,7 +611,139 @@
 <li>重定向的时候，url地址栏会发生变化；302</li>
 </ul>
 <h2><span id="7-cookie-session">7、Cookie、Session</span></h2><h3><span id="71-会话">7.1、会话</span></h3><p><strong>会话：</strong>用户打开一个浏览器，点击了很多超链接，访问了多个web资源，关闭浏览器，这个过程可以称之为会话。</p>
-<p><strong>有状态会话：</strong></p>
+<p><strong>有状态会话：</strong> 一个同学来过教室，下次再来教室，我们会知道这个同学，曾经来过，称之为有状态会话。</p>
+<h3><span id="72-保存会话的两种技术">7.2、保存会话的两种技术</span></h3><h4><span id="cookie">cookie</span></h4><ul>
+<li>客户端技术（响应，请求）。</li>
+</ul>
+<h4><span id="session">session</span></h4><ul>
+<li>服务器技术，利用这个技术，可以保存用户的会话信息？我们可以把信息或者数据放在session中。</li>
+</ul>
+<h3><span id="74-cookie">7.4、Cookie</span></h3><p><strong>常见场景：网站登录之后，你下次不用再登录了，第二次访问直接就上去了。</strong></p>
+<p><strong>cookie：一般会保存在本地的用户目录下appdata</strong></p>
+<h3><span id="74-session重点">7.4、Session（重点）</span></h3><p>什么是Session：</p>
+<ul>
+<li>服务器会给每一个用户（浏览器）创建一个Session对象</li>
+<li>一个Session独占一个浏览器，只要浏览器没关闭，这个Session就存在</li>
+<li>用户登录之后，整个网站他都可以访问—-&gt;保存用户的信息；保存购物车 的信息</li>
+</ul>
+<p>Session和Cookie的区别：</p>
+<ul>
+<li>Cookie是把用户的数据写给用户的浏览器，浏览器保存（可以保存多个）</li>
+<li>Session把用户的数据写到用户独占的Session中，服务器端会保存（保存重要的信息，减少服务器资源的浪费）</li>
+<li>Session对象由服务创建</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li>保存一个登录用户的信息</li>
+<li>购物车信息</li>
+<li>在整个网站中经常会使用的数据，我们将它保存到Session中</li>
+</ul>
+<p>会话自动过期：web.xml配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--设置Session默认失效时间--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--15分钟后Session自动失效--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>15<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h3><span id="jsp四大作用域">JSP四大作用域</span></h3><h4><span id="servletcontext">ServletContext</span></h4><h4><span id="session">Session</span></h4><h4><span id="servletrequest">ServletRequest</span></h4><h4><span id="pagecontext">PageContext</span></h4><h3><span id="session三大作用域">Session三大作用域</span></h3><h4><span id="requestsessionapplication">request，session，application</span></h4><h2><span id="8-jsp">8、JSP</span></h2><h3><span id="81-什么是jsp">8.1、什么是JSP</span></h3><p>Java Server Pages：Java服务器端页面，也和Servlet一样，用于动态web技术！</p>
+<p>最大的特点：</p>
+<ul>
+<li>写JSP就像在写HTML</li>
+<li>区别：<ul>
+<li>HTML只给用户提供静态的数据</li>
+<li>JSP页面中可以嵌入Java代码，为用户提供动态数据</li>
+</ul>
+</li>
+</ul>
+<h3><span id="82-jsp原理">8.2、JSP原理</span></h3><p>JSP到底怎么执行的</p>
+<ul>
+<li><p>代码层面没有任何问题</p>
+</li>
+<li><p>服务器内部工作</p>
+<ul>
+<li>tomcat中有一个work目录</li>
+<li>IDEA中</li>
+</ul>
+</li>
+<li><p>浏览器服务器发送请求，不管访问什么资源，都是在访问Servlet！</p>
+</li>
+<li><p>JSP最终会被转换成java文件</p>
+</li>
+<li><p>JSP本质上就是一个Servlet</p>
+</li>
+<li><p>HttpJspBase继承了HttpServlet</p>
+</li>
+</ul>
+<p>1、判断请求<br>2、内置了一些对象<br>3、输出页面前增加的代码<br>4、以上的这些对象我们可以在JSP页面中直接访问</p>
+<p>在JSP页面中<br>只要是Java代码就会原封不动的输出<br>如果是HTML代码，就会被转换为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out.write(<span class="string">&quot;name:&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h4><span id="jsp-9大内置对象">JSP 9大内置对象</span></h4><ul>
+<li><strong>PageContext      存东西</strong></li>
+<li><strong>Request       存东西</strong></li>
+<li>Response</li>
+<li><strong>Session        存东西</strong></li>
+<li><strong>Application（ServletContext）存东西</strong></li>
+<li>config（ServletConfig）</li>
+<li>out</li>
+<li>page</li>
+<li>exception</li>
+</ul>
+<p>request：客户端向服务器发送请求，产生的数据，用户看完就没用了，比如：新闻，用户看完没用的！<br>session：客户端向服务器发送请求，产生的数据，用户用完一会还有用，比如：购物车；<br>application：客户端向服务器发送请求，产生的数据，一个用户用完了，其他用户还可能使用，比如：聊天数据；</p>
+<h2><span id="9-javabean">9、JavaBean</span></h2><p>实体类</p>
+<p>JavaBean有特定的写法：</p>
+<ul>
+<li>必须要有一个无参构造</li>
+<li>属性必须私有化</li>
+<li>必须要有对应的get/set方法</li>
+</ul>
+<p>一般用来和数据库的字段做映射 ORM</p>
+<p>ORM：对象关系映射</p>
+<ul>
+<li>表—&gt;类</li>
+<li>字段—&gt;属性</li>
+<li>行记录—&gt;对象</li>
+</ul>
+<h2><span id="10-mvc三层架构">10、MVC三层架构</span></h2><p>什么是MVC：模型，视图，控制器</p>
+<h3><span id="101-早期结构">10.1、早期结构</span></h3><p><img src="/2021/02/22/note40/blog\source_posts\note40.assets\image-20210305164552503.png" alt="image-20210305164552503"></p>
+<p>用户直接访问数据层，控制层可以直接操作数据库；</p>
+<p>Servlet—-&gt;CRUD—-&gt;数据库</p>
+<p>弊端：程序十分臃肿，不利于维护，Servlet的代码中：处理请求、响应、视图跳转、处理JDBC、处理业务代码、处理逻辑代码</p>
+<p>架构：没有什么是加一层解决不了的！</p>
+<p>程序猿</p>
+<p>|</p>
+<p>JDBC</p>
+<p>|</p>
+<p>MySQL、Oracle、SQLServer…</p>
+<p><img src="/2021/02/22/note40/blog\source_posts\note40.assets\image-20210305165332767.png" alt="image-20210305165332767"></p>
+<h3><span id="102-mvc">10.2、MVC</span></h3><p><img src="/2021/02/22/note40/blog\source_posts\note40.assets\image-20210305165506523.png" alt="image-20210305165506523"></p>
+<p>Model</p>
+<ul>
+<li>业务处理：业务逻辑（Service）</li>
+<li>数据持久层：CRUD（Dao）</li>
+</ul>
+<p>View</p>
+<ul>
+<li>展示数据</li>
+<li>提供链接发起Servlet请求（a，form，img……）</li>
+</ul>
+<p>Controller（Servlet）</p>
+<ul>
+<li>接收用户请求：（req：请求参数、Session信息……）</li>
+<li>交给业务层处理对应的代码</li>
+<li>控制视图的跳转</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">登录---&gt;接收用户的请求---&gt;处理用户的请求（获取用户登录的参数，username，password）---&gt;交给业务层处理登录业务（判断用户名密码是否正确：事务）---&gt;Dao层查询用户名和密码是否正确---&gt;数据库</span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="11-filter">11、Filter</span></h2><p>Filter：过滤器，用来过滤网站的数据</p>
+<ul>
+<li>处理中文乱码</li>
+<li>登录验证 </li>
+</ul>
+<p><img src="/2021/02/22/note40/blog\source_posts\note40.assets\image-20210305170400905.png" alt="image-20210305170400905"></p>
+<p>继承Filter时，导包一定要导javax.servlet</p>
+<p>在xml中配置，基本上和Servlet一样</p>
+<h2><span id="12-监听器">12、监听器</span></h2><p>listener</p>
+<p>在xml中注册监听器</p>
+<p>在GUI编程中经常使用</p>
+<p>用户登录之后才能进入主页！用户注销后就不能进入首页了！</p>
 
       
 
@@ -880,11 +1034,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
+                <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -904,15 +1058,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JDK</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
+                <a href="javascript:void(0)" class="js-tag color1">PowerDesigner建模</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -921,10 +1071,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1004,15 +1150,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java类加载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1033,6 +1183,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">注释</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis</a>
               </li>
              
               <li class="article-tag-list-item">
