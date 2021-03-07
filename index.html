@@ -152,6 +152,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-note52" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/07/note52/">SSM整合</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/07/note52/" class="archive-article-date">
+  	<time datetime="2021-03-07T03:01:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SSM整合"><a href="#SSM整合" class="headerlink" title="SSM整合"></a>SSM整合</h1><!-- toc -->
+
+<ul>
+<li><a href="#1-%E5%AF%BC%E5%8C%85pomxml">1、导包pom.xml</a></li>
+<li><a href="#2-%E5%86%99dbproperties">2、写db.properties</a></li>
+<li><a href="#3-%E5%86%99mybatis-configxml">3、写mybatis-config.xml</a></li>
+<li><a href="#4-applicationcontextxml">4、applicationContext.xml</a></li>
+<li><a href="#5-%E5%86%99%E5%AE%9E%E4%BD%93%E7%B1%BBbooksjava">5、写实体类Books.java</a></li>
+<li><a href="#6-%E5%9C%A8dao%E5%B1%82%E5%86%99%E6%8E%A5%E5%8F%A3bookmapperjava">6、在dao层写接口BookMapper.java</a></li>
+<li><a href="#7-%E5%9C%A8dao%E5%B1%82%E5%86%99%E6%8E%A5%E5%8F%A3%E5%AF%B9%E5%BA%94%E7%9A%84bookmapperxml">7、在dao层写接口对应的BookMapper.xml</a></li>
+<li><a href="#8-%E5%9C%A8mybatis-configxml%E4%B8%AD%E6%B3%A8%E5%86%8C%E5%86%99%E5%A5%BD%E7%9A%84mapper">8、在mybatis-config.xml中注册写好的mapper</a></li>
+<li><a href="#9-%E5%9C%A8service%E5%B1%82%E5%86%99%E6%8E%A5%E5%8F%A3bookservicejava">9、在service层写接口BookService.java</a></li>
+<li><a href="#10-%E5%86%99bookservice%E6%8E%A5%E5%8F%A3%E5%AF%B9%E5%BA%94%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BBbookserviceimpljava">10、写BookService接口对应的实现类BookServiceImpl.java</a></li>
+<li><a href="#11-spring%E6%95%B4%E5%90%88dao%E5%B1%82spring-daoxml">11、spring整合dao层spring-dao.xml</a></li>
+<li><a href="#12-spring%E6%95%B4%E5%90%88service%E5%B1%82spring-servicexml">12、spring整合service层spring-service.xml</a></li>
+<li><a href="#13-%E6%B7%BB%E5%8A%A0%E9%A1%B9%E7%9B%AE%E4%B8%BAweb%E9%A1%B9%E7%9B%AE">13、添加项目为web项目</a><ul>
+<li><a href="#%E5%86%99webxml">写web.xml</a></li>
+</ul>
+</li>
+<li><a href="#14-spring%E6%95%B4%E5%90%88springmvc%E5%86%99spring-mvcxml">14、spring整合SpringMVC，写spring-mvc.xml</a></li>
+<li><a href="#15-%E5%B0%86%E5%86%99%E5%A5%BD%E7%9A%84xml%E5%86%99%E5%88%B0applicationcontextxml%E4%B8%AD">15、将写好的xml写到applicationContext.xml中</a></li>
+</ul>
+<!-- tocstop -->
+        
+          <a class="article-more-a" href="/2021/03/07/note52/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SSM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/07/note52/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-note58" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -930,129 +1028,9 @@
 
 
   
-    <article id="post-note48" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/note48/">Git</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/25/note48/" class="archive-article-date">
-  	<time datetime="2021-02-25T00:42:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><!-- toc -->
-
-<ul>
-<li><a href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">版本控制</a><ul>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">什么是版本控制</a></li>
-<li><a href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7">常见的版本控制工具</a></li>
-<li><a href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%88%86%E7%B1%BB">版本控制分类</a></li>
-<li><a href="#git%E4%B8%8Esvn%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB">Git与SVN的主要区别</a></li>
-</ul>
-</li>
-<li><a href="#%E8%81%8A%E8%81%8Agit%E7%9A%84%E5%8E%86%E5%8F%B2">聊聊Git的历史</a></li>
-<li><a href="#git%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">Git环境配置</a><ul>
-<li><a href="#%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD">软件下载</a></li>
-<li><a href="#%E5%90%AF%E5%8A%A8git">启动Git</a></li>
-<li><a href="#%E5%B8%B8%E7%94%A8%E7%9A%84linux%E5%91%BD%E4%BB%A4">常用的Linux命令</a></li>
-</ul>
-</li>
-<li><a href="#git%E9%85%8D%E7%BD%AE">Git配置</a><ul>
-<li><a href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8E%E9%82%AE%E7%AE%B1%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86%E5%BF%85%E8%A6%81">设置用户名与邮箱（用户标识，必要）</a></li>
-</ul>
-</li>
-<li><a href="#git%E5%9F%BA%E6%9C%AC%E7%90%86%E8%AE%BA%E9%87%8D%E8%A6%81">Git基本理论（重要）</a><ul>
-<li><a href="#%E4%B8%89%E4%B8%AA%E5%8C%BA%E5%9F%9F">三个区域</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">工作流程</a></li>
-<li><a href="#git%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA">Git项目搭建</a><ul>
-<li><a href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%8E%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4">创建工作目录与常用指令</a></li>
-<li><a href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA">本地仓库搭建</a></li>
-<li><a href="#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">克隆远程仓库</a></li>
-</ul>
-</li>
-<li><a href="#git%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">Git文件操作</a><ul>
-<li><a href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%9B%9B%E7%A7%8D%E7%8A%B6%E6%80%81">文件的四种状态</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81">查看文件状态</a></li>
-<li><a href="#%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6">忽略文件</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E7%A0%81%E4%BA%91">使用码云</a><ul>
-<li><a href="#github-%E6%98%AF%E6%9C%89%E5%A2%99%E7%9A%84%E6%AF%94%E8%BE%83%E6%85%A2%E5%9C%A8%E5%9B%BD%E5%86%85%E7%9A%84%E8%AF%9D%E6%88%91%E4%BB%AC%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8-gitee-%E5%85%AC%E5%8F%B8%E4%B8%AD%E6%9C%89%E6%97%B6%E5%80%99%E4%BC%9A%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84gitlab%E6%9C%8D%E5%8A%A1%E5%99%A8">github 是有墙的，比较慢，在国内的话，我们一般使用 gitee ，公司中有时候会搭建自己的gitlab服务器</a></li>
-<li><a href="#%E8%AF%B4%E6%98%8Egit%E5%88%86%E6%94%AF">说明：GIT分支</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-        
-          <a class="article-more-a" href="/2021/02/25/note48/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/25/note48/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1192,19 +1170,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ArrayList LinkedList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Iterator</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ArrayList LinkedList</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">I/O流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">泛型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1261,6 +1239,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSM</a>
               </li>
              
               <li class="article-tag-list-item">
